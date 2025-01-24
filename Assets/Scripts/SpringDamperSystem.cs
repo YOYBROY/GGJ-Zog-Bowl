@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class SpringDamperSystem : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [HideInInspector] public Transform target;
     Vector3 prevPosition;
-    [Range(0f, 5f)]
     [SerializeField] float errorAdjust = 1;
     [SerializeField] float dragFactor = 1;
+    [SerializeField] float shakeAmountAdjuster = 1f;
 
-    void Start()
+    [SerializeField] private GunController gunController;
+
+
+    private void OnEnable()
     {
         prevPosition = transform.position;
     }
 
     void Update()
     {
+        transform.rotation = target.rotation;
+
         //Spring Damper System
         Vector3 error = target.position - transform.position;
         Vector3 velocity = transform.position - prevPosition;
@@ -24,8 +30,9 @@ public class SpringDamperSystem : MonoBehaviour
         velocity -= velocity * dragFactor * Time.deltaTime;
         Vector3 newPos = transform.position + velocity;
         prevPosition = transform.position;
-        newPos = new Vector3(newPos.x, transform.position.y, newPos.z);
         transform.position = newPos;
-        if(error.magnitude < 0.01f && velocity.magnitude < 0.01f) transform.position = target.position;
+        gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime;
+        Debug.Log(gunController.shaken);
+        if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.position = target.position;
     }
 }

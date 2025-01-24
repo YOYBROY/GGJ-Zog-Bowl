@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class GunPickup : MonoBehaviour
 {
-    [SerializeField] GunController gunController;
     [SerializeField] string gunType;
 
+    //References
+    GunController gunController;
+    
     private Vector3 originalScale;
 
-    void Start()
+    void OnEnable()
     {
+        gunController = GameObject.FindObjectOfType<GunController>();
         originalScale = transform.localScale;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private GunController gunController;
+    private GunController gunController;
 
     void Start()
     {

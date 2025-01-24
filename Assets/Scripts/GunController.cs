@@ -6,9 +6,16 @@ using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
+    [SerializeField] float lerpSpeed = 1f;
+    Vector3 targetPos;
+    Quaternion targetRot;
+
     [SerializeField] Transform gunSocket;
+    Vector3 storedGunSocketPos;
+    Quaternion storedGunSocketRot;
+    [SerializeField] Transform shakePosition;
     GameObject activeGun;
-    private SpringDamperSystem gunSpringSystem;
+    SpringDamperSystem gunSpringSystem;
     [SerializeField] float shakeAdjust = 1f;
 
     [SerializeField] float shakenThreshold = 5f;
@@ -19,8 +26,8 @@ public class GunController : MonoBehaviour
     float storedRotationSpeed;
     float storedMoveSpeed;
 
-    private StarterAssetsInputs _input;
-    private Camera cam;
+    StarterAssetsInputs _input;
+    Camera cam;
 
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool hasShot;
@@ -33,6 +40,10 @@ public class GunController : MonoBehaviour
         _controller = GetComponent<FirstPersonController>();
         _input = GetComponent<StarterAssetsInputs>();
 
+        targetRot = gunSocket.transform.localRotation;
+        targetPos = gunSocket.localPosition;
+        storedGunSocketPos = gunSocket.transform.localPosition;
+        storedGunSocketRot = gunSocket.transform.localRotation;
         storedMoveSpeed = _controller.MoveSpeed;
         storedRotationSpeed = _controller.RotationSpeed;
 
@@ -47,6 +58,8 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            targetPos = shakePosition.localPosition;
+            targetRot = shakePosition.localRotation;
             activeGun.transform.SetParent(null);
             gunSpringSystem.enabled = true;
             _controller.MoveSpeed = 0;
@@ -55,7 +68,9 @@ public class GunController : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(1))
         {
-            activeGun.transform.SetParent(cam.transform);
+            targetPos = storedGunSocketPos;
+            targetRot = storedGunSocketRot;
+            activeGun.transform.SetParent(gunSocket.transform);
             gunSpringSystem.enabled = false;
             activeGun.transform.position = gunSpringSystem.target.position;
             _controller.MoveSpeed = storedMoveSpeed;
@@ -65,6 +80,9 @@ public class GunController : MonoBehaviour
         {
             Shoot();
         }
+
+        gunSocket.localPosition = Vector3.Lerp(gunSocket.localPosition, targetPos, lerpSpeed * Time.deltaTime);
+        gunSocket.localRotation = Quaternion.Lerp(gunSocket.localRotation, targetRot, lerpSpeed * Time.deltaTime);
     }
 
     void Shoot()

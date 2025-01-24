@@ -11,7 +11,7 @@ public class SpringDamperSystem : MonoBehaviour
     [SerializeField] float dragFactor = 1;
     [SerializeField] float shakeAmountAdjuster = 1f;
 
-    [SerializeField] private GunController gunController;
+    [HideInInspector] public GunController gunController;
 
 
     private void OnEnable()
@@ -31,8 +31,7 @@ public class SpringDamperSystem : MonoBehaviour
         Vector3 newPos = transform.position + velocity;
         prevPosition = transform.position;
         transform.position = newPos;
-        gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime;
-        Debug.Log(gunController.shaken);
         if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.position = target.position;
+        if(!gunController.hasShot) { gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime; }
     }
 }

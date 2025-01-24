@@ -1791,6 +1791,11 @@ PrefabInstance:
       propertyPath: shakenSlider
       value: 
       objectReference: {fileID: 431493471}
+    - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: shakenThreshold
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9175800612002192056, guid: 86053e85232e6274b9ce7bbae8ed8242, type: 3}
@@ -1927,6 +1932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356363464594948975, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6706708598884824957, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}

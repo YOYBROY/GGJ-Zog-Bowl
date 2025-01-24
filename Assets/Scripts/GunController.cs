@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GunController : MonoBehaviour
 {
     [SerializeField] Transform gunSocket;
-    [SerializeField] GameObject activeGun;
+    GameObject activeGun;
     private SpringDamperSystem gunSpringSystem;
     [SerializeField] float shakeAdjust = 1f;
 
@@ -42,7 +42,7 @@ public class GunController : MonoBehaviour
     void Update()
     {
         if (shaken >= shakenThreshold) { shaken = shakenThreshold; canShoot = true; }
-        shakenSlider.value = shaken;
+        shakenSlider.value = Remap(shaken, 0, shakenThreshold, 0, 1);
         Vector3 moveInput = new Vector3(_input.look.x, 0, _input.look.y);
 
         if (Input.GetMouseButton(1))
@@ -98,5 +98,10 @@ public class GunController : MonoBehaviour
         gunSpringSystem.enabled = false;
         gunSpringSystem.target = gunSocket;
         gunSpringSystem.gunController = this;
+    }
+
+    float Remap(float value, float minA, float maxA, float minB, float maxB)
+    {
+        return minB + (value - minA) * (maxB - minB) / (maxA - minA);
     }
 }

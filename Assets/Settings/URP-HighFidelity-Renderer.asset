@@ -20,7 +20,7 @@ MonoBehaviour:
   outlineSettings:
     outlineColor: {r: 0, g: 0, b: 0, a: 1}
     outlineScale: 0.7
-    depthThreshold: 7
+    depthThreshold: 36.3
     robertsCrossMultiplier: 100
     normalThreshold: 0.398
     steepAngleThreshold: 0.2
@@ -51,9 +51,9 @@ MonoBehaviour:
     AfterOpaque: 0
     Source: 1
     NormalSamples: 1
-    Intensity: 0.61
+    Intensity: 0.38
     DirectLightingStrength: 1
-    Radius: 0.25
+    Radius: 0.53
     Samples: 0
     BlurQuality: 0
     Falloff: 100

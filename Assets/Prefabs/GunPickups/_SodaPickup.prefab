@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9115451208450050709}
   - component: {fileID: 1594675467290988486}
   - component: {fileID: 947659833824196106}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _SodaPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5a59500e75b9cc840b57f8906c7a1b7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

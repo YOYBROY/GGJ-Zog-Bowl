@@ -1766,6 +1766,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
+      propertyPath: hitscanTrail
+      value: 
+      objectReference: {fileID: 321656322963807708, guid: c89d9fbf5d6913645bc9c40ca80f9a29,
+        type: 3}
+    - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
       propertyPath: shakenSlider
       value: 
       objectReference: {fileID: 431493471}
@@ -2031,6 +2037,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 947659833824196106, guid: 6ee7adffb495fac479ceed18cc634c11,
+        type: 3}
+      propertyPath: deletesSelf
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3527064075397916721, guid: 6ee7adffb495fac479ceed18cc634c11,
         type: 3}
       propertyPath: m_LocalPosition.x

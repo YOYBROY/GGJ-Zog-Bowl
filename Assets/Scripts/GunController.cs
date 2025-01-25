@@ -133,11 +133,7 @@ public class GunController : MonoBehaviour
         {
             //Shoot Hitscan that kills
             TrailRenderer trail = Instantiate(hitscanTrail, gunSpringSystem.fireLocation.position, Quaternion.identity);
-
-
-
             StartCoroutine(SpawnTrail(trail, hit));
-
         }
     }
 
@@ -169,5 +165,9 @@ public class GunController : MonoBehaviour
             time += Time.deltaTime / trail.time;
             yield return null;
         }
+        trail.transform.position = hit.point;
+        //Instantiate Particles for Hit point
+
+        Destroy(trail.gameObject, trail.time);
     }
 }

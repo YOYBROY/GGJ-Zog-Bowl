@@ -75,7 +75,6 @@ public class ZaceyEnemy : MonoBehaviour
                 }
             }
         }
-        else if (alert) enemyState = EnemyState.APPROACHING;
         else enemyState = EnemyState.PATROLLING;
 
 

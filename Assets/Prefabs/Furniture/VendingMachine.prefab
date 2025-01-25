@@ -516,6 +516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: Soda
   pickUpDistance: 3
+  deletesSelf: 1
+  scaleUpAmount: 1.2
+  lerpSpeed: 4
 --- !u!1 &1209482497176045000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,7 +2537,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: Soda
-  pickUpDistance: 3
+  pickUpDistance: 3.5
+  deletesSelf: 0
+  scaleUpAmount: 1.2
+  lerpSpeed: 10
 --- !u!65 &201274950041393876
 BoxCollider:
   m_ObjectHideFlags: 0

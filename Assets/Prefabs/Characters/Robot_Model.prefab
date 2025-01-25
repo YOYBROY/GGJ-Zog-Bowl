@@ -62,22 +62,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8e7e068e34d27a34d92088ce2df8bc71, type: 2}
+      objectReference: {fileID: 2100000, guid: 803912770bf090a4eb4806cc5c7be837, type: 2}
+    - target: {fileID: -2254882193875736026, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -434894888737771529, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8e7e068e34d27a34d92088ce2df8bc71, type: 2}
+      objectReference: {fileID: 2100000, guid: 803912770bf090a4eb4806cc5c7be837, type: 2}
     - target: {fileID: 919132149155446097, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_Name
       value: Robot_Model
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167335941121522215, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2600273326057797097, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8e7e068e34d27a34d92088ce2df8bc71, type: 2}
+      objectReference: {fileID: 2100000, guid: 803912770bf090a4eb4806cc5c7be837, type: 2}
+    - target: {fileID: 3750345050301269665, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

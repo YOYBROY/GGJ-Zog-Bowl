@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  errorAdjust: 5
-  dragFactor: 15
+  errorAdjust: 20
+  dragFactor: 10
   shakeAmountAdjuster: 10
   gunController: {fileID: 0}

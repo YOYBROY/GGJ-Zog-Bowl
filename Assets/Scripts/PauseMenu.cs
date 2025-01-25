@@ -1,4 +1,4 @@
-using System.Collections;
+using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,9 +11,15 @@ public class PauseMenu : MonoBehaviour
     public GameObject winMenuUI;
     public GameObject loseMenuUI;
 
-    public TextMeshProUGUI winTimer;
-    public TextMeshProUGUI loseTimer;
+    FirstPersonController firstPersonController;
+    float storedRotationSpeed;
+
     public bool gameOver = false;
+
+    private void Start()
+    {
+        firstPersonController = FindObjectOfType<FirstPersonController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -54,8 +60,8 @@ public class PauseMenu : MonoBehaviour
     //Resume game
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
+        pauseMenuUI.SetActive(false);
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -65,10 +71,10 @@ public class PauseMenu : MonoBehaviour
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Time.timeScale = 0;
     }
 
     //Quit Game
@@ -88,17 +94,17 @@ public class PauseMenu : MonoBehaviour
     public void GameWon(float time)
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Time.timeScale = 0;
     }
 
     //Game Lost
     public void GameLose(float time)
     {
         loseMenuUI.SetActive(true);
-        Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Time.timeScale = 0;
     }
 }

@@ -483,9 +483,10 @@ MonoBehaviour:
   attackRange: 15
   attackTimer: 0.3
   attackSpawnPoint: {fileID: 2953163212903827288}
-  enemyProjectile: {fileID: 6487779715752134205, guid: a007a44b56a181c458d6c02dab513077,
+  enemyProjectile: {fileID: 8035736283932347423, guid: 850b60ad78425de42967ff81bbe578ae,
     type: 3}
   dazedTimer: 5
+  ignoreRayAgro: 0
   topHalf: {fileID: 4576475000209825167}
   topHalfLocator: {fileID: 1203763704250887019}
 --- !u!65 &5284195385718598968

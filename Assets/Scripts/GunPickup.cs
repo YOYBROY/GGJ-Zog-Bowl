@@ -10,6 +10,8 @@ public class GunPickup : MonoBehaviour
     [SerializeField] float scaleUpAmount = 1.2f;
     [SerializeField] float lerpSpeed = 4f;
 
+    [SerializeField] GameObject[] outliners;
+
     //References
     GunController gunController;
     
@@ -30,15 +32,27 @@ public class GunPickup : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (PauseMenu.isPaused) return;
         float distance = Vector3.Distance(gunController.transform.position, transform.position);
         if (distance > pickUpDistance) return;
-        if (PauseMenu.isPaused) return;
+        foreach (GameObject child in outliners)
+        {
+            //white outline
+            child.layer = 7;
+        }
         targetScale = originalScale * scaleUpAmount;
     }
 
     private void OnMouseExit()
     {
         if (PauseMenu.isPaused) return;
+        float distance = Vector3.Distance(gunController.transform.position, transform.position);
+        if (distance > pickUpDistance) return;
+        foreach (GameObject child in outliners)
+        {
+            //black outline
+            child.layer = 6;
+        }
         targetScale = originalScale;
     }
 

@@ -59,7 +59,7 @@ public class ZaceyEnemy : MonoBehaviour
 
         if (distanceToPlayer < attackRange)
         {
-            if(ignoreRayAgro)
+            if (ignoreRayAgro)
             {
                 enemyState = EnemyState.ATTACKING;
             }
@@ -125,14 +125,15 @@ public class ZaceyEnemy : MonoBehaviour
         targetPoint = patrolPoints[patrolNumber];
     }
 
-    private void OnMouseDown()
+    public void KillEnemy()
     {
-        if (gunController.canShoot)
-        {
-            PauseMenu.totalEnemyCount--;
-            Destroy(topHalf);
-            Destroy(gameObject);
-        }
+        PauseMenu.totalEnemyCount--;
+        Destroy(topHalf);
+        Destroy(gameObject);
+    }
+    public void StunEnemy()
+    {
+        dazedCount = dazedTimer;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -142,7 +143,7 @@ public class ZaceyEnemy : MonoBehaviour
             Debug.Log(collision.relativeVelocity.sqrMagnitude);
             if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
             //Play dazed particle effect
-            dazedCount = dazedTimer;
+            StunEnemy();
         }
     }
 }

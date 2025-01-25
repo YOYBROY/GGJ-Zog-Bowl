@@ -156,7 +156,7 @@ MonoBehaviour:
   attackRange: 10
   attackTimer: 2.5
   attackSpawnPoint: {fileID: 6598472587051793752}
-  enemyProjectile: {fileID: 6487779715752134205, guid: a007a44b56a181c458d6c02dab513077,
+  enemyProjectile: {fileID: 7623222123441272069, guid: e58db9204f581bf45a56b57ebd27bafa,
     type: 3}
   dazedTimer: 2
 --- !u!65 &6619815831750983801

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpringDamperSystem : MonoBehaviour
 {
-    public Transform target;
+    [HideInInspector] public Transform target;
     Vector3 prevPosition;
     Vector3 targetPrevPos;
     [SerializeField] float errorAdjust = 1;

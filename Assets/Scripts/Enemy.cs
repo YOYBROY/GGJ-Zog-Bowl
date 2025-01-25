@@ -131,23 +131,24 @@ public class Enemy : MonoBehaviour
         targetPoint = patrolPoints[patrolNumber];
     }
 
-    private void OnMouseDown()
+    public void KillEnemy()
     {
-        if (gunController.canShoot)
-        {
-            PauseMenu.totalEnemyCount--;
-            Destroy(gameObject);
-        }
+        PauseMenu.totalEnemyCount--;
+        Destroy(gameObject);
+    }
+
+    public void StunEnemy()
+    {
+        dazedCount = dazedTimer;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
-            Debug.Log(collision.relativeVelocity.sqrMagnitude);
             if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
             //Play dazed particle effect
-            dazedCount = dazedTimer;
+            StunEnemy();
         }
     }
 }

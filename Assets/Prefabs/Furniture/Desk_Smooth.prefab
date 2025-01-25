@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 774262835267599108}
   - component: {fileID: 5946104714890406851}
   - component: {fileID: 9173587320702452902}
+  - component: {fileID: 681990686285817368}
   m_Layer: 6
   m_Name: Desk_Smooth
   m_TagString: Untagged
@@ -26,10 +27,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9024273761566134279}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -457.6637, y: 0, z: 0}
-  m_LocalScale: {x: 2.0770707, y: 0.98533756, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.023, y: 0.010910925, z: 0.011073287}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -83,3 +84,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &681990686285817368
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024273761566134279}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 76400751621743684, guid: 67d6ef205ce005840ab7fa77d8efffd5, type: 3}

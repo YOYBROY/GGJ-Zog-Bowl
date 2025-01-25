@@ -21,7 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _USE_SCREEN_SPACE
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -91,18 +91,18 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Density: 37
+    - _Density: 23.53
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FalloffAmount: 0.01
-    - _Falloff_Threshhold: 1.51
+    - _Falloff_Threshhold: 1.86
     - _FresnelSize: 0.05
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: -0
+    - _Intensity: -0.74
     - _LightingCutoff: 0
     - _Lit_Threshhold: 0.45
     - _Metallic: 0

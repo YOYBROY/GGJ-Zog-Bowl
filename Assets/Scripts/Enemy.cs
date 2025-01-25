@@ -31,16 +31,18 @@ public class Enemy : MonoBehaviour
     bool alert;
     float alertTimer;
 
+    private PauseMenu pauseMenu;
+
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
 
     void Start()
     {
+        pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
-        PauseMenu.totalEnemyCount++;
     }
 
     private void Update()
@@ -133,7 +135,7 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
-        PauseMenu.totalEnemyCount--;
+        pauseMenu.totalEnemyCount--;
         Destroy(gameObject);
     }
 

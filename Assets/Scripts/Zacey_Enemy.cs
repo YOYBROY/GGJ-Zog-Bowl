@@ -35,16 +35,18 @@ public class ZaceyEnemy : MonoBehaviour
     [SerializeField] GameObject topHalf;
     [SerializeField] Transform topHalfLocator;
 
+    private PauseMenu pauseMenu;
+
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
 
     void Start()
     {
+        pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
-        PauseMenu.totalEnemyCount++;
     }
 
     private void Update()
@@ -127,7 +129,7 @@ public class ZaceyEnemy : MonoBehaviour
 
     public void KillEnemy()
     {
-        PauseMenu.totalEnemyCount--;
+        pauseMenu.totalEnemyCount--;
         Destroy(topHalf);
         Destroy(gameObject);
     }

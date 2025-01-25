@@ -14,7 +14,8 @@ public class GunController : MonoBehaviour
     Vector3 storedGunSocketPos;
     Quaternion storedGunSocketRot;
     [SerializeField] Transform shakePosition;
-    GameObject activeGun;
+    [SerializeField] Transform launchPosition;
+    [HideInInspector] public GameObject activeGun;
     SpringDamperSystem gunSpringSystem;
     [SerializeField] float shakeAdjust = 1f;
 
@@ -33,6 +34,7 @@ public class GunController : MonoBehaviour
     [HideInInspector] public bool hasShot;
 
     [SerializeField] GameObject sodaCanPrefab;
+    [SerializeField] GameObject sodaCanProjectile;
 
     void Start()
     {
@@ -52,17 +54,16 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.isPaused) return;
         if (shaken >= shakenThreshold) { shaken = shakenThreshold; canShoot = true; }
         shakenSlider.value = Remap(shaken, 0, shakenThreshold, 0, 1);
-        Vector3 moveInput = new Vector3(_input.look.x, 0, _input.look.y);
+        Vector3 moveInput = new Vector3(_input.look.x, -_input.look.y, 0f);
 
         if (Input.GetMouseButton(1))
         {
             targetPos = shakePosition.localPosition;
             targetRot = shakePosition.localRotation;
-            activeGun.transform.SetParent(null);
             gunSpringSystem.enabled = true;
-            _controller.MoveSpeed = 0;
             _controller.RotationSpeed = 0;
             activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
         }
@@ -73,36 +74,27 @@ public class GunController : MonoBehaviour
             activeGun.transform.SetParent(gunSocket.transform);
             gunSpringSystem.enabled = false;
             activeGun.transform.position = gunSpringSystem.target.position;
-            _controller.MoveSpeed = storedMoveSpeed;
             _controller.RotationSpeed = storedRotationSpeed;
         }
         if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            AttemptShot();
         }
 
         gunSocket.localPosition = Vector3.Lerp(gunSocket.localPosition, targetPos, lerpSpeed * Time.deltaTime);
         gunSocket.localRotation = Quaternion.Lerp(gunSocket.localRotation, targetRot, lerpSpeed * Time.deltaTime);
     }
 
-    void Shoot()
+    void AttemptShot()
     {
         if (activeGun == null) return;
         if (hasShot)
         {
-            Debug.Log("Throw Gun");
-            Destroy(activeGun);
-            activeGun = null;
-            gunSpringSystem = null;
-            //Shoot Projectile that stuns
-            hasShot = false;
+            ThrowGun();
         }
         if (canShoot)
         {
-            canShoot = false;
-            hasShot = true;
-            shaken = 0;
-            //Shoot Hitscan that kills
+            ShootGun();
         }
     }
 
@@ -114,8 +106,27 @@ public class GunController : MonoBehaviour
         }
         gunSpringSystem = activeGun.GetComponent<SpringDamperSystem>();
         gunSpringSystem.enabled = false;
-        gunSpringSystem.target = gunSocket;
-        gunSpringSystem.gunController = this;
+    }
+
+    private void ShootGun()
+    {
+        Debug.Log("Shot Gun");
+        canShoot = false;
+        hasShot = true;
+        shaken = 0;
+        //Shoot Hitscan that kills
+    }
+
+    public void ThrowGun()
+    {
+        Debug.Log("Throw Gun");
+        Destroy(activeGun);
+        activeGun = null;
+        gunSpringSystem = null;
+        Instantiate(sodaCanProjectile, launchPosition.position, launchPosition.rotation);
+        shaken = 0;
+        canShoot = false;
+        hasShot = false;
     }
 
     float Remap(float value, float minA, float maxA, float minB, float maxB)

@@ -13,7 +13,7 @@ public class GunPickup : MonoBehaviour
 
     void OnEnable()
     {
-        gunController = GameObject.FindObjectOfType<GunController>();
+        gunController = FindObjectOfType<GunController>();
         originalScale = transform.localScale;
     }
 
@@ -29,6 +29,10 @@ public class GunPickup : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(gunController.activeGun != null)
+        {
+            gunController.ThrowGun();
+        }
         gunController.AddGun(gunType);
         Destroy(gameObject);
     }

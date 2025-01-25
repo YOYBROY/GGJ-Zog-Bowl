@@ -91,13 +91,13 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Density: 3.48
+    - _Density: 10.94
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FalloffAmount: 0.01
-    - _Falloff_Threshhold: 1.18
+    - _Falloff_Threshhold: -0.13
     - _FresnelSize: 0.05
     - _GlossMapScale: 0
     - _Glossiness: 0

@@ -30,13 +30,19 @@ public class GunController : MonoBehaviour
 
     StarterAssetsInputs _input;
     Camera cam;
+    string activeGunType;
 
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool hasShot;
 
     [SerializeField] TrailRenderer hitscanTrail;
+
     [SerializeField] GameObject sodaCanPrefab;
     [SerializeField] GameObject sodaCanProjectile;
+    [SerializeField] float sodaCanDamageRange = 100f;
+
+    [SerializeField] GameObject ChampainGunPrefab;
+    [SerializeField] GameObject ChampainProjectile;
 
     void Start()
     {
@@ -56,8 +62,6 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
         if (PauseMenu.isPaused) return;
         if (shaken >= shakenThreshold) { shaken = shakenThreshold; canShoot = true; }
         shakenSlider.value = Remap(shaken, 0, shakenThreshold, 0, 1);
@@ -115,13 +119,18 @@ public class GunController : MonoBehaviour
         {
             activeGun = Instantiate(sodaCanPrefab, gunSocket.position, gunSocket.rotation, cam.transform);
         }
+        else if (gunType == "Champ")
+        {
+
+            activeGun = Instantiate(ChampainGunPrefab, gunSocket.position, gunSocket.rotation, cam.transform);
+        }
+        activeGunType = gunType;
         gunSpringSystem = activeGun.GetComponent<SpringDamperSystem>();
         gunSpringSystem.enabled = false;
     }
 
     private void ShootGun()
     {
-        Debug.Log("Shot Gun");
         canShoot = false;
         hasShot = true;
         shaken = 0;
@@ -131,6 +140,32 @@ public class GunController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, float.MaxValue))
         {
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                ZaceyEnemy zaceyEnemy = hit.collider.GetComponent<ZaceyEnemy>();
+                bool zacey = false;
+                if (enemy == null) zacey = true;
+                if (activeGunType == "Soda")
+                {
+                    float distance = Vector3.Distance(hit.point, cam.transform.position);
+                    if (distance > sodaCanDamageRange)
+                    {
+                        if (zacey) zaceyEnemy.StunEnemy(); 
+                        else enemy.StunEnemy(); 
+                    }
+                    else
+                    {
+                        if (zacey) zaceyEnemy.KillEnemy(); 
+                        else enemy.KillEnemy(); 
+                    }
+                }
+                else
+                {
+                    if (zacey) zaceyEnemy.KillEnemy();
+                    else enemy.KillEnemy();
+                }
+            }
             //Shoot Hitscan that kills
             TrailRenderer trail = Instantiate(hitscanTrail, gunSpringSystem.fireLocation.position, Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hit));
@@ -139,11 +174,11 @@ public class GunController : MonoBehaviour
 
     public void ThrowGun()
     {
-        Debug.Log("Throw Gun");
         Destroy(activeGun);
         activeGun = null;
         gunSpringSystem = null;
-        Instantiate(sodaCanProjectile, launchPosition.position, launchPosition.rotation);
+        if (activeGunType == "Soda") { Instantiate(sodaCanProjectile, launchPosition.position, launchPosition.rotation); }
+        else if (activeGunType == "Champ") { Instantiate(ChampainProjectile, launchPosition.position, launchPosition.rotation); }
         shaken = 0;
         canShoot = false;
         hasShot = false;
@@ -159,7 +194,7 @@ public class GunController : MonoBehaviour
         float time = 0;
         Vector3 startPos = trail.transform.position;
 
-        while(time < 1)
+        while (time < 1)
         {
             trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
             time += Time.deltaTime / trail.time;

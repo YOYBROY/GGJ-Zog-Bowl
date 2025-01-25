@@ -33,6 +33,9 @@ public class Enemy : MonoBehaviour
 
     private PauseMenu pauseMenu;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip robotMoveAudio;
+
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
 
@@ -43,6 +46,11 @@ public class Enemy : MonoBehaviour
         gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
+        audioSource.loop = true;
+        audioSource.volume = Mathf.Clamp(moveSpeed , 0, 1);
+        audioSource.Play();
     }
 
     private void Update()
@@ -99,6 +107,7 @@ public class Enemy : MonoBehaviour
                     //Attack
                     Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
                     //attack Animation
+                    AudioManager.PlaySound(SoundType.ZOGCOUGH, 1);
                     timer = attackTimer;
                 }
                 //play sound effect

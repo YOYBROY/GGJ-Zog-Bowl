@@ -115,6 +115,7 @@ public class GunController : MonoBehaviour
 
     public void AddGun(string gunType)
     {
+        AudioManager.PlaySound(SoundType.WEAPONPICKUP);
         if (gunType == "Soda")
         {
             activeGun = Instantiate(sodaCanPrefab, gunSocket.position, gunSocket.rotation, cam.transform);
@@ -135,6 +136,10 @@ public class GunController : MonoBehaviour
         hasShot = true;
         shaken = 0;
 
+        if (activeGunType == "Soda") AudioManager.PlaySound(SoundType.SODACANPOP, 1);
+        else AudioManager.PlaySound(SoundType.CHAMPAIGNPOP, 1);
+
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -151,13 +156,13 @@ public class GunController : MonoBehaviour
                     float distance = Vector3.Distance(hit.point, cam.transform.position);
                     if (distance > sodaCanDamageRange)
                     {
-                        if (zacey) zaceyEnemy.StunEnemy(); 
-                        else enemy.StunEnemy(); 
+                        if (zacey) zaceyEnemy.StunEnemy();
+                        else enemy.StunEnemy();
                     }
                     else
                     {
-                        if (zacey) zaceyEnemy.KillEnemy(); 
-                        else enemy.KillEnemy(); 
+                        if (zacey) zaceyEnemy.KillEnemy();
+                        else enemy.KillEnemy();
                     }
                 }
                 else

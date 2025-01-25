@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEditor.ShaderGraph.Internal;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -50,6 +52,10 @@ namespace StarterAssets
         public float TopClamp = 90.0f;
         [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -90.0f;
+        [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
+        private float storedFOV;
+        [SerializeField] float fovAdjust = 1f;
+        [SerializeField] float lerpSpeed = 1f;
 
         // cinemachine
         private float _cinemachineTargetPitch;
@@ -108,15 +114,16 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            storedFOV = cinemachineVirtualCamera.m_Lens.FieldOfView;
         }
 
         private void FixedUpdate()
         {
-
             if (PauseMenu.isPaused) return;
             JumpAndGravity();
             GroundedCheck();
             Move();
+
         }
 
         private void LateUpdate()
@@ -196,6 +203,11 @@ namespace StarterAssets
                 // move
                 inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
             }
+
+            //change FOV
+            float targetFOV = storedFOV + _input.move.y * fovAdjust;
+
+            cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, targetFOV, lerpSpeed * Time.deltaTime);
 
             // move the player
             _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);

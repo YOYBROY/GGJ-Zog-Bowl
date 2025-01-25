@@ -45,7 +45,6 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(totalEnemyCount);
         if (totalEnemyCount == 0) GameWon();
         if (stopWatchOn) timerTime += Time.deltaTime; inGameTimerText.text = "Time: " + timerTime.ToString("#.000"); ;
         if (beginningOfGame)

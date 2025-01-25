@@ -1,31 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class SpringDamperSystem : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    public Transform target;
     Vector3 prevPosition;
-    [Range(0f, 5f)]
+    Vector3 targetPrevPos;
     [SerializeField] float errorAdjust = 1;
     [SerializeField] float dragFactor = 1;
+    [SerializeField] float shakeAmountAdjuster = 1f;
 
-    void Start()
+    [HideInInspector] public GunController gunController;
+    Transform player;
+
+
+    private void OnEnable()
     {
-        prevPosition = transform.position;
+        player = FindObjectOfType<FirstPersonController>().transform;
+        gunController = player.GetComponent<GunController>();
+        target = Camera.main.transform.GetChild(0);
+        targetPrevPos = target.localPosition;
+        prevPosition = transform.localPosition;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        transform.rotation = target.rotation;
+        Vector3 targetVelocity = target.localPosition - targetPrevPos;
+
         //Spring Damper System
-        Vector3 error = target.position - transform.position;
-        Vector3 velocity = transform.position - prevPosition;
+        Vector3 error = target.localPosition - transform.localPosition;
+        Vector3 velocity = transform.localPosition - prevPosition;
+
         velocity += (error * errorAdjust) * Time.deltaTime;
         velocity -= velocity * dragFactor * Time.deltaTime;
-        Vector3 newPos = transform.position + velocity;
-        prevPosition = transform.position;
-        newPos = new Vector3(newPos.x, transform.position.y, newPos.z);
-        transform.position = newPos;
-        if(error.magnitude < 0.01f && velocity.magnitude < 0.01f) transform.position = target.position;
+        Vector3 newPos = transform.localPosition + velocity;
+        prevPosition = transform.localPosition;
+        targetPrevPos = target.localPosition;
+        transform.localPosition = newPos;
+        if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.localPosition = target.localPosition;
+        if(!gunController.hasShot && targetVelocity.magnitude < 0.001f) { gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime; }
     }
 }

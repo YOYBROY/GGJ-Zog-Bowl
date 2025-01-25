@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6449983157441545510}
   - component: {fileID: 8420096171767802301}
   - component: {fileID: 150957749228244309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CeilingLightCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917215889271865588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CeilingHangingLight_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 473129479803993187}
   - component: {fileID: 7947232199376411177}
   - component: {fileID: 4492278953465359397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightBulb_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

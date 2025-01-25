@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4260444911123878670}
   - component: {fileID: 903585938514979806}
   - component: {fileID: 1370090853310991250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof_GeoShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}

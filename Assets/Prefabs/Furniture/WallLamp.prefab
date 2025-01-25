@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7363627410639407483}
   - component: {fileID: 6107657456199271872}
   - component: {fileID: 6824913010365815429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}

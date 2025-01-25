@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     float dazedCount;
     [SerializeField] float dazedTimer = 2f;
     bool alert;
+    float alertTimer;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
@@ -50,7 +51,19 @@ public class Enemy : MonoBehaviour
             return;
         }
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-        if (distanceToPlayer < attackRange) enemyState = EnemyState.ATTACKING;
+        Vector3 direction = player.transform.position - transform.position;
+
+        if (distanceToPlayer < attackRange)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    enemyState = EnemyState.ATTACKING;
+                }
+            }
+        }
         else if (alert) enemyState = EnemyState.APPROACHING;
         else enemyState = EnemyState.PATROLLING;
 
@@ -59,7 +72,7 @@ public class Enemy : MonoBehaviour
         {
             case EnemyState.PATROLLING:
                 //move towards a patrol point.
-                Vector3 direction = targetPoint.position - transform.position;
+                direction = targetPoint.position - transform.position;
                 transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
                 //when we get within a certain range of patrol point.
                 float distance = Vector3.Distance(targetPoint.position, transform.position);
@@ -70,17 +83,18 @@ public class Enemy : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, patrolLerpSpeed * Time.deltaTime);
                 break;
             case EnemyState.ATTACKING:
+
                 alert = true;
                 //face towards player
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
+
                 //shoot projectile on a timer
                 timer -= Time.deltaTime;
                 if (timer < 0)
                 {
                     //Attack
-                    Debug.Log("Attack");
                     Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
                     //attack Animation
                     timer = attackTimer;
@@ -92,8 +106,18 @@ public class Enemy : MonoBehaviour
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
-                //Mose Towards Player
-                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+
+                RaycastHit hit;
+                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        //Mose Towards Player
+                        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                    }
+                    else alertTimer += Time.deltaTime;
+                    if (alertTimer > 4f) { alert = false; enemyState = EnemyState.PATROLLING; alertTimer = 0; }
+                }
                 break;
             default:
                 break;

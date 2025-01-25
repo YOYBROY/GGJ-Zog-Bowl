@@ -34,6 +34,37 @@ Transform:
   - {fileID: 4774836085554391512}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &475062246962775415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9162226757798091334}
+  m_Layer: 0
+  m_Name: LaunchPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9162226757798091334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475062246962775415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.65752053, y: -0, z: -0, w: 0.7534366}
+  m_LocalPosition: {x: 0, y: -0.29100037, z: 0.5949993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5814546909788036738}
+  m_LocalEulerAnglesHint: {x: 82.222, y: 0, z: 0}
 --- !u!1 &2235873777942313105
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +91,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.70674074, y: -0.02273951, z: 0.02273953, w: 0.7067414}
   m_LocalPosition: {x: 0.491, y: -0.42700005, z: 0.702}
+  m_LocalScale: {x: 0.29, y: 0.29, z: 0.29}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5814546909788036738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8941347485172119661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8053994495146778795}
+  m_Layer: 0
+  m_Name: ShakePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8053994495146778795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8941347485172119661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.44599915, y: -0.0089998245, z: 0.73200035}
   m_LocalScale: {x: 0.29, y: 0.29, z: 0.29}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,6 +237,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8032541318651995755}
+    - targetCorrespondingSourceObject: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8053994495146778795}
+    - targetCorrespondingSourceObject: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9162226757798091334}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
 --- !u!4 &5814546909788036738 stripped
@@ -200,6 +270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: pushLayers.m_Bits
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393215578589016642, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5393215578589016655, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -320,15 +395,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb810bb1736548f4b87b0791bbf94c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lerpSpeed: 10
   gunSocket: {fileID: 8032541318651995755}
+  shakePosition: {fileID: 8053994495146778795}
+  launchPosition: {fileID: 9162226757798091334}
   activeGun: {fileID: 0}
   shakeAdjust: 0.2
-  shakenThreshold: 5
+  shakenThreshold: 4
   shaken: 0
   shakenSlider: {fileID: 0}
+  storedRotationSpeed: 0
   canShoot: 0
   hasShot: 0
   sodaCanPrefab: {fileID: 2648314134582069308, guid: 60bf2a65d3431d2498eb7bfa16ae0565,
+    type: 3}
+  sodaCanProjectile: {fileID: 6166230899701459384, guid: b418f32b90807a64eb11285b60940754,
     type: 3}
 --- !u!1001 &7344420281216033449
 PrefabInstance:

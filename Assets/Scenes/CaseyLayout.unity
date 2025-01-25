@@ -23350,7 +23350,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sodaCanProjectile
       value: 
-      objectReference: {fileID: 6166230899701459384, guid: b418f32b90807a64eb11285b60940754,
+      objectReference: {fileID: 3744188144970368314, guid: 4719097bffe8e744a8c5c6d88781e8d5,
         type: 3}
     - target: {fileID: 5262580081882035045, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}

@@ -30,6 +30,8 @@ public class ZaceyEnemy : MonoBehaviour
     bool alert;
     float alertTimer;
 
+    [SerializeField] bool ignoreRayAgro;
+
     [SerializeField] GameObject topHalf;
     [SerializeField] Transform topHalfLocator;
 
@@ -57,16 +59,22 @@ public class ZaceyEnemy : MonoBehaviour
 
         if (distanceToPlayer < attackRange)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+            if(ignoreRayAgro)
             {
-                if (hit.collider.CompareTag("Player"))
+                enemyState = EnemyState.ATTACKING;
+            }
+            else
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
                 {
-                    enemyState = EnemyState.ATTACKING;
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        enemyState = EnemyState.ATTACKING;
+                    }
                 }
             }
         }
-        else if (alert) enemyState = EnemyState.APPROACHING;
         else enemyState = EnemyState.PATROLLING;
 
 

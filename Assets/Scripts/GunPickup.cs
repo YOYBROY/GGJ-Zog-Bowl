@@ -6,16 +6,26 @@ public class GunPickup : MonoBehaviour
 {
     [SerializeField] string gunType;
     [SerializeField] float pickUpDistance = 5f;
+    [SerializeField] bool deletesSelf = true;
+    [SerializeField] float scaleUpAmount = 1.2f;
+    [SerializeField] float lerpSpeed = 4f;
 
     //References
     GunController gunController;
     
     private Vector3 originalScale;
+    Vector3 targetScale;
 
     void OnEnable()
     {
         gunController = FindObjectOfType<GunController>();
         originalScale = transform.localScale;
+        targetScale = originalScale;
+    }
+
+    private void Update()
+    {
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, lerpSpeed * Time.deltaTime);
     }
 
     private void OnMouseOver()
@@ -23,13 +33,13 @@ public class GunPickup : MonoBehaviour
         float distance = Vector3.Distance(gunController.transform.position, transform.position);
         if (distance > pickUpDistance) return;
         if (PauseMenu.isPaused) return;
-        transform.localScale = originalScale * 1.2f;
+        targetScale = originalScale * scaleUpAmount;
     }
 
     private void OnMouseExit()
     {
         if (PauseMenu.isPaused) return;
-        transform.localScale = originalScale;
+        targetScale = originalScale;
     }
 
     private void OnMouseDown()
@@ -42,6 +52,6 @@ public class GunPickup : MonoBehaviour
             gunController.ThrowGun();
         }
         gunController.AddGun(gunType);
-        Destroy(gameObject);
+        if(deletesSelf) Destroy(gameObject);
     }
 }

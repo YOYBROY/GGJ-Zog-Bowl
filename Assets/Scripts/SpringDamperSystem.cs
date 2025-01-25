@@ -14,10 +14,12 @@ public class SpringDamperSystem : MonoBehaviour
 
     [HideInInspector] public GunController gunController;
     Transform player;
+    [HideInInspector] public Transform fireLocation;
 
 
     private void OnEnable()
     {
+        fireLocation = transform.GetChild(0);
         player = FindObjectOfType<FirstPersonController>().transform;
         gunController = player.GetComponent<GunController>();
         target = Camera.main.transform.GetChild(0);

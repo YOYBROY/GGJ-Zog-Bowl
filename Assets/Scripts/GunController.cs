@@ -15,6 +15,7 @@ public class GunController : MonoBehaviour
     Quaternion storedGunSocketRot;
     [SerializeField] Transform shakePosition;
     [SerializeField] Transform launchPosition;
+    [SerializeField] Transform lookAtRayPosition;
     [HideInInspector] public GameObject activeGun;
     SpringDamperSystem gunSpringSystem;
     [SerializeField] float shakeAdjust = 1f;
@@ -33,6 +34,7 @@ public class GunController : MonoBehaviour
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool hasShot;
 
+    [SerializeField] TrailRenderer hitscanTrail;
     [SerializeField] GameObject sodaCanPrefab;
     [SerializeField] GameObject sodaCanProjectile;
 
@@ -54,6 +56,8 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
         if (PauseMenu.isPaused) return;
         if (shaken >= shakenThreshold) { shaken = shakenThreshold; canShoot = true; }
         shakenSlider.value = Remap(shaken, 0, shakenThreshold, 0, 1);
@@ -67,8 +71,12 @@ public class GunController : MonoBehaviour
             gunSpringSystem.enabled = true;
             _controller.RotationSpeed = 0;
             activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
-
         }
+        else
+        {
+            targetRot = lookAtRayPosition.localRotation;
+        }
+
         if (Input.GetMouseButtonUp(1))
         {
             if (activeGun == null) return;
@@ -117,7 +125,20 @@ public class GunController : MonoBehaviour
         canShoot = false;
         hasShot = true;
         shaken = 0;
-        //Shoot Hitscan that kills
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, float.MaxValue))
+        {
+            //Shoot Hitscan that kills
+            TrailRenderer trail = Instantiate(hitscanTrail, gunSpringSystem.fireLocation.position, Quaternion.identity);
+
+
+
+            StartCoroutine(SpawnTrail(trail, hit));
+
+        }
     }
 
     public void ThrowGun()
@@ -135,5 +156,18 @@ public class GunController : MonoBehaviour
     float Remap(float value, float minA, float maxA, float minB, float maxB)
     {
         return minB + (value - minA) * (maxB - minB) / (maxA - minA);
+    }
+
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPos = trail.transform.position;
+
+        while(time < 1)
+        {
+            trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
     }
 }

@@ -24,7 +24,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private Slider shakenSlider;
 
     FirstPersonController _controller;
-    float storedRotationSpeed;
+    [HideInInspector] public int storedRotationSpeed;
     float storedMoveSpeed;
 
     StarterAssetsInputs _input;
@@ -61,14 +61,17 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            if (activeGun == null) return;
             targetPos = shakePosition.localPosition;
             targetRot = shakePosition.localRotation;
             gunSpringSystem.enabled = true;
             _controller.RotationSpeed = 0;
             activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
+
         }
         if (Input.GetMouseButtonUp(1))
         {
+            if (activeGun == null) return;
             targetPos = storedGunSocketPos;
             targetRot = storedGunSocketRot;
             activeGun.transform.SetParent(gunSocket.transform);

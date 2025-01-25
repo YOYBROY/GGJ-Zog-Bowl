@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using StarterAssets;
 using TMPro;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static int totalEnemyCount;
+    public int totalEnemyCount;
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
     public GameObject winMenuUI;
@@ -26,17 +27,25 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+        Enemy[] enemies = FindObjectsByType<Enemy>(0);
+        ZaceyEnemy[] zaceyEnemies = FindObjectsByType<ZaceyEnemy>(0);
+
+        totalEnemyCount += enemies.Length + zaceyEnemies.Length;
+
         gunController = FindObjectOfType<GunController>();
         firstPersonController = FindObjectOfType<FirstPersonController>();
         firstPersonController.enabled = false;
         beginningOfGame = true;
         if (BeginGameUI.activeSelf == false) BeginGameUI.SetActive(true);
+        if(mouseSensitivityUI.gameObject.activeSelf == false) mouseSensitivityUI.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(totalEnemyCount);
         if (totalEnemyCount == 0) GameWon();
         if (stopWatchOn) timerTime += Time.deltaTime; inGameTimerText.text = "Time: " + timerTime.ToString("#.000"); ;
         if (beginningOfGame)
@@ -82,14 +91,6 @@ public class PauseMenu : MonoBehaviour
         {
             QuitGame();
         }
-
-        //Game Over
-        if (gameOver)
-        {
-            gameOver = true;
-            Time.timeScale = 0;
-        }
-
         mouseSensitivityUI.text = "Mouse Sensitivity: " + firstPersonController.RotationSpeed;
     }
 
@@ -98,8 +99,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        mouseSensitivityUI.gameObject.SetActive(false);
         isPaused = false;
     }
 
@@ -107,9 +107,8 @@ public class PauseMenu : MonoBehaviour
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
+        mouseSensitivityUI.gameObject.SetActive(true);
         isPaused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         Time.timeScale = 0;
     }
 
@@ -123,12 +122,14 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
+        isPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     //Game Won
     public void GameWon()
     {
+        gameOver = true;
         isPaused = true;
         stopWatchOn = false;
         finalTimeText.gameObject.SetActive(true);
@@ -141,6 +142,7 @@ public class PauseMenu : MonoBehaviour
     //Game Lost
     public void GameLose()
     {
+        gameOver = true;
         isPaused = true;
         stopWatchOn = false;
         finalTimeText.gameObject.SetActive(true);
@@ -157,6 +159,7 @@ public class PauseMenu : MonoBehaviour
         firstPersonController.enabled = true;
         beginningOfGame = false;
         BeginGameUI.SetActive(false);
+        mouseSensitivityUI.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 }

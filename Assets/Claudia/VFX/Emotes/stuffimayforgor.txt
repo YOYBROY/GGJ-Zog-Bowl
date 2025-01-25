@@ -1,0 +1,9 @@
+I am setting Thought! to have a world render alignment so that it stays in the same direction,
+the view alignment was rotating the images the wrong way
+Can be changed under the Renderer tab if you need to change it (down the bottom)
+
+To rotate the actual particle, change 3D Start Rotation to the correct orientation (it's at the top)
+I think you can also just put it in an empty and move/rotate that...?
+(idk how your programming works sorry i just make it somewhat pretty)
+
+You may need to go into the prefab and adjust the position based on the camera if they are not sitting right

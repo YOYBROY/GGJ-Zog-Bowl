@@ -97,14 +97,14 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FalloffAmount: -0.69
-    - _Falloff_Threshhold: 1.86
+    - _Falloff_Threshhold: 2.74
     - _FresnelSize: 0.05
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: -0.74
+    - _Intensity: -0.16
     - _LightingCutoff: 0
-    - _Lit_Threshhold: 0.45
+    - _Lit_Threshhold: 0.21
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

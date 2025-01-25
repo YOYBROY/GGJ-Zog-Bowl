@@ -84,27 +84,27 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _AmbientStrength: 1.17
+    - _AmbientStrength: 1.9
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Density: 15.19
+    - _Density: 19
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FalloffAmount: 0.01
-    - _Falloff_Threshhold: 1.86
+    - _Falloff_Threshhold: -0.08
     - _FresnelSize: 0.05
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: 1.11
+    - _Intensity: 0.39
     - _LightingCutoff: 0
-    - _Lit_Threshhold: 0.58
+    - _Lit_Threshhold: 0.3
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -114,7 +114,7 @@ Material:
     - _Rotation: 0.32
     - _Smoothness: 10000
     - _SmoothnessTextureChannel: 0
-    - _Softness: 1.6
+    - _Softness: 0.2
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0

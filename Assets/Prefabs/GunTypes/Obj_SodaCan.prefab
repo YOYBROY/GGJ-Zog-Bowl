@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.851493
+      value: -10.698246
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34955937
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.26
+      value: 35.31142
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
@@ -62,11 +62,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0407ac5c60b83be49b3f18cefc1ba5f5, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d3b5b71c76160f4792094004e7aa623, type: 2}
     - target: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_Name
       value: Obj_SodaCan
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

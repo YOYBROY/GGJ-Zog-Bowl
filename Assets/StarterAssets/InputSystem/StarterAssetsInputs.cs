@@ -68,7 +68,6 @@ namespace StarterAssets
 		
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			if (PauseMenu.isPaused) return;
 			SetCursorState(cursorLocked);
 		}
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpringDamperSystem : MonoBehaviour
 {
-    public Transform target;
+    [HideInInspector] public Transform target;
     Vector3 prevPosition;
     Vector3 targetPrevPos;
     [SerializeField] float errorAdjust = 1;
@@ -14,10 +14,12 @@ public class SpringDamperSystem : MonoBehaviour
 
     [HideInInspector] public GunController gunController;
     Transform player;
+    [HideInInspector] public Transform fireLocation;
 
 
     private void OnEnable()
     {
+        fireLocation = transform.GetChild(0);
         player = FindObjectOfType<FirstPersonController>().transform;
         gunController = player.GetComponent<GunController>();
         target = Camera.main.transform.GetChild(0);

@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 6833946586661057184}
   - component: {fileID: 5942307439644923214}
   - component: {fileID: 1185100911418792540}
+  - component: {fileID: 2726881389145582031}
   m_Layer: 6
   m_Name: VendingMachineOutside
   m_TagString: Untagged
@@ -476,10 +477,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3183048500874377025, guid: 4f62a32d50eb1ae4799019e785fbe3c4, type: 3}
-  - {fileID: -7791486788655378091, guid: 4f62a32d50eb1ae4799019e785fbe3c4, type: 3}
-  - {fileID: -1490458834067555635, guid: 4f62a32d50eb1ae4799019e785fbe3c4, type: 3}
-  - {fileID: 5561349426305759274, guid: 4f62a32d50eb1ae4799019e785fbe3c4, type: 3}
+  - {fileID: 2100000, guid: 6928af781a1ae1f4e8c67fdf921d8162, type: 2}
+  - {fileID: 2100000, guid: f5dca000b184ca449bc86039a1fa59d2, type: 2}
+  - {fileID: 2100000, guid: 6928af781a1ae1f4e8c67fdf921d8162, type: 2}
+  - {fileID: 2100000, guid: 6928af781a1ae1f4e8c67fdf921d8162, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -501,6 +502,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2726881389145582031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073382212161740750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbfaf8cac63e3b4990866cbd5220cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunType: Soda
+  pickUpDistance: 3
+  deletesSelf: 1
+  scaleUpAmount: 1.2
+  lerpSpeed: 4
 --- !u!1 &1209482497176045000
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +580,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7791486788655378091, guid: 4f62a32d50eb1ae4799019e785fbe3c4, type: 3}
+  - {fileID: 2100000, guid: 265402ed72439e74197f1ef5e6149901, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2479,6 +2497,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5832069308733482658}
+  - component: {fileID: 7323037333268559168}
+  - component: {fileID: 201274950041393876}
   m_Layer: 6
   m_Name: VendingMachine
   m_TagString: Untagged
@@ -2494,7 +2514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8422602624505904118}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.3560934, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2504,6 +2524,44 @@ Transform:
   - {fileID: 1052001184082986805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7323037333268559168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422602624505904118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbfaf8cac63e3b4990866cbd5220cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunType: Soda
+  pickUpDistance: 3.5
+  deletesSelf: 0
+  scaleUpAmount: 1.2
+  lerpSpeed: 10
+--- !u!65 &201274950041393876
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422602624505904118}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4537169, y: 2.4362512, z: 1}
+  m_Center: {x: 0, y: 1.23, z: 0}
 --- !u!1 &9181354170189165295
 GameObject:
   m_ObjectHideFlags: 0

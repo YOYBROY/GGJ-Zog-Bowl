@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
+using StarterAssets;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,42 +8,122 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform[] patrolPoints;
     Transform targetPoint;
     int patrolNumber = 0;
-    [SerializeField] float lerpSpeed = 1f;
+    [SerializeField] float patrolLerpSpeed = 2f;
+    [SerializeField] float attackLerpSpeed = 15f;
 
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float distanceThreshold = 0.01f;
 
+    private GameObject player;
     private GunController gunController;
-    private Material storedMaterial;
-    [SerializeField] private Material stunnedMat;
 
     [SerializeField] float stunThreshold = 500f;
 
+    [SerializeField] float attackRange = 10f;
+    float timer;
+    [SerializeField] float attackTimer = 4f;
+
+    [SerializeField] Transform attackSpawnPoint;
+    [SerializeField] GameObject enemyProjectile;
+
+    float dazedCount;
+    [SerializeField] float dazedTimer = 2f;
+    bool alert;
+    float alertTimer;
+
+    private PauseMenu pauseMenu;
+
+    enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
+    EnemyState enemyState;
+
     void Start()
     {
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        player = FindObjectOfType<FirstPersonController>().gameObject;
         gunController = FindObjectOfType<GunController>();
-        storedMaterial = GetComponent<Material>();
-        targetPoint = patrolPoints[0]; 
+        targetPoint = patrolPoints[0];
+        timer = attackTimer;
     }
 
     private void Update()
     {
-        //STATE 1: PATROLLING
-        //move towards a patrol point.
-        Vector3 direction = targetPoint.position - transform.position;
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-        //when we get within a certain range of patrol point.
-        float distance = Vector3.Distance(targetPoint.position, transform.position);
-        if (distance < distanceThreshold) UpdatePatrolPoints();
-        //go to next.
-        //rotate in direction of movement.
-        Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, lerpSpeed * Time.deltaTime);
+        if (dazedCount > 0)
+        {
+            dazedCount -= Time.deltaTime;
+            return;
+        }
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        Vector3 direction = player.transform.position - transform.position;
 
-        //STATE 2: ATTACKING
-        //face towards player
-        //shoot projectile on a timer
-        //play sound effect
+        if (distanceToPlayer < attackRange)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    enemyState = EnemyState.ATTACKING;
+                }
+            }
+        }
+        else if (alert) enemyState = EnemyState.APPROACHING;
+        else enemyState = EnemyState.PATROLLING;
+
+
+        switch (enemyState)
+        {
+            case EnemyState.PATROLLING:
+                //move towards a patrol point.
+                direction = targetPoint.position - transform.position;
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                //when we get within a certain range of patrol point.
+                float distance = Vector3.Distance(targetPoint.position, transform.position);
+                //go to next point
+                if (distance < distanceThreshold) UpdatePatrolPoints();
+                //rotate in direction of movement.
+                Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, patrolLerpSpeed * Time.deltaTime);
+                break;
+            case EnemyState.ATTACKING:
+
+                alert = true;
+                //face towards player
+                direction = player.transform.position - transform.position;
+                targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
+
+                //shoot projectile on a timer
+                timer -= Time.deltaTime;
+                if (timer < 0)
+                {
+                    //Attack
+                    Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
+                    //attack Animation
+                    timer = attackTimer;
+                }
+                //play sound effect
+                break;
+            case EnemyState.APPROACHING:
+                //face towards player
+                direction = player.transform.position - transform.position;
+                targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
+
+                RaycastHit hit;
+                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        //Mose Towards Player
+                        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                    }
+                    else alertTimer += Time.deltaTime;
+                    if (alertTimer > 4f) { alert = false; enemyState = EnemyState.PATROLLING; alertTimer = 0; }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     void UpdatePatrolPoints()
@@ -53,21 +133,24 @@ public class Enemy : MonoBehaviour
         targetPoint = patrolPoints[patrolNumber];
     }
 
-    private void OnMouseDown()
+    public void KillEnemy()
     {
-        if (gunController.canShoot)
-        {
-            Destroy(gameObject);
-        }
+        pauseMenu.totalEnemyCount--;
+        Destroy(gameObject);
+    }
+
+    public void StunEnemy()
+    {
+        dazedCount = dazedTimer;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("PlayerProjectile"))
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
-            Debug.Log(collision.relativeVelocity.sqrMagnitude);
             if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
-            GetComponent<Renderer>().material = stunnedMat;
+            //Play dazed particle effect
+            StunEnemy();
         }
     }
 }

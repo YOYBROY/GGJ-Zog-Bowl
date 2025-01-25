@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8610469105947744181
+--- !u!1001 &2911349790002464026
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.289364
+      value: 8.597516
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2547734
+      value: 0.17593235
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3229134
+      value: 0.8664541
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
@@ -58,7 +58,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+    - target: {fileID: -4341075328330474639, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e7e068e34d27a34d92088ce2df8bc71, type: 2}
+    - target: {fileID: -434894888737771529, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -68,6 +73,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot_Model
       objectReference: {fileID: 0}
+    - target: {fileID: 2600273326057797097, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e7e068e34d27a34d92088ce2df8bc71, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

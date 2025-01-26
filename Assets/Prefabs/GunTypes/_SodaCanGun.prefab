@@ -103,6 +103,7 @@ MonoBehaviour:
   shakeAmountAdjuster: 10
   gunController: {fileID: 0}
   fireLocation: {fileID: 0}
+  shakeSoundThreshold: 0.01
 --- !u!1 &3431828213548885664
 GameObject:
   m_ObjectHideFlags: 0

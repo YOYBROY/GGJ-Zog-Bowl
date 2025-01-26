@@ -149,4 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 1500
   angularForce: 30
-  hitSomething: 0
+  isChampaign: 1
+  impactParticle: {fileID: 3122347672128452897, guid: f474a8c5158955049b7d7ebda7730001,
+    type: 3}

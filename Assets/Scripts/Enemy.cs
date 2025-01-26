@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float distanceThreshold = 0.01f;
 
     private GameObject player;
-    private GunController gunController;
 
     [SerializeField] float stunThreshold = 500f;
 
@@ -29,9 +28,22 @@ public class Enemy : MonoBehaviour
     float dazedCount;
     [SerializeField] float dazedTimer = 2f;
     bool alert;
+    bool prevAlert;
     float alertTimer;
 
+    bool stunned;
+
     private PauseMenu pauseMenu;
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private Transform particleSocket;
+    [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] private ParticleSystem stunParticles;
+    [SerializeField] private ParticleSystem surpriseParticle;
+    [SerializeField] private ParticleSystem confusedParticles;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip robotMoveAudio;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
@@ -40,18 +52,29 @@ public class Enemy : MonoBehaviour
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
-        gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
+        audioSource.loop = true;
+        audioSource.volume = Mathf.Clamp(moveSpeed , 0, 1);
+        audioSource.Play();
     }
 
     private void Update()
     {
         if (dazedCount > 0)
         {
+            if (!stunned)
+            {
+                Instantiate(stunParticles, particleSocket.transform.position, Quaternion.identity, particleSocket.transform);
+                stunned = true;
+            }
             dazedCount -= Time.deltaTime;
             return;
         }
+        else if (stunned) stunned = false;
+
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 direction = player.transform.position - transform.position;
 
@@ -69,10 +92,22 @@ public class Enemy : MonoBehaviour
         else if (alert) enemyState = EnemyState.APPROACHING;
         else enemyState = EnemyState.PATROLLING;
 
+        if (alert && !prevAlert)
+        {
+            Instantiate(surpriseParticle, particleSocket.position, Quaternion.identity, particleSocket);
+            prevAlert = alert;
+        }
+        if(!alert && prevAlert)
+        {
+            Instantiate(confusedParticles, particleSocket.position, Quaternion.identity, particleSocket);
+            prevAlert = alert;
+        }
+        
 
         switch (enemyState)
         {
             case EnemyState.PATROLLING:
+                animator.SetBool("IsAggro", false);
                 //move towards a patrol point.
                 direction = targetPoint.position - transform.position;
                 transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -85,7 +120,7 @@ public class Enemy : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, patrolLerpSpeed * Time.deltaTime);
                 break;
             case EnemyState.ATTACKING:
-
+                animator.SetBool("IsAggro", true);
                 alert = true;
                 //face towards player
                 direction = player.transform.position - transform.position;
@@ -99,6 +134,7 @@ public class Enemy : MonoBehaviour
                     //Attack
                     Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
                     //attack Animation
+                    AudioManager.PlaySound(SoundType.ZOGCOUGH, 1);
                     timer = attackTimer;
                 }
                 //play sound effect
@@ -136,6 +172,7 @@ public class Enemy : MonoBehaviour
     public void KillEnemy()
     {
         pauseMenu.totalEnemyCount--;
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -143,7 +180,6 @@ public class Enemy : MonoBehaviour
     {
         dazedCount = dazedTimer;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("PlayerProjectile"))

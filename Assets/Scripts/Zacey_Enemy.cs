@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
+[RequireComponent(typeof(AudioSource))]
 
 public class ZaceyEnemy : MonoBehaviour
 {
@@ -27,15 +28,19 @@ public class ZaceyEnemy : MonoBehaviour
 
     float dazedCount;
     [SerializeField] float dazedTimer = 2f;
-    bool alert;
-    float alertTimer;
 
     [SerializeField] bool ignoreRayAgro;
 
     [SerializeField] GameObject topHalf;
     [SerializeField] Transform topHalfLocator;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip robotMoveAudio;
+
     private PauseMenu pauseMenu;
+
+    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] private Animator animator;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
@@ -47,6 +52,11 @@ public class ZaceyEnemy : MonoBehaviour
         gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
+        audioSource.loop = true;
+        audioSource.volume = Mathf.Clamp(moveSpeed, 0, 1);
+        audioSource.Play();
     }
 
     private void Update()
@@ -95,9 +105,11 @@ public class ZaceyEnemy : MonoBehaviour
         switch (enemyState)
         {
             case EnemyState.PATROLLING:
+                animator.SetBool("IsAggro", false);
                 topHalf.transform.rotation = transform.rotation;
                 break;
             case EnemyState.ATTACKING:
+                animator.SetBool("IsAggro", true);
                 //face towards player
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -130,6 +142,8 @@ public class ZaceyEnemy : MonoBehaviour
     public void KillEnemy()
     {
         pauseMenu.totalEnemyCount--;
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
         Destroy(topHalf);
         Destroy(gameObject);
     }

@@ -192,6 +192,7 @@ MonoBehaviour:
   shakeAmountAdjuster: 10
   gunController: {fileID: 0}
   fireLocation: {fileID: 0}
+  shakeSoundThreshold: 0.01
 --- !u!4 &5415916241947948255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1f4d11b9c3683fe478d73a8d223e0f55,

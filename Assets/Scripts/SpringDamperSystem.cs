@@ -15,6 +15,7 @@ public class SpringDamperSystem : MonoBehaviour
     [HideInInspector] public GunController gunController;
     Transform player;
     [HideInInspector] public Transform fireLocation;
+    [SerializeField] private float shakeSoundThreshold = 1f;
 
 
     private void OnEnable()
@@ -43,6 +44,10 @@ public class SpringDamperSystem : MonoBehaviour
         targetPrevPos = target.localPosition;
         transform.localPosition = newPos;
         if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.localPosition = target.localPosition;
-        if(!gunController.hasShot && targetVelocity.magnitude < 0.001f) { gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime; }
+        if(!gunController.hasShot && targetVelocity.magnitude < 0.001f) 
+        { 
+            gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime;
+            if(velocity.sqrMagnitude > shakeSoundThreshold) AudioManager.PlaySound(SoundType.SHAKING, 1);
+        }
     }
 }

@@ -5,14 +5,14 @@ using System;
 
 public enum SoundType
 {
-    MOVESQUELCH,
-    JUMP,
-    POOP,
-    ROOMBA,
-    DOOR,
-    FRIDGE,
-    VACCUUM,
-    GLASS
+    ZOGCOUGH,
+    SODACANPOP,
+    CHAMPAIGNPOP,
+    ROBOTMOVING,
+    SHAKING,
+    WEAPONPICKUP,
+    GLASSSMASH,
+    SODALANDING
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
@@ -38,6 +38,13 @@ public class AudioManager : MonoBehaviour
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
         instance.audioSource.PlayOneShot(randomClip, volume);
+    }
+
+    public static AudioClip GetAudioClip(SoundType sound)
+    {
+        AudioClip[] clips = instance.soundList[(int)sound].Sounds;
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        return randomClip;
     }
 
 #if UNITY_EDITOR

@@ -39,10 +39,15 @@ public class GunController : MonoBehaviour
 
     [SerializeField] GameObject sodaCanPrefab;
     [SerializeField] GameObject sodaCanProjectile;
+    [SerializeField] ParticleSystem sodaShootParticle;
+    [SerializeField] ParticleSystem sodaImpactParticle;
     [SerializeField] float sodaCanDamageRange = 100f;
 
     [SerializeField] GameObject ChampainGunPrefab;
     [SerializeField] GameObject ChampainProjectile;
+    [SerializeField] ParticleSystem champainShootParticle; 
+    [SerializeField] ParticleSystem champaignImpactParticle;
+
 
     void Start()
     {
@@ -115,6 +120,7 @@ public class GunController : MonoBehaviour
 
     public void AddGun(string gunType)
     {
+        AudioManager.PlaySound(SoundType.WEAPONPICKUP);
         if (gunType == "Soda")
         {
             activeGun = Instantiate(sodaCanPrefab, gunSocket.position, gunSocket.rotation, cam.transform);
@@ -135,6 +141,20 @@ public class GunController : MonoBehaviour
         hasShot = true;
         shaken = 0;
 
+        if (activeGunType == "Soda")
+        {
+            AudioManager.PlaySound(SoundType.SODACANPOP, 1);
+            //Particle Effect at launch point
+            Instantiate(sodaShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.CHAMPAIGNPOP, 1);
+            //Particle Effect At launch point
+            Instantiate(champainShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
+        }
+
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -151,13 +171,13 @@ public class GunController : MonoBehaviour
                     float distance = Vector3.Distance(hit.point, cam.transform.position);
                     if (distance > sodaCanDamageRange)
                     {
-                        if (zacey) zaceyEnemy.StunEnemy(); 
-                        else enemy.StunEnemy(); 
+                        if (zacey) zaceyEnemy.StunEnemy();
+                        else enemy.StunEnemy();
                     }
                     else
                     {
-                        if (zacey) zaceyEnemy.KillEnemy(); 
-                        else enemy.KillEnemy(); 
+                        if (zacey) zaceyEnemy.KillEnemy();
+                        else enemy.KillEnemy();
                     }
                 }
                 else
@@ -197,11 +217,14 @@ public class GunController : MonoBehaviour
         while (time < 1)
         {
             trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
-            time += Time.deltaTime / trail.time;
+            time += Time.deltaTime / trail.time * 10f;
             yield return null;
         }
         trail.transform.position = hit.point;
-        //Instantiate Particles for Hit point
+
+        if(activeGunType == "Soda") Instantiate(sodaImpactParticle, hit.point, Quaternion.Euler(hit.normal));
+        else Instantiate(champaignImpactParticle, hit.point, Quaternion.Euler(hit.normal));
+
 
         Destroy(trail.gameObject, trail.time);
     }

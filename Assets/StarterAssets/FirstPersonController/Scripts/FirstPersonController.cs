@@ -52,7 +52,7 @@ namespace StarterAssets
         public float TopClamp = 90.0f;
         [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -90.0f;
-        [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
+        CinemachineVirtualCamera cinemachineVirtualCamera;
         private float storedFOV;
         [SerializeField] float fovAdjust = 1f;
         [SerializeField] float lerpSpeed = 1f;
@@ -103,6 +103,7 @@ namespace StarterAssets
 
         private void Start()
         {
+            cinemachineVirtualCamera = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM

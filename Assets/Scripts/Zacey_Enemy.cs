@@ -39,6 +39,8 @@ public class ZaceyEnemy : MonoBehaviour
 
     private PauseMenu pauseMenu;
 
+    [SerializeField] ParticleSystem deathParticles;
+
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
 
@@ -137,6 +139,8 @@ public class ZaceyEnemy : MonoBehaviour
     public void KillEnemy()
     {
         pauseMenu.totalEnemyCount--;
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
         Destroy(topHalf);
         Destroy(gameObject);
     }

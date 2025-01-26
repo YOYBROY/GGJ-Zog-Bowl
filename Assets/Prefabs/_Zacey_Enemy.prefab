@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1325059150690751984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.941999, y: 0, z: 18.571}
+  m_LocalPosition: {x: -6.67, y: 0, z: 1.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4756003362910374253}
   m_Layer: 6
   m_Name: Obj_Arms
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2953163212903827288}
   m_Layer: 0
   m_Name: BulletSpawnPoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2159410895768025153}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000005066394}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 6.54, y: 0, z: -18.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 3713342629884013293}
   m_Layer: 6
   m_Name: Robot_Model
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,6 +212,7 @@ Transform:
   m_Children:
   - {fileID: 4226591929032986892}
   - {fileID: 1203763704250887019}
+  - {fileID: 1110466546719267631}
   m_Father: {fileID: 8764044218026652079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3082855091144319715
@@ -239,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 3082855091144319715}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.71399975, y: 0, z: 19.505}
+  m_LocalPosition: {x: 0.74, y: 0, z: 5.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258,7 +259,7 @@ GameObject:
   - component: {fileID: 7398010931503836502}
   m_Layer: 6
   m_Name: Obj_Wheel
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,7 +340,7 @@ GameObject:
   - component: {fileID: 1203763704250887019}
   m_Layer: 6
   m_Name: TopHalfLocator
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,7 +371,7 @@ GameObject:
   - component: {fileID: 4896225296964281169}
   m_Layer: 6
   m_Name: TopHalf
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -417,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 5441264028995259687}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.69200015, y: 0, z: 14.161}
+  m_LocalPosition: {x: 1.58, y: 0, z: -3.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -481,7 +482,7 @@ MonoBehaviour:
   moveSpeed: 4
   distanceThreshold: 1.5
   stunThreshold: 100
-  attackRange: 15
+  attackRange: 20
   attackTimer: 0.3
   attackSpawnPoint: {fileID: 2953163212903827288}
   enemyProjectile: {fileID: 8035736283932347423, guid: 850b60ad78425de42967ff81bbe578ae,
@@ -491,6 +492,8 @@ MonoBehaviour:
   topHalf: {fileID: 4576475000209825167}
   topHalfLocator: {fileID: 1203763704250887019}
   robotMoveAudio: {fileID: 0}
+  deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
+    type: 3}
 --- !u!65 &5284195385718598968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -587,7 +590,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.318
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -596,7 +599,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 4.3038836
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -684,7 +687,7 @@ GameObject:
   - component: {fileID: 3950704251476990771}
   m_Layer: 6
   m_Name: Obj_Torso
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -755,3 +758,123 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &4064510261009715427
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3713342629884013293}
+    m_Modifications:
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.49999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.106
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.136
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.262
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000036454895
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000036454895
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068269568304570853, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: VelocityModule.z.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068269568304570853, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068269568304570853, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068269568304570853, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068269568304570853, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068269568304570853, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947547226661403971, guid: c21021c449071a043824d294fd4a4f57,
+        type: 3}
+      propertyPath: m_Name
+      value: _WheelDustParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6452141214688987810, guid: c21021c449071a043824d294fd4a4f57, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c21021c449071a043824d294fd4a4f57, type: 3}
+--- !u!4 &1110466546719267631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3963486517057424332, guid: c21021c449071a043824d294fd4a4f57,
+    type: 3}
+  m_PrefabInstance: {fileID: 4064510261009715427}
+  m_PrefabAsset: {fileID: 0}

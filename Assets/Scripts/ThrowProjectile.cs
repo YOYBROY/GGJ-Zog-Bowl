@@ -7,6 +7,7 @@ public class ThrowProjectile : MonoBehaviour
     [SerializeField] float force = 1f;
     [SerializeField] float angularForce = 1f;
     [SerializeField] bool isChampaign;
+    [SerializeField] ParticleSystem impactParticle;
 
     void OnEnable()
     {
@@ -18,11 +19,15 @@ public class ThrowProjectile : MonoBehaviour
     {
         if (isChampaign)
         {
+            if(impactParticle != null) Instantiate(impactParticle, transform.position, Quaternion.Euler(collision.contacts[0].normal)); 
             AudioManager.PlaySound(SoundType.GLASSSMASH, 1);
             Destroy(gameObject);
         }
         else
         {
+            Debug.Log(collision.impulse.sqrMagnitude);
+            if (collision.impulse.sqrMagnitude < 5f) return;
+            if (impactParticle != null) Instantiate(impactParticle, transform.position, Quaternion.Euler(collision.contacts[0].normal));
             AudioManager.PlaySound(SoundType.SODALANDING, 1);
         }
     }

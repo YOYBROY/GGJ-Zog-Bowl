@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
 
     private PauseMenu pauseMenu;
 
+    [SerializeField] private ParticleSystem deathParticles;
+
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip robotMoveAudio;
 
@@ -145,6 +147,7 @@ public class Enemy : MonoBehaviour
     public void KillEnemy()
     {
         pauseMenu.totalEnemyCount--;
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

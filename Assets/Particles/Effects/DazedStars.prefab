@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7242037063630352020}
   - component: {fileID: 3364041150614723756}
   - component: {fileID: 278678565709171852}
+  - component: {fileID: 3126643524136063622}
   m_Layer: 0
   m_Name: DazedStars
   m_TagString: Untagged
@@ -107,7 +108,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -5074,6 +5075,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3126643524136063622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620867150542935581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6205674f6c2c38f48a28341314f3a6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 4
 --- !u!1001 &1836088954079895039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5082,6 +5096,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7242037063630352020}
     m_Modifications:
+    - target: {fileID: 1633704834651696748, guid: 54b8920d049a8c2438da99c550948499,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1633704834651696748, guid: 54b8920d049a8c2438da99c550948499,
         type: 3}
       propertyPath: InitialModule.startRotationX.scalar

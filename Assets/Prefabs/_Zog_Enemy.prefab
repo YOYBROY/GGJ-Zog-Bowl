@@ -164,7 +164,8 @@ MonoBehaviour:
   particleSocket: {fileID: 5851911267544703724}
   deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
     type: 3}
-  stunParticles: {fileID: 8022799248479621502}
+  stunParticles: {fileID: 3364041150614723756, guid: 0a12f4d35b3e3384984be6a55fa59ec2,
+    type: 3}
   surpriseParticle: {fileID: 6621048440437026064, guid: 79455ae25740e3d46a84403d87204a02,
     type: 3}
   confusedParticles: {fileID: 2879032215474260523, guid: 2b21a9953592fa84db291d51bbbc7aed,
@@ -316,8 +317,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.306, z: 0.16699982}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5442634268527362884}
+  m_Children: []
   m_Father: {fileID: 5397252951051203971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7357490645465259556
@@ -382,86 +382,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7027191446990839622}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &462130174001642491
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5851911267544703724}
-    m_Modifications:
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7482541529040476530, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-        type: 3}
-      propertyPath: m_Name
-      value: _StunParticles
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2393a0cd5be8a4148be42a8ceff9c9bc, type: 3}
---- !u!4 &5442634268527362884 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5611995267032840383, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 462130174001642491}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8022799248479621502 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7583892006137326213, guid: 2393a0cd5be8a4148be42a8ceff9c9bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 462130174001642491}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2627517600825809653
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float distanceThreshold = 0.01f;
 
     private GameObject player;
-    private GunController gunController;
 
     [SerializeField] float stunThreshold = 500f;
 
@@ -31,6 +30,8 @@ public class Enemy : MonoBehaviour
     bool alert;
     bool prevAlert;
     float alertTimer;
+
+    bool stunned;
 
     private PauseMenu pauseMenu;
 
@@ -50,7 +51,6 @@ public class Enemy : MonoBehaviour
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
-        gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
         audioSource = GetComponent<AudioSource>();
@@ -64,13 +64,15 @@ public class Enemy : MonoBehaviour
     {
         if (dazedCount > 0)
         {
-            var emis = stunParticles.emission;
-            emis.rateOverTime = 4;
+            if (!stunned)
+            {
+                Instantiate(stunParticles, particleSocket.transform.position, Quaternion.identity, particleSocket.transform);
+                stunned = true;
+            }
             dazedCount -= Time.deltaTime;
             return;
         }
-        var emission = stunParticles.emission;
-        emission.rateOverTime = 0;
+        else if (stunned) stunned = false;
 
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 direction = player.transform.position - transform.position;
@@ -176,7 +178,6 @@ public class Enemy : MonoBehaviour
     {
         dazedCount = dazedTimer;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("PlayerProjectile"))

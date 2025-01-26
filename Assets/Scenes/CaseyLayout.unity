@@ -24425,7 +24425,7 @@ PrefabInstance:
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: shakeAdjust
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
@@ -24435,7 +24435,7 @@ PrefabInstance:
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: shakenThreshold
-      value: 0.9
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
@@ -24447,6 +24447,31 @@ PrefabInstance:
         type: 3}
       propertyPath: GroundLayers.m_Bits
       value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053994495146778795, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.36736766
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053994495146778795, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053994495146778795, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9300759
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053994495146778795, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053994495146778795, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -136.893
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

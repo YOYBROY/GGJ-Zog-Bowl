@@ -40,6 +40,7 @@ public class ZaceyEnemy : MonoBehaviour
     private PauseMenu pauseMenu;
 
     [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] private Animator animator;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
@@ -104,9 +105,11 @@ public class ZaceyEnemy : MonoBehaviour
         switch (enemyState)
         {
             case EnemyState.PATROLLING:
+                animator.SetBool("IsAggro", false);
                 topHalf.transform.rotation = transform.rotation;
                 break;
             case EnemyState.ATTACKING:
+                animator.SetBool("IsAggro", true);
                 //face towards player
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);

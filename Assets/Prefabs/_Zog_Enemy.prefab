@@ -161,6 +161,7 @@ MonoBehaviour:
   enemyProjectile: {fileID: 7623222123441272069, guid: e58db9204f581bf45a56b57ebd27bafa,
     type: 3}
   dazedTimer: 2
+  animator: {fileID: 4925821075535364155}
   particleSocket: {fileID: 5851911267544703724}
   deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
     type: 3}
@@ -721,8 +722,39 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1402854425492263225}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8863532123664497306, guid: c53d7cb963c5bcf49b84ffea0e671447,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4925821075535364155}
   m_SourcePrefab: {fileID: 100100000, guid: c53d7cb963c5bcf49b84ffea0e671447, type: 3}
+--- !u!1 &2792778674640930302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8863532123664497306, guid: c53d7cb963c5bcf49b84ffea0e671447,
+    type: 3}
+  m_PrefabInstance: {fileID: 6755512591969910628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4925821075535364155
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792778674640930302}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 103265641805456468b6b657d3574740, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &3281472408433860420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8091357943367819296, guid: c53d7cb963c5bcf49b84ffea0e671447,

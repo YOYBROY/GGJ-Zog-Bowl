@@ -494,6 +494,7 @@ MonoBehaviour:
   robotMoveAudio: {fileID: 0}
   deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
     type: 3}
+  animator: {fileID: 5156839787570479217}
 --- !u!65 &5284195385718598968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -685,6 +686,7 @@ GameObject:
   - component: {fileID: 7326691782380456020}
   - component: {fileID: 8068082601860821880}
   - component: {fileID: 3950704251476990771}
+  - component: {fileID: 5156839787570479217}
   m_Layer: 6
   m_Name: Obj_Torso
   m_TagString: Enemy
@@ -758,6 +760,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &5156839787570479217
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485392853317192389}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce7ccabc556b7c54199fbfeb5dd25385, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &4064510261009715427
 PrefabInstance:
   m_ObjectHideFlags: 0

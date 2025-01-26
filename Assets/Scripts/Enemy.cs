@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     bool stunned;
 
     private PauseMenu pauseMenu;
+    [SerializeField] private Animator animator;
 
     [SerializeField] private Transform particleSocket;
     [SerializeField] private ParticleSystem deathParticles;
@@ -106,6 +107,7 @@ public class Enemy : MonoBehaviour
         switch (enemyState)
         {
             case EnemyState.PATROLLING:
+                animator.SetBool("IsAggro", false);
                 //move towards a patrol point.
                 direction = targetPoint.position - transform.position;
                 transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -118,7 +120,7 @@ public class Enemy : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, patrolLerpSpeed * Time.deltaTime);
                 break;
             case EnemyState.ATTACKING:
-
+                animator.SetBool("IsAggro", true);
                 alert = true;
                 //face towards player
                 direction = player.transform.position - transform.position;

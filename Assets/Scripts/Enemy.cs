@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     bool stunned;
 
     private PauseMenu pauseMenu;
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
     [SerializeField] private Transform particleSocket;
     [SerializeField] private ParticleSystem deathParticles;
@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         targetPoint = patrolPoints[0];

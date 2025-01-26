@@ -494,8 +494,8 @@ MonoBehaviour:
   launchPosition: {fileID: 9162226757798091334}
   lookAtRayPosition: {fileID: 8598453737318360289}
   activeGun: {fileID: 0}
-  shakeAdjust: 0.2
-  shakenThreshold: 2.5
+  shakeAdjust: 0.4
+  shakenThreshold: 2
   shaken: 0
   shakenSlider: {fileID: 0}
   storedRotationSpeed: 0
@@ -507,9 +507,18 @@ MonoBehaviour:
     type: 3}
   sodaCanProjectile: {fileID: 3744188144970368314, guid: 4719097bffe8e744a8c5c6d88781e8d5,
     type: 3}
+  sodaShootParticle: {fileID: 3821096401308559813, guid: 6208302d65654674ba765e98968acf75,
+    type: 3}
+  sodaImpactParticle: {fileID: 728578837446138464, guid: 4c39757bace183944acdb2570aa51421,
+    type: 3}
+  sodaCanDamageRange: 100
   ChampainGunPrefab: {fileID: 4639520756783591013, guid: 11f8d698c77bc4b46bad824003d126d0,
     type: 3}
   ChampainProjectile: {fileID: 8054697206167872071, guid: daf5fc68f35b15b4d905512351dfb8b5,
+    type: 3}
+  champainShootParticle: {fileID: 5552825249553029934, guid: 9dbc9e22385e7d245a67aa189042ba6c,
+    type: 3}
+  champaignImpactParticle: {fileID: 728578837446138464, guid: 38856dfab1e5fa443b9a59726e24b208,
     type: 3}
 --- !u!1001 &7344420281216033449
 PrefabInstance:

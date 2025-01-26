@@ -40,13 +40,14 @@ public class ZaceyEnemy : MonoBehaviour
     private PauseMenu pauseMenu;
 
     [SerializeField] ParticleSystem deathParticles;
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
 
     void Start()
     {
+        animator = transform.parent.GetComponentInChildren<Animator>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         gunController = FindObjectOfType<GunController>();

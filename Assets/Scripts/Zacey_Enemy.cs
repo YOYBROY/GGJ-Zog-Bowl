@@ -47,7 +47,7 @@ public class ZaceyEnemy : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = transform.parent.GetComponentInChildren<Animator>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         gunController = FindObjectOfType<GunController>();

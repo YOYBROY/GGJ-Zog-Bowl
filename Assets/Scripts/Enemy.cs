@@ -29,11 +29,16 @@ public class Enemy : MonoBehaviour
     float dazedCount;
     [SerializeField] float dazedTimer = 2f;
     bool alert;
+    bool prevAlert;
     float alertTimer;
 
     private PauseMenu pauseMenu;
 
+    [SerializeField] private Transform particleSocket;
     [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] private ParticleSystem stunParticles;
+    [SerializeField] private ParticleSystem surpriseParticle;
+    [SerializeField] private ParticleSystem confusedParticles;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip robotMoveAudio;
@@ -59,9 +64,14 @@ public class Enemy : MonoBehaviour
     {
         if (dazedCount > 0)
         {
+            var emis = stunParticles.emission;
+            emis.rateOverTime = 4;
             dazedCount -= Time.deltaTime;
             return;
         }
+        var emission = stunParticles.emission;
+        emission.rateOverTime = 0;
+
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 direction = player.transform.position - transform.position;
 
@@ -79,6 +89,17 @@ public class Enemy : MonoBehaviour
         else if (alert) enemyState = EnemyState.APPROACHING;
         else enemyState = EnemyState.PATROLLING;
 
+        if (alert && !prevAlert)
+        {
+            Instantiate(surpriseParticle, particleSocket.position, Quaternion.identity, particleSocket);
+            prevAlert = alert;
+        }
+        if(!alert && prevAlert)
+        {
+            Instantiate(confusedParticles, particleSocket.position, Quaternion.identity, particleSocket);
+            prevAlert = alert;
+        }
+        
 
         switch (enemyState)
         {

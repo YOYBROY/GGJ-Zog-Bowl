@@ -12,7 +12,8 @@ public enum SoundType
     SHAKING,
     WEAPONPICKUP,
     GLASSSMASH,
-    SODALANDING
+    SODALANDING,
+    ZACEYSHOOT,
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]

@@ -22,6 +22,8 @@ public class ZaceyEnemy : MonoBehaviour
     [SerializeField] float attackRange = 10f;
     float timer;
     [SerializeField] float attackTimer = 4f;
+    [SerializeField] float attentionSpan = 3f;
+    public float attentionSpanTimer;
 
     [SerializeField] Transform attackSpawnPoint;
     [SerializeField] GameObject enemyProjectile;
@@ -36,13 +38,14 @@ public class ZaceyEnemy : MonoBehaviour
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip robotMoveAudio;
+    [SerializeField] private float volume;
 
     private PauseMenu pauseMenu;
 
     [SerializeField] ParticleSystem deathParticles;
     private Animator animator;
 
-    enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
+    enum EnemyState { PATROLLING, ATTACKING, ALERT };
     EnemyState enemyState;
 
     void Start()
@@ -56,7 +59,7 @@ public class ZaceyEnemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
         audioSource.loop = true;
-        audioSource.volume = Mathf.Clamp(moveSpeed, 0, 1);
+        audioSource.volume = Mathf.Clamp(moveSpeed, 0, volume);
         audioSource.Play();
     }
 
@@ -83,7 +86,20 @@ public class ZaceyEnemy : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Player"))
                     {
+                        attentionSpanTimer = 0;
                         enemyState = EnemyState.ATTACKING;
+                    }
+                    else
+                    {
+                        attentionSpanTimer += Time.deltaTime;
+                        if(attentionSpanTimer > attentionSpan)
+                        {
+                            enemyState = EnemyState.PATROLLING;
+                        }
+                        else
+                        {
+                            enemyState = EnemyState.ALERT;
+                        }
                     }
                 }
             }
@@ -115,7 +131,6 @@ public class ZaceyEnemy : MonoBehaviour
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 topHalf.transform.rotation = targetRotation;
-                //topHalf.transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
 
                 //shoot projectile on a timer
                 timer -= Time.deltaTime;
@@ -127,6 +142,13 @@ public class ZaceyEnemy : MonoBehaviour
                     timer = attackTimer;
                 }
                 //play sound effect
+                break;
+            case EnemyState.ALERT:
+                animator.SetBool("IsAggro", true);
+                //face towards player
+                direction = player.transform.position - transform.position;
+                targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+                topHalf.transform.rotation = targetRotation;
                 break;
             default:
                 break;
@@ -160,7 +182,7 @@ public class ZaceyEnemy : MonoBehaviour
             Debug.Log(collision.relativeVelocity.sqrMagnitude);
             if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
             //Play dazed particle effect
-            StunEnemy();
+            KillEnemy();
         }
     }
 }

@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip robotMoveAudio;
+    [SerializeField] private float volume;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
         audioSource.loop = true;
-        audioSource.volume = Mathf.Clamp(moveSpeed , 0, 1);
+        audioSource.volume = Mathf.Clamp(moveSpeed, 0, volume);
         audioSource.Play();
         startHeight = transform.position.y;
     }
@@ -82,31 +83,30 @@ public class Enemy : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         Vector3 direction = player.transform.position - transform.position;
 
-        if (distanceToPlayer < attackRange)
+
+        RaycastHit hit;
+        if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, attackRange))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+            if (hit.collider.CompareTag("Player"))
             {
-                if (hit.collider.CompareTag("Player"))
-                {
-                    enemyState = EnemyState.ATTACKING;
-                }
+                enemyState = EnemyState.ATTACKING;
             }
+            else if (alert) enemyState = EnemyState.APPROACHING;
+            else enemyState = EnemyState.PATROLLING;
         }
-        else if (alert) enemyState = EnemyState.APPROACHING;
-        else enemyState = EnemyState.PATROLLING;
+        
 
         if (alert && !prevAlert)
         {
             Instantiate(surpriseParticle, particleSocket.position, Quaternion.identity, particleSocket);
             prevAlert = alert;
         }
-        if(!alert && prevAlert)
+        if (!alert && prevAlert)
         {
             Instantiate(confusedParticles, particleSocket.position, Quaternion.identity, particleSocket);
             prevAlert = alert;
         }
-        
+
 
         switch (enemyState)
         {
@@ -149,7 +149,6 @@ public class Enemy : MonoBehaviour
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
 
-                RaycastHit hit;
                 if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
                 {
                     if (hit.collider.CompareTag("Player"))
@@ -192,7 +191,7 @@ public class Enemy : MonoBehaviour
         {
             if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
             //Play dazed particle effect
-            StunEnemy();
+            KillEnemy();
         }
     }
 }

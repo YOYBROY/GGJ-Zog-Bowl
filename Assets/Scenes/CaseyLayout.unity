@@ -500,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 5690466963575801174, guid: e1ae8008c9cc1384f89625ea75c9fca1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9220,6 +9220,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 214036038}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &403814711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403814712}
+  - component: {fileID: 403814713}
+  m_Layer: 6
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &403814712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403814711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5, y: 14.5, z: 195.6}
+  m_LocalScale: {x: 2.6342, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 46585517}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &403814713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403814711}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 100, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &405869736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9321,11 +9374,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Vase
-      objectReference: {fileID: 0}
-    - target: {fileID: 3464267711172277845, guid: cff2a1657f5819f4ea87ad1d8bf80869,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8418014005773447134, guid: cff2a1657f5819f4ea87ad1d8bf80869,
         type: 3}
@@ -9835,6 +9883,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1791289558343819640, guid: 08f7fb2dc46201a4b9561262d0720712,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4571130261552669057, guid: 08f7fb2dc46201a4b9561262d0720712,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9852,7 +9905,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 60986814679042902, guid: 08f7fb2dc46201a4b9561262d0720712,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 403814712}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08f7fb2dc46201a4b9561262d0720712, type: 3}
 --- !u!4 &469069469 stripped
@@ -11432,11 +11489,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mug
-      objectReference: {fileID: 0}
-    - target: {fileID: 1146086117220809909, guid: 5a79c68a06ade8f4dbe303284258faba,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5440223997795617062, guid: 5a79c68a06ade8f4dbe303284258faba,
         type: 3}
@@ -18397,11 +18449,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeskChair
       objectReference: {fileID: 0}
-    - target: {fileID: 6973065935898466288, guid: 7fd91037d8cccec429844a0c728c6989,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 7730427917384079290, guid: 7fd91037d8cccec429844a0c728c6989,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24587,7 +24634,7 @@ PrefabInstance:
     - target: {fileID: 2050681422456387538, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 79.56556
+      value: 80.67227
       objectReference: {fileID: 0}
     - target: {fileID: 3610906601867325321, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
@@ -24673,7 +24720,7 @@ PrefabInstance:
     - target: {fileID: 5814546909788036741, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: field of view
-      value: 79.56556
+      value: 80.67227
       objectReference: {fileID: 0}
     - target: {fileID: 8053994495146778795, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
@@ -44980,11 +45027,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ComputerMonitor (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690466963575801174, guid: e1ae8008c9cc1384f89625ea75c9fca1,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

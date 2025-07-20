@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
 
+    private float startHeight;
+
     [SerializeField] float stunThreshold = 500f;
 
     [SerializeField] float attackRange = 10f;
@@ -60,6 +62,7 @@ public class Enemy : MonoBehaviour
         audioSource.loop = true;
         audioSource.volume = Mathf.Clamp(moveSpeed , 0, 1);
         audioSource.Play();
+        startHeight = transform.position.y;
     }
 
     private void Update()
@@ -161,6 +164,8 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
+
+        transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
     }
 
     void UpdatePatrolPoints()

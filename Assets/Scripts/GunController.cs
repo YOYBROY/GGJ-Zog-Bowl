@@ -48,6 +48,8 @@ public class GunController : MonoBehaviour
     [SerializeField] ParticleSystem champainShootParticle; 
     [SerializeField] ParticleSystem champaignImpactParticle;
 
+    [SerializeField] LayerMask shootLayerMask;
+
 
     void Start()
     {
@@ -158,7 +160,7 @@ public class GunController : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, float.MaxValue))
+        if (Physics.Raycast(ray, out hit, float.MaxValue, shootLayerMask))
         {
             if (hit.collider.CompareTag("Enemy"))
             {

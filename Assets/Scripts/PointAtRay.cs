@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PointAtRay : MonoBehaviour
 {
     Camera cam;
+    [SerializeField] LayerMask layerMask;
 
     void Start()
     {
@@ -16,7 +15,7 @@ public class PointAtRay : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, float.MaxValue))
+        if (Physics.Raycast(ray, out hit, float.MaxValue, layerMask))
         {
             transform.LookAt(hit.point, Vector3.up);
             transform.Rotate(new Vector3(1.0f, 0, 0), 90);

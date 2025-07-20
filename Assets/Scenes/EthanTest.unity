@@ -2363,6 +2363,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: _1st Person Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1768547025426193362, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 247
+      objectReference: {fileID: 0}
     - target: {fileID: 1845881119713480037, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: m_CameraType
@@ -2462,6 +2467,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5552825249553029934, guid: 9dbc9e22385e7d245a67aa189042ba6c,
         type: 3}
+    - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: shootLayerMask.m_Bits
+      value: 247
+      objectReference: {fileID: 0}
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: champaignImpactParticle

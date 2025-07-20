@@ -148,10 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolPoints:
   - {fileID: 2880559481920676012}
-  - {fileID: 484640484118109960}
-  - {fileID: 3263340881500485571}
-  patrolLerpSpeed: 2
-  attackLerpSpeed: 15
+  patrolLerpSpeed: 2.5
+  attackLerpSpeed: 2
   moveSpeed: 4
   distanceThreshold: 0.75
   stunThreshold: 100
@@ -161,7 +159,6 @@ MonoBehaviour:
   enemyProjectile: {fileID: 7623222123441272069, guid: e58db9204f581bf45a56b57ebd27bafa,
     type: 3}
   dazedTimer: 2
-  animator: {fileID: 4925821075535364155}
   particleSocket: {fileID: 5851911267544703724}
   deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
     type: 3}

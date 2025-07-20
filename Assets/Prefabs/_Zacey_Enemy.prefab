@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1325059150690751984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.67, y: 0, z: 1.29}
+  m_LocalPosition: {x: -0.56, y: 0, z: 6.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 3082855091144319715}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: 0, z: 5.61}
+  m_LocalPosition: {x: 3.55, y: 0, z: 8.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -418,7 +418,7 @@ Transform:
   m_GameObject: {fileID: 5441264028995259687}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.58, y: 0, z: -3.12}
+  m_LocalPosition: {x: 1.81, y: 0, z: 0.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -483,7 +483,7 @@ MonoBehaviour:
   distanceThreshold: 1.5
   stunThreshold: 100
   attackRange: 20
-  attackTimer: 0.3
+  attackTimer: 0.5
   attackSpawnPoint: {fileID: 2953163212903827288}
   enemyProjectile: {fileID: 8035736283932347423, guid: 850b60ad78425de42967ff81bbe578ae,
     type: 3}
@@ -494,7 +494,6 @@ MonoBehaviour:
   robotMoveAudio: {fileID: 0}
   deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
     type: 3}
-  animator: {fileID: 5156839787570479217}
 --- !u!65 &5284195385718598968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -686,7 +685,7 @@ GameObject:
   - component: {fileID: 7326691782380456020}
   - component: {fileID: 8068082601860821880}
   - component: {fileID: 3950704251476990771}
-  - component: {fileID: 5156839787570479217}
+  - component: {fileID: 1984461601701949134}
   m_Layer: 6
   m_Name: Obj_Torso
   m_TagString: Enemy
@@ -703,7 +702,7 @@ Transform:
   m_GameObject: {fileID: 8485392853317192389}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.515892, z: -0.021723434}
+  m_LocalPosition: {x: 0, y: 0.515892, z: -0.02172343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -760,7 +759,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &5156839787570479217
+--- !u!95 &1984461601701949134
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

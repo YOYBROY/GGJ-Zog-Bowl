@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpringDamperSystem : MonoBehaviour
 {
     [Header("Designer Adjustments")]
-    [Tooltip("Adjustor for how much error the can gets, makes shaking easier")]
+    [Tooltip("Higher number makes shaking can harder")]
     [SerializeField] float errorAdjust = 1;
     [Tooltip("Increases drag creating less springy motion on shake")]
     [SerializeField] float dragFactor = 1;
@@ -48,7 +48,6 @@ public class SpringDamperSystem : MonoBehaviour
         Vector3 newPos = transform.localPosition + velocity;
         float shakenError = Mathf.Abs(prevSpeed - velocity.magnitude);
 
-
         //update prev frame variables
         prevPosition = transform.localPosition;
         targetPrevPos = target.localPosition;
@@ -56,7 +55,6 @@ public class SpringDamperSystem : MonoBehaviour
 
         //update position
         transform.localPosition = newPos;
-
 
         if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.localPosition = target.localPosition;
         if(!gunController.hasShot && targetVelocity.magnitude < 0.001f) 

@@ -116,6 +116,7 @@ public class GunController : MonoBehaviour
             targetPos = storedGunSocketPos;
             targetRot = storedGunSocketRot;
             gunSpringSystem.enabled = false;
+            activeGun.transform.parent = gunSocket.transform;
             activeGun.transform.position = gunSpringSystem.target.position;
             _controller.RotationSpeed = storedRotationSpeed;
         }
@@ -152,7 +153,6 @@ public class GunController : MonoBehaviour
         {
             activeGun = Instantiate(ChampainGunPrefab, gunSocket.position, gunSocket.rotation, cam.transform);
         }
-        activeGun.transform.parent = gunSocket.transform;
         activeGunType = gunType;
         gunSpringSystem = activeGun.GetComponent<SpringDamperSystem>();
         gunSpringSystem.enabled = false;

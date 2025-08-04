@@ -5,30 +5,53 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Designer Adjustments")]
+    [Tooltip("List of transforms for the enemy to move between")]
     [SerializeField] Transform[] patrolPoints;
-    Transform targetPoint;
-    int patrolNumber = 0;
+    [Tooltip("How close to the patrol point the enemy needs to get before moving to the next patrol point")]
+    [SerializeField] float distanceThreshold = 0.01f;
+
+    [Tooltip("How fast the enemy turns while patrolling")]
     [SerializeField] float patrolLerpSpeed = 2f;
+    [Tooltip("How fast the enemy turns while attacking")]
     [SerializeField] float attackLerpSpeed = 15f;
 
+    [Tooltip("Max speed of Enemy")]
     [SerializeField] float moveSpeed = 1f;
-    [SerializeField] float distanceThreshold = 0.01f;
+
+    [Tooltip("Velocity threshold of incoming projectile before it actually stuns the enemy")]
+    [SerializeField] float stunThreshold = 500f;
+
+    [Tooltip("Distance the enemy can detect the player")]
+    [SerializeField] float attackRange = 10f;
+    [Tooltip("Time in seconds the enemy takes to go back to patrolling after losing sight of the player")]
+    [SerializeField] float attackTimer = 4f;
+
+    [Tooltip("Time in seconds the enemy is dazed for")]
+    [SerializeField] float dazedTimer = 2f;
+
+    [Header("References")]
+
+    [SerializeField] Transform attackSpawnPoint;
+    [SerializeField] GameObject enemyProjectile;
+
+    [SerializeField] private Transform particleSocket;
+    [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] private ParticleSystem stunParticles;
+    [SerializeField] private ParticleSystem surpriseParticle;
+    [SerializeField] private ParticleSystem confusedParticles;
+
+    //private variables
+    Transform targetPoint;
+    int patrolNumber = 0;
 
     private GameObject player;
 
     private float startHeight;
 
-    [SerializeField] float stunThreshold = 500f;
-
-    [SerializeField] float attackRange = 10f;
     float timer;
-    [SerializeField] float attackTimer = 4f;
-
-    [SerializeField] Transform attackSpawnPoint;
-    [SerializeField] GameObject enemyProjectile;
 
     float dazedCount;
-    [SerializeField] float dazedTimer = 2f;
     bool alert;
     bool prevAlert;
     float alertTimer;
@@ -38,15 +61,8 @@ public class Enemy : MonoBehaviour
     private PauseMenu pauseMenu;
     private Animator animator;
 
-    [SerializeField] private Transform particleSocket;
-    [SerializeField] private ParticleSystem deathParticles;
-    [SerializeField] private ParticleSystem stunParticles;
-    [SerializeField] private ParticleSystem surpriseParticle;
-    [SerializeField] private ParticleSystem confusedParticles;
 
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip robotMoveAudio;
-    [SerializeField] private float volume;
+    private AudioSource audioSource;
 
     enum EnemyState { PATROLLING, ATTACKING, APPROACHING };
     EnemyState enemyState;
@@ -61,7 +77,6 @@ public class Enemy : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
         audioSource.loop = true;
-        audioSource.volume = Mathf.Clamp(moveSpeed, 0, volume);
         audioSource.Play();
         startHeight = transform.position.y;
     }

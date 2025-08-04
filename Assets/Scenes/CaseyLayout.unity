@@ -24651,6 +24651,11 @@ PrefabInstance:
       objectReference: {fileID: 1646913597}
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
+      propertyPath: sodaCanSpread
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
       propertyPath: shakenThreshold
       value: 1.5
       objectReference: {fileID: 0}
@@ -24660,6 +24665,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3744188144970368314, guid: 4719097bffe8e744a8c5c6d88781e8d5,
         type: 3}
+    - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: sodaCanDamageRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
+        type: 3}
+      propertyPath: sodaCanProjectiles
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4054691080560290225, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
       propertyPath: shootLayerMask.m_Bits

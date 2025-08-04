@@ -1,54 +1,77 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
-using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
-    [SerializeField] float lerpSpeed = 1f;
-    Vector3 targetPos;
-    Quaternion targetRot;
+    [Header("Designer Adjustments")]
+    [Tooltip("Sensitivity of shaking, higher number makes it easier to shake")]
+    [SerializeField] float shakeAdjust = 1f;
 
+    [Tooltip("Total shake needed to load the shot")]
+    [SerializeField] float shakenThreshold = 5f;
+
+    [Tooltip("How fast the can moves positions, higher number is faster")]
+    [SerializeField] float lerpSpeed = 1f;
+
+    [Tooltip("Max distance the soda can will damage")]
+    [SerializeField] float sodaCanDamageRange = 10f;
+
+    [Tooltip("Random spread amount of the soda can")]
+    [SerializeField] float sodaCanSpread = 0.5f;
+
+    [Tooltip("Number of bullets shot from soda can")]
+    [SerializeField] int sodaCanProjectiles = 10;
+
+    [Tooltip("The layermask used to detect bullet hits")]
+    [SerializeField] LayerMask shootLayerMask;
+
+    [Header("References")]
     [SerializeField] Transform gunSocket;
-    Vector3 storedGunSocketPos;
-    Quaternion storedGunSocketRot;
+
     [SerializeField] Transform shakePosition;
     [SerializeField] Transform launchPosition;
     [SerializeField] Transform lookAtRayPosition;
-    [HideInInspector] public GameObject activeGun;
-    SpringDamperSystem gunSpringSystem;
-    [SerializeField] float shakeAdjust = 1f;
-
-    [SerializeField] float shakenThreshold = 5f;
-    [HideInInspector] public float shaken = 0f;
+    
     [SerializeField] private Slider shakenSlider;
 
-    FirstPersonController _controller;
-    [HideInInspector] public int storedRotationSpeed;
-    float storedMoveSpeed;
-
-    StarterAssetsInputs _input;
-    Camera cam;
-    string activeGunType;
-
-    [HideInInspector] public bool canShoot;
-    [HideInInspector] public bool hasShot;
-
+    [Tooltip("Bullet trail")]
     [SerializeField] TrailRenderer hitscanTrail;
 
     [SerializeField] GameObject sodaCanPrefab;
     [SerializeField] GameObject sodaCanProjectile;
     [SerializeField] ParticleSystem sodaShootParticle;
     [SerializeField] ParticleSystem sodaImpactParticle;
-    [SerializeField] float sodaCanDamageRange = 100f;
 
     [SerializeField] GameObject ChampainGunPrefab;
     [SerializeField] GameObject ChampainProjectile;
-    [SerializeField] ParticleSystem champainShootParticle; 
+    [SerializeField] ParticleSystem champainShootParticle;
     [SerializeField] ParticleSystem champaignImpactParticle;
 
-    [SerializeField] LayerMask shootLayerMask;
+    //Private Variables
+    private Vector3 storedGunSocketPos;
+    private Quaternion storedGunSocketRot;
+
+    private Vector3 targetPos;
+    private Quaternion targetRot;
+
+    [HideInInspector] public GameObject activeGun;
+    private SpringDamperSystem gunSpringSystem;
+    [HideInInspector] public float shaken = 0f;
+
+    private FirstPersonController _controller;
+    [HideInInspector] public int storedRotationSpeed;
+
+    private StarterAssetsInputs _input;
+    private Camera cam;
+    private string activeGunType;
+
+    [HideInInspector] public bool canShoot;
+    [HideInInspector] public bool hasShot;
 
 
     void Start()
@@ -61,7 +84,6 @@ public class GunController : MonoBehaviour
         targetPos = gunSocket.localPosition;
         storedGunSocketPos = gunSocket.transform.localPosition;
         storedGunSocketRot = gunSocket.transform.localRotation;
-        storedMoveSpeed = _controller.MoveSpeed;
         storedRotationSpeed = _controller.RotationSpeed;
 
         shaken = 0;
@@ -74,7 +96,7 @@ public class GunController : MonoBehaviour
         shakenSlider.value = Remap(shaken, 0, shakenThreshold, 0, 1);
         Vector3 moveInput = new Vector3(_input.look.x, -_input.look.y, 0f);
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1)) //rmb
         {
             if (activeGun == null) return;
             targetPos = shakePosition.localPosition;
@@ -88,17 +110,16 @@ public class GunController : MonoBehaviour
             targetRot = lookAtRayPosition.localRotation;
         }
 
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1)) //rmb
         {
             if (activeGun == null) return;
             targetPos = storedGunSocketPos;
             targetRot = storedGunSocketRot;
-            activeGun.transform.SetParent(gunSocket.transform);
             gunSpringSystem.enabled = false;
             activeGun.transform.position = gunSpringSystem.target.position;
             _controller.RotationSpeed = storedRotationSpeed;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))
         {
             AttemptShot();
         }
@@ -129,9 +150,9 @@ public class GunController : MonoBehaviour
         }
         else if (gunType == "Champ")
         {
-
             activeGun = Instantiate(ChampainGunPrefab, gunSocket.position, gunSocket.rotation, cam.transform);
         }
+        activeGun.transform.parent = gunSocket.transform;
         activeGunType = gunType;
         gunSpringSystem = activeGun.GetComponent<SpringDamperSystem>();
         gunSpringSystem.enabled = false;
@@ -148,6 +169,40 @@ public class GunController : MonoBehaviour
             AudioManager.PlaySound(SoundType.SODACANPOP, 1);
             //Particle Effect at launch point
             Instantiate(sodaShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
+
+            for (int i = 0; i < sodaCanProjectiles; i++)
+            {
+                Vector3 shootDirection = cam.transform.forward + new Vector3(
+                                                                 Random.Range(-sodaCanSpread, sodaCanSpread),
+                                                                 Random.Range(-sodaCanSpread, sodaCanSpread),
+                                                                 Random.Range(-sodaCanSpread, sodaCanSpread)
+                                                                 );
+                shootDirection.Normalize();
+
+                RaycastHit sodaHit;
+
+                if (Physics.Raycast(gunSpringSystem.fireLocation.position, shootDirection, out sodaHit, float.MaxValue, shootLayerMask))
+                {
+                    if (sodaHit.collider.CompareTag("Enemy"))
+                    {
+                        Enemy enemy = sodaHit.collider.GetComponent<Enemy>();
+                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponent<ZaceyEnemy>();
+                        bool zacey = false;
+                        if (enemy == null) zacey = true;
+                        float distance = Vector3.Distance(sodaHit.point, cam.transform.position);
+                        if (distance < sodaCanDamageRange)
+                        {
+                            if (zacey) zaceyEnemy.KillEnemy();
+                            else enemy.KillEnemy();
+                        }
+                    }
+                    StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, sodaHit.point, sodaHit));
+                }
+                else
+                {
+                    StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (shootDirection * sodaCanDamageRange), sodaHit)); //magic number for how far away to send the trail
+                }
+            }
         }
         else
         {
@@ -162,6 +217,7 @@ public class GunController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, float.MaxValue, shootLayerMask))
         {
+            float distance = Vector3.Distance(hit.point, cam.transform.position);
             if (hit.collider.CompareTag("Enemy"))
             {
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
@@ -170,16 +226,14 @@ public class GunController : MonoBehaviour
                 if (enemy == null) zacey = true;
                 if (activeGunType == "Soda")
                 {
-                    float distance = Vector3.Distance(hit.point, cam.transform.position);
-                    if (distance > sodaCanDamageRange)
-                    {
-                        if (zacey) zaceyEnemy.StunEnemy();
-                        else enemy.StunEnemy();
-                    }
-                    else
+                    if (distance < sodaCanDamageRange)
                     {
                         if (zacey) zaceyEnemy.KillEnemy();
                         else enemy.KillEnemy();
+                    }
+                    else
+                    {
+                        StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
                     }
                 }
                 else
@@ -188,9 +242,26 @@ public class GunController : MonoBehaviour
                     else enemy.KillEnemy();
                 }
             }
-            //Shoot Hitscan that kills
-            TrailRenderer trail = Instantiate(hitscanTrail, gunSpringSystem.fireLocation.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hit));
+            if(activeGunType == "Soda" && distance > sodaCanDamageRange)
+            {
+                StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
+            }
+            else
+            {
+                //Shoot Hitscan that kills
+                StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, hit.point, hit));
+            }
+        }
+        else
+        {
+            if (activeGunType == "Soda")
+            {
+                StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
+            }
+            else
+            {
+                StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * 100), hit));
+            }
         }
     }
 
@@ -211,21 +282,22 @@ public class GunController : MonoBehaviour
         return minB + (value - minA) * (maxB - minB) / (maxA - minA);
     }
 
-    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    private IEnumerator SpawnTrail(Vector3 startPosition, Vector3 endPosition, RaycastHit hit)
     {
+        TrailRenderer trail = Instantiate(hitscanTrail, startPosition, Quaternion.identity);
+
         float time = 0;
-        Vector3 startPos = trail.transform.position;
 
         while (time < 1)
         {
-            trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
+            trail.transform.position = Vector3.Lerp(startPosition, endPosition, time);
             time += Time.deltaTime / trail.time * 10f;
             yield return null;
         }
-        trail.transform.position = hit.point;
+        trail.transform.position = endPosition;
 
-        if(activeGunType == "Soda") Instantiate(sodaImpactParticle, hit.point, Quaternion.Euler(hit.normal));
-        else Instantiate(champaignImpactParticle, hit.point, Quaternion.Euler(hit.normal));
+        if (activeGunType == "Soda") Instantiate(sodaImpactParticle, endPosition, Quaternion.Euler(hit.normal));
+        else Instantiate(champaignImpactParticle, endPosition, Quaternion.Euler(hit.normal));
 
 
         Destroy(trail.gameObject, trail.time);

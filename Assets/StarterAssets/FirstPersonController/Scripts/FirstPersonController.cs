@@ -63,6 +63,8 @@ namespace StarterAssets
         private float _speed;
         private float _rotationVelocity;
         private float _verticalVelocity;
+        private Vector3 prevPosition;
+        private Vector3 _horizontalVelocity;
         private float _terminalVelocity = 53.0f;
 
         // timeout deltatime
@@ -204,10 +206,21 @@ namespace StarterAssets
                 inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
             }
 
+            //calculate horizontal velocity
+            _horizontalVelocity = (transform.position - prevPosition);
+
+            //FOV Adjustments
+            /*prevPosition = transform.position;
+
+            float normalisedVelocityForFOV = Remap(_horizontalVelocity.magnitude, 0, 0.3f, 0, 1);
+
             //change FOV
-            float targetFOV = storedFOV + _input.move.y * fovAdjust;
+            float targetFOV = storedFOV + normalisedVelocityForFOV * fovAdjust;
+
+            Debug.Log(_horizontalVelocity.magnitude);
 
             cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, targetFOV, lerpSpeed * Time.deltaTime);
+            */
 
             // move the player
             _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -279,5 +292,10 @@ namespace StarterAssets
             // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
         }
+        float Remap(float value, float minA, float maxA, float minB, float maxB)
+        {
+            return minB + (value - minA) * (maxB - minB) / (maxA - minA);
+        }
     }
 }
+    

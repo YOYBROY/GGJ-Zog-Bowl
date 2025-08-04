@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class SpringDamperSystem : MonoBehaviour
 {
-    [HideInInspector] public Transform target;
-    Vector3 prevPosition;
-    Vector3 targetPrevPos;
+    [Header("Designer Adjustments")]
+    [Tooltip("Adjustor for how much error the can gets, makes shaking easier")]
     [SerializeField] float errorAdjust = 1;
+    [Tooltip("Increases drag creating less springy motion on shake")]
     [SerializeField] float dragFactor = 1;
+    [Tooltip("Increases the amount shaking gives to the slider")]
     [SerializeField] float shakeAmountAdjuster = 1f;
+    [Tooltip("Can velocity threshold before it plays a sound")]
+    [SerializeField] private float shakeSoundThreshold = 0.1f;
 
+    [HideInInspector] public Transform target;
+    private Vector3 prevPosition;
+    private Vector3 targetPrevPos;
+    private float prevSpeed;
+
+    private Transform player;
     [HideInInspector] public GunController gunController;
-    Transform player;
     [HideInInspector] public Transform fireLocation;
-    [SerializeField] private float shakeSoundThreshold = 1f;
 
 
     private void OnEnable()
@@ -32,7 +39,6 @@ public class SpringDamperSystem : MonoBehaviour
     {
         transform.rotation = target.rotation;
         Vector3 targetVelocity = target.localPosition - targetPrevPos;
-
         //Spring Damper System
         Vector3 error = target.localPosition - transform.localPosition;
         Vector3 velocity = transform.localPosition - prevPosition;
@@ -40,14 +46,24 @@ public class SpringDamperSystem : MonoBehaviour
         velocity += (error * errorAdjust) * Time.deltaTime;
         velocity -= velocity * dragFactor * Time.deltaTime;
         Vector3 newPos = transform.localPosition + velocity;
+        float shakenError = Mathf.Abs(prevSpeed - velocity.magnitude);
+
+
+        //update prev frame variables
         prevPosition = transform.localPosition;
         targetPrevPos = target.localPosition;
+        prevSpeed = velocity.magnitude;
+
+        //update position
         transform.localPosition = newPos;
+
+
         if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.localPosition = target.localPosition;
         if(!gunController.hasShot && targetVelocity.magnitude < 0.001f) 
-        { 
-            gunController.shaken += error.magnitude * shakeAmountAdjuster * Time.deltaTime;
-            if(velocity.sqrMagnitude > shakeSoundThreshold) AudioManager.PlaySound(SoundType.SHAKING, 1);
+        {
+            Debug.Log(shakenError);
+            gunController.shaken += shakenError * shakeAmountAdjuster * Time.deltaTime;
+            if(shakenError > shakeSoundThreshold) AudioManager.PlaySound(SoundType.SHAKING, 1);
         }
     }
 }

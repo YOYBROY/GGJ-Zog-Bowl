@@ -97,13 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043e4bee053be7c4ca1738dc02427d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  errorAdjust: 20
-  dragFactor: 10
+  errorAdjust: 35
+  dragFactor: 13
   shakeAmountAdjuster: 10
+  shakeSoundThreshold: 0.1
+  target: {fileID: 0}
   gunController: {fileID: 0}
   fireLocation: {fileID: 0}
-  shakeSoundThreshold: 0.01
 --- !u!1 &3431828213548885664
 GameObject:
   m_ObjectHideFlags: 0

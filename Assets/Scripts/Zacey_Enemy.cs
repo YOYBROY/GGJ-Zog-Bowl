@@ -6,43 +6,59 @@ using UnityEngine;
 
 public class ZaceyEnemy : MonoBehaviour
 {
+    [Header("Designer Adjustments")]
+    [Tooltip("List of transforms for the enemy to move between")]
     [SerializeField] Transform[] patrolPoints;
-    Transform targetPoint;
-    int patrolNumber = 0;
-    [SerializeField] float patrolLerpSpeed = 2f;
 
-    [SerializeField] float moveSpeed = 1f;
+    [Tooltip("How close to the patrol point the enemy needs to get before moving to the next patrol point")]
     [SerializeField] float distanceThreshold = 0.01f;
 
-    private GameObject player;
-    private GunController gunController;
+    [Tooltip("How fast the enemy turns while patrolling")]
+    [SerializeField] float patrolLerpSpeed = 2f;
 
+    [Tooltip("Max speed of Enemy")]
+    [SerializeField] float moveSpeed = 1f;
+
+    [Tooltip("Velocity threshold of incoming projectile before it actually stuns the enemy")]
     [SerializeField] float stunThreshold = 500f;
 
+    [Tooltip("Distance the enemy can detect the player")]
     [SerializeField] float attackRange = 10f;
-    float timer;
+
+    [Tooltip("Time in seconds between shooting a projectile")]
     [SerializeField] float attackTimer = 4f;
+
+    [Tooltip("Time in seconds the enemy takes to go back to patrolling after losing sight of the player")]
     [SerializeField] float attentionSpan = 3f;
-    public float attentionSpanTimer;
+    private float attentionSpanTimer;
+
+    [Tooltip("Time in seconds the enemy is dazed for")]
+    [SerializeField] float dazedTimer = 2f;
+
+    [Tooltip("True = enemy will always be agro within the attackRange, False = enemy will also need to see player to agro")]
+    [SerializeField] bool ignoreRayAgro;
+
+    [Header("Public References")]
 
     [SerializeField] Transform attackSpawnPoint;
     [SerializeField] GameObject enemyProjectile;
 
-    float dazedCount;
-    [SerializeField] float dazedTimer = 2f;
-
-    [SerializeField] bool ignoreRayAgro;
-
     [SerializeField] GameObject topHalf;
     [SerializeField] Transform topHalfLocator;
 
+    [SerializeField] ParticleSystem deathParticles;
+
+    //Private Variables
+    Transform targetPoint;
+    int patrolNumber = 0;
+
+    private GameObject player;
+
+    float timer;
+    float dazedCount;
     private AudioSource audioSource;
-    [SerializeField] private AudioClip robotMoveAudio;
-    [SerializeField] private float volume;
 
     private PauseMenu pauseMenu;
-
-    [SerializeField] ParticleSystem deathParticles;
     private Animator animator;
 
     enum EnemyState { PATROLLING, ATTACKING, ALERT };
@@ -53,13 +69,11 @@ public class ZaceyEnemy : MonoBehaviour
         animator = transform.parent.GetComponentInChildren<Animator>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
-        gunController = FindObjectOfType<GunController>();
         targetPoint = patrolPoints[0];
         timer = attackTimer;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
         audioSource.loop = true;
-        audioSource.volume = Mathf.Clamp(moveSpeed, 0, volume);
         audioSource.Play();
     }
 

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Comix Loud SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1244314579
   material: {fileID: 5739594873569445470}
-  materialHashCode: 0
+  materialHashCode: 1887593235
   m_Version: 1.1.0
   m_SourceFontFileGUID: dd7f1b4259b563243ae2ab5d1508da66
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: dd7f1b4259b563243ae2ab5d1508da66,
@@ -40,7 +40,7 @@ MonoBehaviour:
     m_SubscriptSize: 0.5
     m_UnderlineOffset: -5.703125
     m_UnderlineThickness: 2.9296875
-    m_StrikethroughOffset: 0
+    m_StrikethroughOffset: 19.6
     m_StrikethroughThickness: 2.9296875
     m_TabWidth: 16
   m_GlyphTable:
@@ -1873,9 +1873,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

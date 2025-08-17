@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject winMenuUI;
     public GameObject loseMenuUI;
     public TMP_Text mouseSensitivityUI;
+    public GameObject BeginGameUI;
 
     GunController gunController;
     FirstPersonController firstPersonController;
@@ -36,6 +37,7 @@ public class PauseMenu : MonoBehaviour
         firstPersonController = FindObjectOfType<FirstPersonController>();
         firstPersonController.enabled = false;
         beginningOfGame = true;
+        if (BeginGameUI.activeSelf == false) BeginGameUI.SetActive(true);
         if(mouseSensitivityUI.gameObject.activeSelf == false) mouseSensitivityUI.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
@@ -88,7 +90,7 @@ public class PauseMenu : MonoBehaviour
         {
             QuitGame();
         }
-        mouseSensitivityUI.text = "MOUSE SENSITIVITY: " + firstPersonController.RotationSpeed;
+        mouseSensitivityUI.text = "Mouse Sensitivity: " + firstPersonController.RotationSpeed;
     }
 
     //Resume game
@@ -97,8 +99,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
         mouseSensitivityUI.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         isPaused = false;
     }
 
@@ -107,8 +107,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         mouseSensitivityUI.gameObject.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         isPaused = true;
         Time.timeScale = 0;
     }
@@ -159,8 +157,7 @@ public class PauseMenu : MonoBehaviour
         inGameTimerText.gameObject.SetActive(true);
         firstPersonController.enabled = true;
         beginningOfGame = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        BeginGameUI.SetActive(false);
         mouseSensitivityUI.gameObject.SetActive(false);
         Time.timeScale = 1;
     }

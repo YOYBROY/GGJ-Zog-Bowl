@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1436597927968905083}
   m_Layer: 6
   m_Name: AbstractOrnament_01
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

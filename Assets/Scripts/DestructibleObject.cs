@@ -10,11 +10,14 @@ public class DestructibleObject : MonoBehaviour
     {
         Transform spawnPosition = alternativeTransformPosition != null ? alternativeTransformPosition : transform;
         GameObject spawnedVariant = Instantiate(brokenVariant, spawnPosition.position, Quaternion.identity);
+        
 
         foreach (Transform child in spawnedVariant.transform)
         {
             GameObject piece = child.gameObject;
             piece.layer = 6;
+
+            piece.transform.localScale = transform.localScale;
 
             MeshCollider collider = piece.AddComponent<MeshCollider>();
             collider.convex = true;

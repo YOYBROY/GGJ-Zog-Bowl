@@ -3,7 +3,12 @@ guid: 18883488eee0a8641bd569822d32524b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Zog_Body
+    second: {fileID: 2100000, guid: 2b24d0b87d0ca5344bd14d15b6fd934a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

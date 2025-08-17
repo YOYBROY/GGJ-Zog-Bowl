@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 5261742592527808823}
   - component: {fileID: 516278563617191050}
   - component: {fileID: 620917220420879080}
+  - component: {fileID: 5813632603584078525}
   m_Layer: 0
   m_Name: Zacey_Root
   m_TagString: Enemy
@@ -541,6 +542,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5813632603584078525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551710364278645688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb885e14a34e0d343b176c245f587dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenVariant: {fileID: 919132149155446097, guid: 8b54c9eb5c34d0f42979304d6c22f2af,
+    type: 3}
+  forceMultiplier: 200
+  alternativeTransformPosition: {fileID: 961959319342506693}
 --- !u!1001 &30941507120861385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -849,6 +866,12 @@ MonoBehaviour:
   - m_Rig: {fileID: 3676830563000458250}
     m_Active: 1
   m_Effectors: []
+--- !u!4 &961959319342506693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8271848332775099892, guid: 9c1d37a71939489488a4ec5f013b53b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 30941507120861385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2379870310070525287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6815333462874944082, guid: 9c1d37a71939489488a4ec5f013b53b9,

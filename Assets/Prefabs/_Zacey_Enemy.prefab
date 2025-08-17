@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2953163212903827288}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BulletSpawnPoint
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203763704250887019}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TopHalfLocator
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -602,12 +602,17 @@ PrefabInstance:
     - target: {fileID: -6815333462874944082, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6815333462874944082, guid: 9c1d37a71939489488a4ec5f013b53b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -6601487299062146028, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5804772428771361672, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
@@ -617,7 +622,7 @@ PrefabInstance:
     - target: {fileID: -5444895057509893551, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4098159368348406071, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
@@ -657,17 +662,22 @@ PrefabInstance:
     - target: {fileID: -456642551817611647, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -456642551817611647, guid: 9c1d37a71939489488a4ec5f013b53b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -440855681449300728, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 736540987822115918, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
@@ -677,17 +687,22 @@ PrefabInstance:
     - target: {fileID: 1861931933626308064, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2145247384033441978, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2781349698426177635, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781349698426177635, guid: 9c1d37a71939489488a4ec5f013b53b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2930170814892848707, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
@@ -712,7 +727,7 @@ PrefabInstance:
     - target: {fileID: 4628367147531313237, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6368407901057605490, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
@@ -722,7 +737,12 @@ PrefabInstance:
     - target: {fileID: 6514068860570601054, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6514068860570601054, guid: 9c1d37a71939489488a4ec5f013b53b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6803302278486477654, guid: 9c1d37a71939489488a4ec5f013b53b9,
         type: 3}

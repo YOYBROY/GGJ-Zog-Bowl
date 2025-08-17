@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -186,7 +187,7 @@ public class GunController : MonoBehaviour
                     if (sodaHit.collider.CompareTag("Enemy"))
                     {
                         Enemy enemy = sodaHit.collider.GetComponent<Enemy>();
-                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponent<ZaceyEnemy>();
+                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponentInParent<ZaceyEnemy>();
                         bool zacey = false;
                         if (enemy == null) zacey = true;
                         float distance = Vector3.Distance(sodaHit.point, cam.transform.position);
@@ -221,7 +222,7 @@ public class GunController : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
-                ZaceyEnemy zaceyEnemy = hit.collider.GetComponent<ZaceyEnemy>();
+                ZaceyEnemy zaceyEnemy = hit.collider.GetComponentInParent<ZaceyEnemy>();
                 bool zacey = false;
                 if (enemy == null) zacey = true;
                 if (activeGunType == "Soda")

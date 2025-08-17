@@ -197,6 +197,10 @@ public class GunController : MonoBehaviour
                             else enemy.KillEnemy();
                         }
                     }
+                    else if (sodaHit.collider.CompareTag("Destructible"))
+                    {
+                        sodaHit.collider.GetComponent<DestructibleObject>().SwapModel();
+                    }
                     StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, sodaHit.point, sodaHit));
                 }
                 else
@@ -243,7 +247,11 @@ public class GunController : MonoBehaviour
                     else enemy.KillEnemy();
                 }
             }
-            if(activeGunType == "Soda" && distance > sodaCanDamageRange)
+            else if (hit.collider.CompareTag("Destructible"))
+            {
+                hit.collider.GetComponent<DestructibleObject>().SwapModel();
+            }
+            if (activeGunType == "Soda" && distance > sodaCanDamageRange)
             {
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
             }

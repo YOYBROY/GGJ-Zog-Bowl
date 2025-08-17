@@ -186,6 +186,7 @@ public class ZaceyEnemy : MonoBehaviour
         pauseMenu.totalEnemyCount--;
         Instantiate(deathParticles, transform.position, Quaternion.identity);
         Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
+        gameObject.GetComponent<DestructibleObject>().SwapModel();
         Destroy(gameObject.transform.parent.gameObject);
     }
     public void StunEnemy()

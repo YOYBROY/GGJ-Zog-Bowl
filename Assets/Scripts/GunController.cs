@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -186,7 +187,7 @@ public class GunController : MonoBehaviour
                     if (sodaHit.collider.CompareTag("Enemy"))
                     {
                         Enemy enemy = sodaHit.collider.GetComponent<Enemy>();
-                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponent<ZaceyEnemy>();
+                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponentInParent<ZaceyEnemy>();
                         bool zacey = false;
                         if (enemy == null) zacey = true;
                         float distance = Vector3.Distance(sodaHit.point, cam.transform.position);
@@ -195,6 +196,10 @@ public class GunController : MonoBehaviour
                             if (zacey) zaceyEnemy.KillEnemy();
                             else enemy.KillEnemy();
                         }
+                    }
+                    else if (sodaHit.collider.CompareTag("Destructible"))
+                    {
+                        sodaHit.collider.GetComponent<DestructibleObject>().SwapModel();
                     }
                     StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, sodaHit.point, sodaHit));
                 }
@@ -221,7 +226,7 @@ public class GunController : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
-                ZaceyEnemy zaceyEnemy = hit.collider.GetComponent<ZaceyEnemy>();
+                ZaceyEnemy zaceyEnemy = hit.collider.GetComponentInParent<ZaceyEnemy>();
                 bool zacey = false;
                 if (enemy == null) zacey = true;
                 if (activeGunType == "Soda")
@@ -242,7 +247,11 @@ public class GunController : MonoBehaviour
                     else enemy.KillEnemy();
                 }
             }
-            if(activeGunType == "Soda" && distance > sodaCanDamageRange)
+            else if (hit.collider.CompareTag("Destructible"))
+            {
+                hit.collider.GetComponent<DestructibleObject>().SwapModel();
+            }
+            if (activeGunType == "Soda" && distance > sodaCanDamageRange)
             {
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
             }

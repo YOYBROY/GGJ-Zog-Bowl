@@ -193,6 +193,7 @@ public class Enemy : MonoBehaviour
     {
         pauseMenu.totalEnemyCount--;
         Instantiate(deathParticles, transform.position, Quaternion.identity);
+        GetComponent<DestructibleObject>().SwapModel();
         Destroy(gameObject);
     }
 

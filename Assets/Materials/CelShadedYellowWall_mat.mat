@@ -31,13 +31,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Density: 33.1
     - _Falloff_Threshhold: -0.13
     - _Intensity: 0.41
     - _Rotation: 0.17
     - _Smoothness: 0
     - _Softness: 0.22
     m_Colors:
-    - _DiffuseColor: {r: 1, g: 1, b: 0, a: 1}
+    - _DiffuseColor: {r: 0.735849, g: 0.735849, b: 0, a: 1}
     - _FresnelColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &857774842489867678

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8109645030820057428}
   m_Layer: 6
   m_Name: Roof_GeoShape
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

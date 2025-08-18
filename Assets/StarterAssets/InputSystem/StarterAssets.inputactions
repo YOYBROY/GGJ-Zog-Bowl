@@ -209,7 +209,7 @@
                 {
                     "name": "",
                     "id": "dc65b89f-9bd3-43fb-92af-d0d87ba5faa4",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/capsLock",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -231,7 +231,7 @@
                 {
                     "name": "",
                     "id": "74dc3f73-beda-4959-b149-6539379a65ed",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",

@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -29,7 +30,12 @@ namespace StarterAssets
         public float Gravity = -15.0f;
 
         [Space(10)]
+        public float slideTimeSlow = 0.5f;
+        public float crouchSpeed = 1.0f;
+        public float slideSpeed = 0.3f;
         public float crouchHeight = 0.75f;
+        public float slideFriction = 1f;
+        private bool sliding;
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
@@ -125,8 +131,10 @@ namespace StarterAssets
             if (PauseMenu.isPaused) return;
             JumpAndGravity();
             GroundedCheck();
-            Move();
+            SlidingCheck();
             Crouch();
+            Move();
+            TimeScale();
         }
 
         private void LateUpdate()
@@ -140,6 +148,35 @@ namespace StarterAssets
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+        }
+
+        private void SlidingCheck()
+        {
+            if (_input.crouch)
+            {
+                float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
+                if (currentHorizontalSpeed > crouchSpeed + 0.2f)
+                {
+                    sliding = true;
+                }
+                else
+                {
+                    sliding = false;
+                }
+            }
+        }
+
+        private void TimeScale()
+        {
+            if (sliding)
+            {
+                Time.timeScale = slideTimeSlow;
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
         }
 
         private void CameraRotation()
@@ -177,6 +214,7 @@ namespace StarterAssets
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+            Debug.Log(currentHorizontalSpeed);
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
@@ -223,8 +261,25 @@ namespace StarterAssets
             cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, targetFOV, lerpSpeed * Time.deltaTime);
             */
 
-            // move the player
-            _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            if (_input.crouch)
+            {
+                Vector3 currentHorizontalVelocity = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z);
+                if (sliding)
+                {
+                    Vector3 newSpeed = Vector3.Lerp(inputDirection.normalized * (slideSpeed * Time.deltaTime) + currentHorizontalVelocity, Vector3.zero, Time.deltaTime * slideFriction);
+                    Vector3 leftRightInputDirection = transform.right * _input.move.x;
+                    _controller.Move(leftRightInputDirection.normalized * (slideSpeed * Time.deltaTime) + (newSpeed * Time.deltaTime) + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
+                }
+                else
+                {
+                    _controller.Move(inputDirection.normalized * (crouchSpeed * Time.deltaTime) + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
+                }
+            }
+            else
+            {
+                // move the player
+                _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            }
         }
 
         private void JumpAndGravity()
@@ -277,13 +332,14 @@ namespace StarterAssets
 
         private void Crouch()
         {
-            if(_input.crouch)
+            if (_input.crouch)
             {
                 transform.localScale = new Vector3(1, crouchHeight, 1);
             }
             else
             {
                 transform.localScale = Vector3.one;
+                sliding = false;
             }
         }
 
@@ -311,4 +367,3 @@ namespace StarterAssets
         }
     }
 }
-    

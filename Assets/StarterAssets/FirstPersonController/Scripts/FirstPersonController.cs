@@ -29,6 +29,9 @@ namespace StarterAssets
         public float Gravity = -15.0f;
 
         [Space(10)]
+        public float crouchHeight = 0.75f;
+
+        [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
         public float JumpTimeout = 0.1f;
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
@@ -123,6 +126,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Crouch();
         }
 
         private void LateUpdate()
@@ -268,6 +272,18 @@ namespace StarterAssets
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
+            }
+        }
+
+        private void Crouch()
+        {
+            if(_input.crouch)
+            {
+                transform.localScale = new Vector3(1, crouchHeight, 1);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
             }
         }
 

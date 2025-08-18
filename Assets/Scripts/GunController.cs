@@ -166,6 +166,8 @@ public class GunController : MonoBehaviour
 
         if (activeGunType == "Soda")
         {
+            CinemachineShake.Instance.AddTrauma(60);
+
             AudioManager.PlaySound(SoundType.SODACANPOP, 1);
             //Particle Effect at launch point
             Instantiate(sodaShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
@@ -210,6 +212,7 @@ public class GunController : MonoBehaviour
         }
         else
         {
+            CinemachineShake.Instance.AddTrauma(30);
             AudioManager.PlaySound(SoundType.CHAMPAIGNPOP, 1);
             //Particle Effect At launch point
             Instantiate(champainShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
@@ -264,10 +267,12 @@ public class GunController : MonoBehaviour
         {
             if (activeGunType == "Soda")
             {
+                //CinemachineShake.Instance.AddTrauma(500);
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
             }
             else
             {
+                //CinemachineShake.Instance.AddTrauma(250);
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * 100), hit));
             }
         }

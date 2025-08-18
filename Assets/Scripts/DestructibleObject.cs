@@ -6,27 +6,36 @@ public class DestructibleObject : MonoBehaviour
     [SerializeField] private float forceMultiplier = 200.0f;
     [SerializeField] private Transform alternativeTransformPosition;
 
+    private int killCounter;
+
     public void SwapModel()
     {
-        Transform spawnPosition = alternativeTransformPosition != null ? alternativeTransformPosition : transform;
-        GameObject spawnedVariant = Instantiate(brokenVariant, spawnPosition.position, Quaternion.identity);
-        
+        killCounter++;
+    }
 
-        foreach (Transform child in spawnedVariant.transform)
+    private void LateUpdate()
+    {
+        if(killCounter > 0)
         {
-            GameObject piece = child.gameObject;
-            piece.layer = 6;
+            Transform spawnPosition = alternativeTransformPosition != null ? alternativeTransformPosition : transform;
+            GameObject spawnedVariant = Instantiate(brokenVariant, spawnPosition.position, transform.rotation);
 
-            piece.transform.localScale = transform.localScale;
+            foreach (Transform child in spawnedVariant.transform)
+            {
+                GameObject piece = child.gameObject;
+                piece.layer = 6;
 
-            MeshCollider collider = piece.AddComponent<MeshCollider>();
-            collider.convex = true;
-            Rigidbody rb = piece.AddComponent<Rigidbody>();
+                piece.transform.localScale = transform.localScale;
 
-            Vector3 force = (piece.transform.position - transform.position).normalized * forceMultiplier;
-            rb.AddForceAtPosition(force, transform.position);
+                MeshCollider collider = piece.AddComponent<MeshCollider>();
+                collider.convex = true;
+                Rigidbody rb = piece.AddComponent<Rigidbody>();
+
+                Vector3 force = (piece.transform.position - transform.position).normalized * forceMultiplier;
+                rb.AddForceAtPosition(force, transform.position);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

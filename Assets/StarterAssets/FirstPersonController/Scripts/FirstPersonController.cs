@@ -53,8 +53,6 @@ namespace StarterAssets
         public float BottomClamp = -90.0f;
         CinemachineVirtualCamera cinemachineVirtualCamera;
         private float storedFOV;
-        [SerializeField] float fovAdjust = 1f;
-        [SerializeField] float lerpSpeed = 1f;
 
         // cinemachine
         private float _cinemachineTargetPitch;

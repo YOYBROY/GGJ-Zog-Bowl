@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3157996789786239612}
   - component: {fileID: 5088154379306336621}
   - component: {fileID: 7176446547477898771}
+  - component: {fileID: 2084176261093626122}
   m_Layer: 6
   m_Name: DeskLamp
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +107,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6382539355653849697, guid: 4d5097db9b62d814da66ec0bb62e2f2a, type: 3}
+--- !u!114 &2084176261093626122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709663751817784084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb885e14a34e0d343b176c245f587dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenVariant: {fileID: 919132149155446097, guid: 5bac3674047771f428575f72ae147ec3,
+    type: 3}
+  forceMultiplier: 200
+  alternativeTransformPosition: {fileID: 0}

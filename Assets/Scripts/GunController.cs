@@ -1,9 +1,6 @@
 using StarterAssets;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
@@ -73,6 +70,8 @@ public class GunController : MonoBehaviour
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool hasShot;
 
+    private bool shakingGun;
+
 
     void Start()
     {
@@ -99,11 +98,16 @@ public class GunController : MonoBehaviour
         if (Input.GetMouseButton(1)) //rmb
         {
             if (activeGun == null) return;
-            targetPos = shakePosition.localPosition;
-            targetRot = shakePosition.localRotation;
-            gunSpringSystem.enabled = true;
+            if(!canShoot)
+            {
+                targetPos = shakePosition.localPosition;
+                targetRot = shakePosition.localRotation;
+                gunSpringSystem.enabled = true;
+                activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
+                shakingGun = true;
+            }
+            else { StopShakingGun(); }
             _controller.RotationSpeed = 0;
-            activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
         }
         else
         {
@@ -112,14 +116,10 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1)) //rmb
         {
-            if (activeGun == null) return;
-            targetPos = storedGunSocketPos;
-            targetRot = storedGunSocketRot;
-            gunSpringSystem.enabled = false;
-            activeGun.transform.parent = gunSocket.transform;
-            activeGun.transform.position = gunSpringSystem.target.position;
+            StopShakingGun();
             _controller.RotationSpeed = storedRotationSpeed;
         }
+
         if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))
         {
             AttemptShot();
@@ -186,7 +186,7 @@ public class GunController : MonoBehaviour
                     if (sodaHit.collider.CompareTag("Enemy"))
                     {
                         Enemy enemy = sodaHit.collider.GetComponent<Enemy>();
-                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponent<ZaceyEnemy>();
+                        ZaceyEnemy zaceyEnemy = sodaHit.collider.GetComponentInParent<ZaceyEnemy>();
                         bool zacey = false;
                         if (enemy == null) zacey = true;
                         float distance = Vector3.Distance(sodaHit.point, cam.transform.position);
@@ -195,6 +195,10 @@ public class GunController : MonoBehaviour
                             if (zacey) zaceyEnemy.KillEnemy();
                             else enemy.KillEnemy();
                         }
+                    }
+                    else if (sodaHit.collider.CompareTag("Destructible"))
+                    {
+                        sodaHit.collider.GetComponent<DestructibleObject>().SwapModel();
                     }
                     StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, sodaHit.point, sodaHit));
                 }
@@ -221,7 +225,7 @@ public class GunController : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
-                ZaceyEnemy zaceyEnemy = hit.collider.GetComponent<ZaceyEnemy>();
+                ZaceyEnemy zaceyEnemy = hit.collider.GetComponentInParent<ZaceyEnemy>();
                 bool zacey = false;
                 if (enemy == null) zacey = true;
                 if (activeGunType == "Soda")
@@ -242,7 +246,11 @@ public class GunController : MonoBehaviour
                     else enemy.KillEnemy();
                 }
             }
-            if(activeGunType == "Soda" && distance > sodaCanDamageRange)
+            else if (hit.collider.CompareTag("Destructible"))
+            {
+                hit.collider.GetComponent<DestructibleObject>().SwapModel();
+            }
+            if (activeGunType == "Soda" && distance > sodaCanDamageRange)
             {
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
             }
@@ -275,6 +283,20 @@ public class GunController : MonoBehaviour
         shaken = 0;
         canShoot = false;
         hasShot = false;
+    }
+
+    private void StopShakingGun()
+    {
+        if (activeGun == null) return;
+        if(shakingGun)
+        {
+            targetPos = storedGunSocketPos;
+            targetRot = storedGunSocketRot;
+            gunSpringSystem.enabled = false;
+            activeGun.transform.parent = gunSocket.transform;
+            activeGun.transform.position = gunSpringSystem.target.position;
+            shakingGun = false;
+        }
     }
 
     float Remap(float value, float minA, float maxA, float minB, float maxB)

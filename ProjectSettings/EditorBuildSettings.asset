@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b064af3e857aeb943b07280179e0d1b8
+  - enabled: 1
     path: Assets/Scenes/CaseyLayout.unity
     guid: 95e8cf2cdac7af049b4190c2d34d5ae9
   m_configObjects:

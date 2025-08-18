@@ -63,6 +63,8 @@ public class ZaceyEnemy : MonoBehaviour
     private PauseMenu pauseMenu;
     private Animator animator;
 
+    private int killCounter = 0;
+
     enum EnemyState { PATROLLING, ATTACKING, ALERT };
     EnemyState enemyState;
 
@@ -174,6 +176,18 @@ public class ZaceyEnemy : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if(killCounter > 0)
+        {
+            pauseMenu.totalEnemyCount--;
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
+            gameObject.GetComponent<DestructibleObject>().SwapModel();
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+    }
+
     void UpdatePatrolPoints()
     {
         if (patrolNumber == patrolPoints.Length - 1) patrolNumber = 0;
@@ -183,12 +197,9 @@ public class ZaceyEnemy : MonoBehaviour
 
     public void KillEnemy()
     {
-        pauseMenu.totalEnemyCount--;
-        Instantiate(deathParticles, transform.position, Quaternion.identity);
-        Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
-        gameObject.GetComponent<DestructibleObject>().SwapModel();
-        Destroy(gameObject.transform.parent.gameObject);
+        killCounter++;
     }
+
     public void StunEnemy()
     {
         dazedCount = dazedTimer;

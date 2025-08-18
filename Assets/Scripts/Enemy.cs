@@ -61,6 +61,8 @@ public class Enemy : MonoBehaviour
     private PauseMenu pauseMenu;
     private Animator animator;
 
+    private int killCounter = 0;
+
 
     private AudioSource audioSource;
 
@@ -182,6 +184,17 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
     }
 
+    private void LateUpdate()
+    {
+        if(killCounter > 0)
+        {
+            pauseMenu.totalEnemyCount--;
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            GetComponent<DestructibleObject>().SwapModel();
+            Destroy(gameObject);
+        }
+    }
+
     void UpdatePatrolPoints()
     {
         if (patrolNumber == patrolPoints.Length - 1) patrolNumber = 0;
@@ -191,10 +204,7 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
-        pauseMenu.totalEnemyCount--;
-        Instantiate(deathParticles, transform.position, Quaternion.identity);
-        GetComponent<DestructibleObject>().SwapModel();
-        Destroy(gameObject);
+        killCounter++;
     }
 
     public void StunEnemy()

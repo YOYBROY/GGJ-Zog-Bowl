@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6107657456199271872}
   - component: {fileID: 6824913010365815429}
   - component: {fileID: 5525228349815435999}
+  - component: {fileID: 4239170331522539501}
   m_Layer: 6
   m_Name: WallLamp
   m_TagString: Destructible
@@ -106,3 +107,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1351253295495979857, guid: 4d5097db9b62d814da66ec0bb62e2f2a, type: 3}
+--- !u!114 &4239170331522539501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4613437669055359923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb885e14a34e0d343b176c245f587dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenVariant: {fileID: 5564915720405734021, guid: e3ac88bb39494ec40b15d162f9c0f22d,
+    type: 3}
+  forceMultiplier: 200
+  alternativeTransformPosition: {fileID: 0}

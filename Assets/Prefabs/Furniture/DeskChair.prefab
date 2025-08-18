@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7605169141610723974}
   - component: {fileID: 6543292015724467361}
   - component: {fileID: 6727495852219277066}
+  - component: {fileID: -4052493516585777393}
   m_Layer: 6
   m_Name: DeskChair
   m_TagString: Destructible
@@ -134,3 +135,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &-4052493516585777393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6973065935898466288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb885e14a34e0d343b176c245f587dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenVariant: {fileID: 5878901510519853620, guid: a15e267c3316dd5469e1126fc50c474e,
+    type: 3}
+  forceMultiplier: 200
+  alternativeTransformPosition: {fileID: 0}

@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
@@ -30,12 +31,20 @@ namespace StarterAssets
         public float Gravity = -15.0f;
 
         [Space(10)]
-        public float slideTimeSlow = 0.5f;
+        
         public float crouchSpeed = 1.0f;
         public float slideSpeed = 0.3f;
         public float crouchHeight = 0.75f;
         public float slideFriction = 1f;
         private bool sliding;
+        private bool crouchKeyPressed;
+
+        [Space(10)]
+        public float slowDownFactor = 0.5f;
+        public float slowDownLength = 20f;
+        public float fovSlideAmount = 20f;
+        public AnimationCurve fovLerpCurve;
+        [HideInInspector] public float targetFOV;
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
@@ -124,6 +133,7 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
             storedFOV = cinemachineVirtualCamera.m_Lens.FieldOfView;
+            targetFOV = storedFOV;
         }
 
         private void FixedUpdate()
@@ -169,14 +179,28 @@ namespace StarterAssets
 
         private void TimeScale()
         {
-            if (sliding)
+            Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
+
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        }
+
+        private IEnumerator animateFOV(float amountToAdjust)
+        {
+            targetFOV = storedFOV + amountToAdjust;
+            float timer = 0;
+            while(timer < slowDownLength)
             {
-                Time.timeScale = slideTimeSlow;
+                float lerpPos = fovLerpCurve.Evaluate(timer / slowDownLength);
+                cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(targetFOV, storedFOV, lerpPos);
+                timer += Time.unscaledDeltaTime;
+                yield return null;
             }
-            else
-            {
-                Time.timeScale = 1.0f;
-            }
+        }
+
+        private void SlowTimeDown(float amountToSlow)
+        {
+            Time.timeScale = slowDownFactor;
         }
 
         private void CameraRotation()
@@ -214,7 +238,6 @@ namespace StarterAssets
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-            Debug.Log(currentHorizontalSpeed);
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
@@ -248,24 +271,16 @@ namespace StarterAssets
             //calculate horizontal velocity
             _horizontalVelocity = (transform.position - prevPosition);
 
-            //FOV Adjustments
-            /*prevPosition = transform.position;
-
-            float normalisedVelocityForFOV = Remap(_horizontalVelocity.magnitude, 0, 0.3f, 0, 1);
-
-            //change FOV
-            float targetFOV = storedFOV + normalisedVelocityForFOV * fovAdjust;
-
-            Debug.Log(_horizontalVelocity.magnitude);
-
-            cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, targetFOV, lerpSpeed * Time.deltaTime);
-            */
-
             if (_input.crouch)
             {
                 Vector3 currentHorizontalVelocity = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z);
                 if (sliding)
                 {
+                    if(!crouchKeyPressed)
+                    {
+                        SlowTimeDown(slowDownFactor);
+                        StartCoroutine(animateFOV(fovSlideAmount));
+                    }
                     Vector3 newSpeed = Vector3.Lerp(inputDirection.normalized * (slideSpeed * Time.deltaTime) + currentHorizontalVelocity, Vector3.zero, Time.deltaTime * slideFriction);
                     Vector3 leftRightInputDirection = transform.right * _input.move.x;
                     _controller.Move(leftRightInputDirection.normalized * (slideSpeed * Time.deltaTime) + (newSpeed * Time.deltaTime) + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
@@ -274,11 +289,13 @@ namespace StarterAssets
                 {
                     _controller.Move(inputDirection.normalized * (crouchSpeed * Time.deltaTime) + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
                 }
+                crouchKeyPressed = true;
             }
             else
             {
                 // move the player
                 _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                crouchKeyPressed = false;
             }
         }
 

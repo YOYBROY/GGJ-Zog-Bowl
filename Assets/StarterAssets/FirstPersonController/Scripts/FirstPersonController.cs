@@ -31,20 +31,26 @@ namespace StarterAssets
         public float Gravity = -15.0f;
 
         [Space(10)]
-        
-        public float crouchSpeed = 1.0f;
+        [Tooltip("Camera height while crouched")]
+        public float crouchHeight = 0.6f;
+        [Tooltip("Speed while crouched")]
+        public float crouchSpeed = 2.0f;
+        [Tooltip("Speed you can move while sliding")]
         public float slideSpeed = 0.3f;
-        public float crouchHeight = 0.75f;
-        public float slideFriction = 1f;
+        [Tooltip("Drag on player more while sliding")]
+        public float slideFriction = 0.75f;
         private bool sliding;
         private bool crouchKeyPressed;
 
         [Space(10)]
-        public float slowDownFactor = 0.5f;
-        public float slowDownLength = 20f;
+        [Tooltip("Amount to slow time by on slide 0-1")]
+        public float slowDownFactor = 0.1f;
+        [Tooltip("Time it takes for slow effect to wear off")]
+        public float slowDownLength = 2f;
+        [Tooltip("Amount to alter from starting fov, +wider, -more zoomed")]
         public float fovSlideAmount = 20f;
         public AnimationCurve fovLerpCurve;
-        [HideInInspector] public float targetFOV;
+        private float targetFOV;
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]

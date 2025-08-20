@@ -179,6 +179,7 @@ MonoBehaviour:
   ElevatorBell: {fileID: 0}
   ElevatorWhirr: {fileID: 0}
   ElevatorRumble: {fileID: 0}
+  myAudioMixer: {fileID: 0}
 --- !u!82 &190148390
 AudioSource:
   m_ObjectHideFlags: 0
@@ -188,7 +189,8 @@ AudioSource:
   m_GameObject: {fileID: 190148383}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 95a65b31d1d25294ba4dd7ea26526c42,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -419,7 +421,8 @@ AudioSource:
   m_GameObject: {fileID: 475787756}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 95a65b31d1d25294ba4dd7ea26526c42,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 82f905b830ca0874a946b419a0c15407, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.24
@@ -943,7 +946,8 @@ AudioSource:
   m_GameObject: {fileID: 1433997088}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 95a65b31d1d25294ba4dd7ea26526c42,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 65e9c952480d8be46bd322fd6c9fb538, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1039,7 +1043,8 @@ AudioSource:
   m_GameObject: {fileID: 1433997088}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 95a65b31d1d25294ba4dd7ea26526c42,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1144,6 +1149,7 @@ MonoBehaviour:
   ElevatorBell: {fileID: 0}
   ElevatorWhirr: {fileID: 8300000, guid: 65e9c952480d8be46bd322fd6c9fb538, type: 3}
   ElevatorRumble: {fileID: 8300000, guid: 90d108af10f438e4c8b1b58aeb88859d, type: 3}
+  myAudioMixer: {fileID: 0}
 --- !u!1001 &1483448803
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,9 +20,6 @@ public class ZaceyEnemy : MonoBehaviour
     [Tooltip("Max speed of Enemy")]
     [SerializeField] float moveSpeed = 1f;
 
-    [Tooltip("Velocity threshold of incoming projectile before it actually stuns the enemy")]
-    [SerializeField] float stunThreshold = 500f;
-
     [Tooltip("Distance the enemy can detect the player")]
     [SerializeField] float attackRange = 10f;
 
@@ -203,16 +200,5 @@ public class ZaceyEnemy : MonoBehaviour
     public void StunEnemy()
     {
         dazedCount = dazedTimer;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("PlayerProjectile"))
-        {
-            Debug.Log(collision.relativeVelocity.sqrMagnitude);
-            if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
-            //Play dazed particle effect
-            KillEnemy();
-        }
     }
 }

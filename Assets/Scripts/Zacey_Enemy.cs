@@ -57,7 +57,6 @@ public class ZaceyEnemy : MonoBehaviour
     float dazedCount;
     private AudioSource audioSource;
 
-    private PauseMenu pauseMenu;
     private Animator animator;
 
     private int killCounter = 0;
@@ -68,7 +67,6 @@ public class ZaceyEnemy : MonoBehaviour
     void Start()
     {
         animator = transform.parent.GetComponentInChildren<Animator>();
-        pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         targetPoint = patrolPoints[0];
         timer = attackTimer;
@@ -177,7 +175,7 @@ public class ZaceyEnemy : MonoBehaviour
     {
         if(killCounter > 0)
         {
-            pauseMenu.totalEnemyCount--;
+            PauseMenu.totalEnemyCount--;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
             gameObject.GetComponent<DestructibleObject>().SwapModel();

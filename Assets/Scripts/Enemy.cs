@@ -55,7 +55,6 @@ public class Enemy : MonoBehaviour
 
     bool stunned;
 
-    private PauseMenu pauseMenu;
     private Animator animator;
 
     private int killCounter = 0;
@@ -69,7 +68,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        pauseMenu = FindObjectOfType<PauseMenu>();
         player = FindObjectOfType<FirstPersonController>().gameObject;
         targetPoint = patrolPoints[0];
         timer = attackTimer;
@@ -185,7 +183,7 @@ public class Enemy : MonoBehaviour
     {
         if(killCounter > 0)
         {
-            pauseMenu.totalEnemyCount--;
+            PauseMenu.totalEnemyCount--;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             GetComponent<DestructibleObject>().SwapModel();
             Destroy(gameObject);

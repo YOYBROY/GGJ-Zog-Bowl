@@ -3,10 +3,11 @@ using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public int totalEnemyCount;
+    public static int totalEnemyCount;
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
     public GameObject winMenuUI;
@@ -24,13 +25,20 @@ public class PauseMenu : MonoBehaviour
     public bool beginningOfGame;
     bool stopWatchOn;
 
+    public Image reticleUI;
+    public Sprite sodaReticle;
+    public Sprite champagneReticle;
+    public Sprite emptyReticle;
+
+    [SerializeField] GameObject destroyAllHumansUI;
+
     private void Start()
     {
         Time.timeScale = 1f;
         Enemy[] enemies = FindObjectsByType<Enemy>(0);
         ZaceyEnemy[] zaceyEnemies = FindObjectsByType<ZaceyEnemy>(0);
 
-        totalEnemyCount += enemies.Length + zaceyEnemies.Length;
+        totalEnemyCount = enemies.Length + zaceyEnemies.Length;
 
         gunController = FindObjectOfType<GunController>();
         firstPersonController = FindObjectOfType<FirstPersonController>();
@@ -89,6 +97,22 @@ public class PauseMenu : MonoBehaviour
             QuitGame();
         }
         mouseSensitivityUI.text = "MOUSE SENSITIVITY: " + firstPersonController.RotationSpeed;
+    }
+
+    public void UpdateReticleUI(string gunType)
+    {
+        if(gunType == "Soda")
+        {
+            reticleUI.sprite = sodaReticle;
+        }
+        else if(gunType == "Champ")
+        {
+            reticleUI.sprite = champagneReticle;
+        }
+        else if(gunType == "Null")
+        {
+            reticleUI.sprite = emptyReticle;
+        }
     }
 
     //Resume game
@@ -155,7 +179,6 @@ public class PauseMenu : MonoBehaviour
 
     public void BeginGame()
     {
-        stopWatchOn = true; 
         inGameTimerText.gameObject.SetActive(true);
         firstPersonController.enabled = true;
         beginningOfGame = false;
@@ -163,5 +186,11 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         mouseSensitivityUI.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void StartStopWatch()
+    {
+        stopWatchOn = true;
+        destroyAllHumansUI.SetActive(true);
     }
 }

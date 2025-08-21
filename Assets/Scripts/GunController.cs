@@ -66,6 +66,7 @@ public class GunController : MonoBehaviour
     private StarterAssetsInputs _input;
     private Camera cam;
     private string activeGunType;
+    private PauseMenu pauseMenu;
 
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool hasShot;
@@ -78,13 +79,13 @@ public class GunController : MonoBehaviour
         cam = Camera.main;
         _controller = GetComponent<FirstPersonController>();
         _input = GetComponent<StarterAssetsInputs>();
-
+        pauseMenu = FindObjectOfType<PauseMenu>().GetComponent<PauseMenu>();
         targetRot = gunSocket.transform.localRotation;
         targetPos = gunSocket.localPosition;
         storedGunSocketPos = gunSocket.transform.localPosition;
         storedGunSocketRot = gunSocket.transform.localRotation;
         storedRotationSpeed = _controller.RotationSpeed;
-
+        activeGunType = "Null";
         shaken = 0;
     }
 
@@ -156,6 +157,7 @@ public class GunController : MonoBehaviour
         activeGunType = gunType;
         gunSpringSystem = activeGun.GetComponent<SpringDamperSystem>();
         gunSpringSystem.enabled = false;
+        pauseMenu.UpdateReticleUI(gunType);
     }
 
     private void ShootGun()
@@ -285,6 +287,8 @@ public class GunController : MonoBehaviour
         gunSpringSystem = null;
         if (activeGunType == "Soda") { Instantiate(sodaCanProjectile, launchPosition.position, launchPosition.rotation); }
         else if (activeGunType == "Champ") { Instantiate(ChampainProjectile, launchPosition.position, launchPosition.rotation); }
+        activeGunType = "Null";
+        pauseMenu.UpdateReticleUI(activeGunType);
         shaken = 0;
         canShoot = false;
         hasShot = false;

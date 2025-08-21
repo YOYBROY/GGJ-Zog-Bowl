@@ -1,10 +1,6 @@
 using StarterAssets;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
@@ -74,6 +70,8 @@ public class GunController : MonoBehaviour
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool hasShot;
 
+    private bool shakingGun;
+
 
     void Start()
     {
@@ -100,11 +98,16 @@ public class GunController : MonoBehaviour
         if (Input.GetMouseButton(1)) //rmb
         {
             if (activeGun == null) return;
-            targetPos = shakePosition.localPosition;
-            targetRot = shakePosition.localRotation;
-            gunSpringSystem.enabled = true;
+            if(!canShoot)
+            {
+                targetPos = shakePosition.localPosition;
+                targetRot = shakePosition.localRotation;
+                gunSpringSystem.enabled = true;
+                activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
+                shakingGun = true;
+            }
+            else { StopShakingGun(); }
             _controller.RotationSpeed = 0;
-            activeGun.transform.Translate(moveInput * shakeAdjust * Time.deltaTime);
         }
         else
         {
@@ -113,14 +116,10 @@ public class GunController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1)) //rmb
         {
-            if (activeGun == null) return;
-            targetPos = storedGunSocketPos;
-            targetRot = storedGunSocketRot;
-            gunSpringSystem.enabled = false;
-            activeGun.transform.parent = gunSocket.transform;
-            activeGun.transform.position = gunSpringSystem.target.position;
+            StopShakingGun();
             _controller.RotationSpeed = storedRotationSpeed;
         }
+
         if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))
         {
             AttemptShot();
@@ -167,6 +166,8 @@ public class GunController : MonoBehaviour
 
         if (activeGunType == "Soda")
         {
+            CinemachineShake.Instance.AddTrauma(CinemachineShake.Instance.bigShake);
+
             AudioManager.PlaySound(SoundType.SODACANPOP, 1);
             //Particle Effect at launch point
             Instantiate(sodaShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
@@ -211,6 +212,7 @@ public class GunController : MonoBehaviour
         }
         else
         {
+            CinemachineShake.Instance.AddTrauma(CinemachineShake.Instance.smallShake);
             AudioManager.PlaySound(SoundType.CHAMPAIGNPOP, 1);
             //Particle Effect At launch point
             Instantiate(champainShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
@@ -265,10 +267,12 @@ public class GunController : MonoBehaviour
         {
             if (activeGunType == "Soda")
             {
+                //CinemachineShake.Instance.AddTrauma(500);
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * sodaCanDamageRange), hit));
             }
             else
             {
+                //CinemachineShake.Instance.AddTrauma(250);
                 StartCoroutine(SpawnTrail(gunSpringSystem.fireLocation.position, gunSpringSystem.fireLocation.position + (gunSpringSystem.fireLocation.forward * 100), hit));
             }
         }
@@ -284,6 +288,20 @@ public class GunController : MonoBehaviour
         shaken = 0;
         canShoot = false;
         hasShot = false;
+    }
+
+    private void StopShakingGun()
+    {
+        if (activeGun == null) return;
+        if(shakingGun)
+        {
+            targetPos = storedGunSocketPos;
+            targetRot = storedGunSocketRot;
+            gunSpringSystem.enabled = false;
+            activeGun.transform.parent = gunSocket.transform;
+            activeGun.transform.position = gunSpringSystem.target.position;
+            shakingGun = false;
+        }
     }
 
     float Remap(float value, float minA, float maxA, float minB, float maxB)

@@ -59,7 +59,6 @@ public class SpringDamperSystem : MonoBehaviour
         if (error.magnitude < 0.001f && velocity.magnitude < 0.001f) transform.localPosition = target.localPosition;
         if(!gunController.hasShot && targetVelocity.magnitude < 0.001f) 
         {
-            Debug.Log(shakenError);
             gunController.shaken += shakenError * shakeAmountAdjuster * Time.deltaTime;
             if(shakenError > shakeSoundThreshold) AudioManager.PlaySound(SoundType.SHAKING, 1);
         }

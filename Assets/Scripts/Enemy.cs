@@ -19,9 +19,6 @@ public class Enemy : MonoBehaviour
     [Tooltip("Max speed of Enemy")]
     [SerializeField] float moveSpeed = 1f;
 
-    [Tooltip("Velocity threshold of incoming projectile before it actually stuns the enemy")]
-    [SerializeField] float stunThreshold = 500f;
-
     [Tooltip("Distance the enemy can detect the player")]
     [SerializeField] float attackRange = 10f;
     [Tooltip("Time in seconds the enemy takes to go back to patrolling after losing sight of the player")]
@@ -60,6 +57,8 @@ public class Enemy : MonoBehaviour
 
     private PauseMenu pauseMenu;
     private Animator animator;
+
+    private int killCounter = 0;
 
 
     private AudioSource audioSource;
@@ -182,6 +181,17 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
     }
 
+    private void LateUpdate()
+    {
+        if(killCounter > 0)
+        {
+            pauseMenu.totalEnemyCount--;
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            GetComponent<DestructibleObject>().SwapModel();
+            Destroy(gameObject);
+        }
+    }
+
     void UpdatePatrolPoints()
     {
         if (patrolNumber == patrolPoints.Length - 1) patrolNumber = 0;
@@ -191,23 +201,11 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
-        pauseMenu.totalEnemyCount--;
-        Instantiate(deathParticles, transform.position, Quaternion.identity);
-        GetComponent<DestructibleObject>().SwapModel();
-        Destroy(gameObject);
+        killCounter++;
     }
 
     public void StunEnemy()
     {
         dazedCount = dazedTimer;
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("PlayerProjectile"))
-        {
-            if (collision.relativeVelocity.sqrMagnitude < stunThreshold) return;
-            //Play dazed particle effect
-            KillEnemy();
-        }
     }
 }

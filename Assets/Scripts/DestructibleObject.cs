@@ -37,12 +37,4 @@ public class DestructibleObject : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("PlayerProjectile"))
-        {
-            SwapModel();
-        }
-    }
 }

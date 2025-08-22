@@ -1,4 +1,6 @@
 ﻿using Cinemachine;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -29,7 +31,26 @@ namespace StarterAssets
         public float Gravity = -15.0f;
 
         [Space(10)]
-        public float crouchHeight = 0.75f;
+        [Tooltip("Camera height while crouched")]
+        public float crouchHeight = 0.6f;
+        [Tooltip("Speed while crouched")]
+        public float crouchSpeed = 2.0f;
+        [Tooltip("Speed you can move while sliding")]
+        public float slideSpeed = 0.3f;
+        [Tooltip("Drag on player more while sliding")]
+        public float slideFriction = 0.75f;
+        private bool sliding;
+        private bool crouchKeyPressed;
+
+        [Space(10)]
+        [Tooltip("Amount to slow time by on slide 0-1")]
+        public float slowDownFactor = 0.1f;
+        [Tooltip("Time it takes for slow effect to wear off")]
+        public float slowDownLength = 2f;
+        [Tooltip("Amount to alter from starting fov, +wider, -more zoomed")]
+        public float fovSlideAmount = 20f;
+        public AnimationCurve fovLerpCurve;
+        private float targetFOV;
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
@@ -118,6 +139,7 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
             storedFOV = cinemachineVirtualCamera.m_Lens.FieldOfView;
+            targetFOV = storedFOV;
         }
 
         private void FixedUpdate()
@@ -125,8 +147,10 @@ namespace StarterAssets
             if (PauseMenu.isPaused) return;
             JumpAndGravity();
             GroundedCheck();
-            Move();
+            SlidingCheck();
             Crouch();
+            Move();
+            TimeScale();
         }
 
         private void LateUpdate()
@@ -140,6 +164,49 @@ namespace StarterAssets
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+        }
+
+        private void SlidingCheck()
+        {
+            if (_input.crouch)
+            {
+                float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
+                if (currentHorizontalSpeed > crouchSpeed + 0.2f)
+                {
+                    sliding = true;
+                }
+                else
+                {
+                    sliding = false;
+                }
+            }
+        }
+
+        private void TimeScale()
+        {
+            Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0, 1);
+
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        }
+
+        private IEnumerator animateFOV(float amountToAdjust)
+        {
+            targetFOV = storedFOV + amountToAdjust;
+            float timer = 0;
+            while(timer < slowDownLength)
+            {
+                float lerpPos = fovLerpCurve.Evaluate(timer / slowDownLength);
+                cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(targetFOV, storedFOV, lerpPos);
+                timer += Time.unscaledDeltaTime;
+                yield return null;
+            }
+        }
+
+        private void SlowTimeDown(float amountToSlow)
+        {
+            Time.timeScale = slowDownFactor;
         }
 
         private void CameraRotation()
@@ -210,21 +277,32 @@ namespace StarterAssets
             //calculate horizontal velocity
             _horizontalVelocity = (transform.position - prevPosition);
 
-            //FOV Adjustments
-            /*prevPosition = transform.position;
-
-            float normalisedVelocityForFOV = Remap(_horizontalVelocity.magnitude, 0, 0.3f, 0, 1);
-
-            //change FOV
-            float targetFOV = storedFOV + normalisedVelocityForFOV * fovAdjust;
-
-            Debug.Log(_horizontalVelocity.magnitude);
-
-            cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.FieldOfView, targetFOV, lerpSpeed * Time.deltaTime);
-            */
-
-            // move the player
-            _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            if (_input.crouch)
+            {
+                Vector3 currentHorizontalVelocity = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z);
+                if (sliding)
+                {
+                    if(!crouchKeyPressed)
+                    {
+                        SlowTimeDown(slowDownFactor);
+                        StartCoroutine(animateFOV(fovSlideAmount));
+                    }
+                    Vector3 newSpeed = Vector3.Lerp(inputDirection.normalized * (slideSpeed * Time.deltaTime) + currentHorizontalVelocity, Vector3.zero, Time.deltaTime * slideFriction);
+                    Vector3 leftRightInputDirection = transform.right * _input.move.x;
+                    _controller.Move(leftRightInputDirection.normalized * (slideSpeed * Time.deltaTime) + (newSpeed * Time.deltaTime) + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
+                }
+                else
+                {
+                    _controller.Move(inputDirection.normalized * (crouchSpeed * Time.deltaTime) + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
+                }
+                crouchKeyPressed = true;
+            }
+            else
+            {
+                // move the player
+                _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                crouchKeyPressed = false;
+            }
         }
 
         private void JumpAndGravity()
@@ -277,13 +355,14 @@ namespace StarterAssets
 
         private void Crouch()
         {
-            if(_input.crouch)
+            if (_input.crouch)
             {
                 transform.localScale = new Vector3(1, crouchHeight, 1);
             }
             else
             {
                 transform.localScale = Vector3.one;
+                sliding = false;
             }
         }
 
@@ -311,4 +390,3 @@ namespace StarterAssets
         }
     }
 }
-    

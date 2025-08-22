@@ -166,7 +166,7 @@ public class GunController : MonoBehaviour
 
         if (activeGunType == "Soda")
         {
-            CinemachineShake.Instance.AddTrauma(60);
+            CinemachineShake.Instance.AddTrauma(CinemachineShake.Instance.bigShake);
 
             AudioManager.PlaySound(SoundType.SODACANPOP, 1);
             //Particle Effect at launch point
@@ -212,7 +212,7 @@ public class GunController : MonoBehaviour
         }
         else
         {
-            CinemachineShake.Instance.AddTrauma(30);
+            CinemachineShake.Instance.AddTrauma(CinemachineShake.Instance.smallShake);
             AudioManager.PlaySound(SoundType.CHAMPAIGNPOP, 1);
             //Particle Effect At launch point
             Instantiate(champainShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);

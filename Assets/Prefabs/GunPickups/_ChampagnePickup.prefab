@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 4874523789969774728}
   - component: {fileID: 8974139105797262757}
   m_Layer: 6
-  m_Name: SodaVisual
+  m_Name: ChampagneVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ Transform:
   m_GameObject: {fileID: 1694856515184727730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.548, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,7 +93,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694856515184727730}
-  m_Mesh: {fileID: -4871546634432744703, guid: a962f40b651830249bf2a9c6d7993995, type: 3}
+  m_Mesh: {fileID: -8925045459233743192, guid: 1f4d11b9c3683fe478d73a8d223e0f55, type: 3}
 --- !u!23 &4874523789969774728
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 8487665830648032247}
   - component: {fileID: 8071877902949982811}
   m_Layer: 6
-  m_Name: _SodaColliderPickup
+  m_Name: _ChampagnePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,10 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbfaf8cac63e3b4990866cbd5220cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunType: Soda
+  gunType: Champ
   pickUpDistance: 3
   deletesSelf: 1
-  scaleUpAmount: 1.2
+  scaleUpAmount: 1.1
   lerpSpeed: 10
   isWalkoverPickup: 1
   outliners:
@@ -246,7 +246,7 @@ GameObject:
   m_Layer: 6
   m_Name: PickupAngler
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

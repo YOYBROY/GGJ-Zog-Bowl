@@ -72,6 +72,11 @@ public class AnimEventManager : MonoBehaviour
         ObjectAudioSource.PlayOneShot(ElevatorWhirr);
     }
 
+    public void PlaySoundClip()
+    {
+        ObjectAudioSource.Play();
+    }
+
     public void AdjustVolume(float value)
     {
         myAudioMixer.SetFloat("MasterAudio", Mathf.Log10(value) * 20);

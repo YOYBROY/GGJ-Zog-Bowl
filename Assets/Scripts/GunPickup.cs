@@ -85,7 +85,7 @@ public class GunPickup : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.transform.CompareTag("Player") && isWalkoverPickup)
         {

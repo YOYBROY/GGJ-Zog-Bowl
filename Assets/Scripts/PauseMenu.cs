@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public static int totalEnemyCount;
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
     public GameObject winMenuUI;
     public GameObject loseMenuUI;
     public TMP_Text mouseSensitivityUI;
@@ -120,6 +121,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(false);
         mouseSensitivityUI.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -137,6 +137,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    public void GoToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     //Quit Game
     public void QuitGame()
     {
@@ -148,6 +153,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -161,6 +167,8 @@ public class PauseMenu : MonoBehaviour
         inGameTimerText.gameObject.SetActive(false);
         finalTimeText.text = "Total Time: " + timerTime.ToString("#.000"); ;
         winMenuUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Time.timeScale = 0;
     }
 
@@ -174,6 +182,8 @@ public class PauseMenu : MonoBehaviour
         inGameTimerText.gameObject.SetActive(false);
         finalTimeText.text = "Total Time: " + timerTime.ToString("#.000"); ;
         loseMenuUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Time.timeScale = 0;
     }
 

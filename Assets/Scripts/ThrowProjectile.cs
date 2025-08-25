@@ -34,6 +34,13 @@ public class ThrowProjectile : MonoBehaviour
                 enemy.KillEnemy();
             }
         }
+        else
+        {
+            DestructibleObject destructible = collision.gameObject.GetComponent<DestructibleObject>();
+            if (destructible == null)
+            { return; }
+            destructible.SwapModel();
+        }
 
         if (isChampaign)
         {
@@ -47,10 +54,5 @@ public class ThrowProjectile : MonoBehaviour
             if (impactParticle != null) Instantiate(impactParticle, transform.position, Quaternion.Euler(collision.contacts[0].normal));
             AudioManager.PlaySound(SoundType.SODALANDING, 1);
         }
-
-        DestructibleObject destructible = collision.gameObject.GetComponent<DestructibleObject>();
-        if (destructible == null)
-            { return; }
-        destructible.SwapModel();
     }
 }

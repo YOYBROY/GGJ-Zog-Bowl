@@ -73,9 +73,6 @@ public class ZaceyEnemy : MonoBehaviour
         targetPoint = patrolPoints[0];
         timer = attackTimer;
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
-        audioSource.loop = true;
-        audioSource.Play();
         rig = GetComponentInChildren<Rig>();
         startHeight = transform.position.y;
     }
@@ -155,6 +152,7 @@ public class ZaceyEnemy : MonoBehaviour
                 {
                     //Attack
                     Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
+                    AudioManager.PlaySound(SoundType.ZACEYSHOOT, 1);
                     //attack Animation
                     timer = attackTimer;
                 }

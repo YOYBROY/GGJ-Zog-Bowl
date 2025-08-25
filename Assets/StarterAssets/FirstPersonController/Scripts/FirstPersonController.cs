@@ -20,7 +20,7 @@ namespace StarterAssets
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 6.0f;
         [Tooltip("Rotation speed of the character")]
-        public int RotationSpeed = 1;
+        public float RotationSpeed = 1;
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
 
@@ -51,6 +51,9 @@ namespace StarterAssets
         public float fovSlideAmount = 20f;
         public AnimationCurve fovLerpCurve;
         public AnimationCurve timeLerpCurve;
+        public float deathTimer = 1.0f;
+        public float fovDeathAmount = -10f;
+        public AnimationCurve deathLerpCurve;
         private float targetFOV;
 
         [Space(10)]
@@ -89,10 +92,14 @@ namespace StarterAssets
         private Vector3 prevPosition;
         private Vector3 _horizontalVelocity;
         private float _terminalVelocity = 53.0f;
+        private bool dead = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
+
+        //pause menu
+        private PauseMenu pauseMenu;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -127,6 +134,7 @@ namespace StarterAssets
 
         private void Start()
         {
+            pauseMenu = FindObjectOfType<PauseMenu>();
             cinemachineVirtualCamera = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -209,10 +217,22 @@ namespace StarterAssets
                 yield return null;
             }
         }
-
-        private void SlowTimeDown(float amountToSlow)
+        public IEnumerator animateDeath()
         {
-            Time.timeScale = slowDownFactor;
+            dead = true;
+
+            targetFOV = storedFOV + (fovDeathAmount * -_input.move.y);
+            float timer = 0.01f;
+            while(timer < deathTimer)
+            {
+                float timeLerpPos = deathLerpCurve.Evaluate(timer / deathTimer);
+                Time.timeScale = timeLerpPos;
+                AudioManager.AdjustPitch(timeLerpPos);
+                cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(targetFOV, storedFOV, timeLerpPos);
+                timer += Time.unscaledDeltaTime;
+                yield return null;
+            }
+            pauseMenu.GameLose();
         }
 
         private void CameraRotation()
@@ -239,6 +259,8 @@ namespace StarterAssets
 
         private void Move()
         {
+            
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -282,6 +304,14 @@ namespace StarterAssets
 
             //calculate horizontal velocity
             _horizontalVelocity = (transform.position - prevPosition);
+
+            if (dead)
+            {
+                Vector3 currentHorizontalVelocity = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z);
+                Vector3 newSpeed = Vector3.Lerp(inputDirection.normalized * (slideSpeed * Time.deltaTime) + currentHorizontalVelocity, Vector3.zero, Time.deltaTime * slideFriction);
+                _controller.Move(newSpeed * Time.deltaTime + (new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime));
+                return;
+            }
 
             if (_input.crouch)
             {
@@ -389,10 +419,6 @@ namespace StarterAssets
 
             // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
-        }
-        float Remap(float value, float minA, float maxA, float minB, float maxB)
-        {
-            return minB + (value - minA) * (maxB - minB) / (maxA - minA);
         }
     }
 }

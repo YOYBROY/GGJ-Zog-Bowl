@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249c7920767babf4d8ade3e9001c828e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 1500
+  force: 30
   angularForce: 30
   isChampaign: 1
   impactParticle: {fileID: 3122347672128452897, guid: f474a8c5158955049b7d7ebda7730001,

@@ -61,7 +61,7 @@ public class GunController : MonoBehaviour
     [HideInInspector] public float shaken = 0f;
 
     private FirstPersonController _controller;
-    [HideInInspector] public int storedRotationSpeed;
+    [HideInInspector] public float storedRotationSpeed;
 
     private StarterAssetsInputs _input;
     private Camera cam;

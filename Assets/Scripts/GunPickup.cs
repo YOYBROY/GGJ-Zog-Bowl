@@ -14,9 +14,11 @@ public class GunPickup : MonoBehaviour
 
     [SerializeField] GameObject[] outliners;
 
+
     //References
     GunController gunController;
 
+    private Animator animator;
     private Vector3 originalScale;
     Vector3 targetScale;
 
@@ -25,6 +27,7 @@ public class GunPickup : MonoBehaviour
         gunController = FindObjectOfType<GunController>();
         originalScale = transform.localScale;
         targetScale = originalScale;
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -40,6 +43,10 @@ public class GunPickup : MonoBehaviour
         }
         gunController.AddGun(gunType);
         if (deletesSelf) Destroy(gameObject);
+        if (animator != null)
+        {
+            animator.SetTrigger("OnPickup");
+        }
     }
 
     private void OnMouseOver()

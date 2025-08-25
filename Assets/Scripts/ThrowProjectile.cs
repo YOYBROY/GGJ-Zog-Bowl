@@ -37,9 +37,10 @@ public class ThrowProjectile : MonoBehaviour
         else
         {
             DestructibleObject destructible = collision.gameObject.GetComponent<DestructibleObject>();
-            if (destructible == null)
-            { return; }
-            destructible.SwapModel();
+            if (destructible != null)
+            { 
+                destructible.SwapModel(); 
+            }
         }
 
         if (isChampaign)

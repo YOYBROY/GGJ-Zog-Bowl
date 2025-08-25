@@ -165,14 +165,18 @@ public class GunController : MonoBehaviour
         canShoot = false;
         hasShot = true;
         shaken = 0;
+        //switch gun model to used
+        SwitchGunToUsed();
 
         if (activeGunType == "Soda")
         {
             CinemachineShake.Instance.AddTrauma(CinemachineShake.Instance.bigShake);
 
-            AudioManager.PlaySound(SoundType.SODACANPOP, 1);
+            //AudioManager.PlaySound(SoundType.SODACANPOP, 1);
             //Particle Effect at launch point
             Instantiate(sodaShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
+
+            
 
             for (int i = 0; i < sodaCanProjectiles; i++)
             {
@@ -292,6 +296,11 @@ public class GunController : MonoBehaviour
         shaken = 0;
         canShoot = false;
         hasShot = false;
+    }
+
+    private void SwitchGunToUsed()
+    {
+        activeGun.GetComponent<UsedGunSwitcher>().SwitchGunModel();
     }
 
     private void StopShakingGun()

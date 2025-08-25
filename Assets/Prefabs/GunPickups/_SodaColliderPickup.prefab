@@ -47,11 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinSpeed: 50
   spinSpeedVariance: 0.5
-  clockwiseRotation: 1
+  randomRotationDirection: 0
   rotateAxis: 1
   bob: 1
   bobHeight: 0.15
   bobSpeed: 2
+  bobSpeedVariance: 0.4
 --- !u!1 &1694856515184727730
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: Soda
-  pickUpDistance: 3
+  pickUpDistance: 4
   deletesSelf: 1
   scaleUpAmount: 1.2
   lerpSpeed: 10
@@ -230,10 +231,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 0.9010389
+  m_Radius: 0.7
+  m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3599702, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8943262545284786693
 GameObject:
   m_ObjectHideFlags: 0

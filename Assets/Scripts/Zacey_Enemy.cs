@@ -42,9 +42,6 @@ public class ZaceyEnemy : MonoBehaviour
     [SerializeField] Transform attackSpawnPoint;
     [SerializeField] GameObject enemyProjectile;
 
-    [SerializeField] GameObject topHalf;
-    [SerializeField] Transform topHalfLocator;
-
     [SerializeField] ParticleSystem deathParticles;
 
     //Private Variables
@@ -52,6 +49,7 @@ public class ZaceyEnemy : MonoBehaviour
     int patrolNumber = 0;
 
     private GameObject player;
+    private float startHeight;
 
     float timer;
     float dazedCount;
@@ -75,6 +73,7 @@ public class ZaceyEnemy : MonoBehaviour
         audioSource.loop = true;
         audioSource.Play();
         rig = GetComponentInChildren<Rig>();
+        startHeight = transform.position.y;
     }
 
     private void Update()
@@ -121,7 +120,6 @@ public class ZaceyEnemy : MonoBehaviour
         else enemyState = EnemyState.PATROLLING;
 
 
-        topHalf.transform.position = topHalfLocator.position;
         //move towards a patrol point.
         direction = targetPoint.position - transform.position;
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -130,7 +128,7 @@ public class ZaceyEnemy : MonoBehaviour
         //go to next point
         if (distance < distanceThreshold) UpdatePatrolPoints();
         //rotate in direction of movement.
-        Quaternion targetRotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, patrolLerpSpeed * Time.deltaTime);
 
         switch (enemyState)
@@ -138,7 +136,6 @@ public class ZaceyEnemy : MonoBehaviour
             case EnemyState.PATROLLING:
                 rig.weight = 0;
                 animator.SetBool("IsAggro", false);
-                topHalf.transform.rotation = transform.rotation;
                 break;
             case EnemyState.ATTACKING:
                 rig.weight = 1;
@@ -146,7 +143,6 @@ public class ZaceyEnemy : MonoBehaviour
                 //face towards player
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-                topHalf.transform.rotation = targetRotation;
 
                 //shoot projectile on a timer
                 timer -= Time.deltaTime;
@@ -164,11 +160,11 @@ public class ZaceyEnemy : MonoBehaviour
                 //face towards player
                 direction = player.transform.position - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-                topHalf.transform.rotation = targetRotation;
                 break;
             default:
                 break;
         }
+        transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
     }
 
     private void LateUpdate()
@@ -177,8 +173,8 @@ public class ZaceyEnemy : MonoBehaviour
         {
             PauseMenu.totalEnemyCount--;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
-            Instantiate(deathParticles, topHalf.transform.position, Quaternion.identity);
-            gameObject.GetComponent<DestructibleObject>().SwapModel();
+            Instantiate(deathParticles, attackSpawnPoint.transform.position, Quaternion.identity);
+            gameObject.GetComponent<DestructibleObject>().SwapEnemyModel();
             Destroy(gameObject.transform.parent.gameObject);
         }
     }

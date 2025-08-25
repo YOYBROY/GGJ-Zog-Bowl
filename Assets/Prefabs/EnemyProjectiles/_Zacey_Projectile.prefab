@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4582242697133434669}
   - component: {fileID: 7870532185749881905}
   - component: {fileID: 3485481667602141045}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: _Zacey_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

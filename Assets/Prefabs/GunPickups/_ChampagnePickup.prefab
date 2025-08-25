@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 8533796198287372324}
   - component: {fileID: 8487665830648032247}
   - component: {fileID: 8071877902949982811}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: _ChampagnePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

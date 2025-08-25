@@ -47,6 +47,7 @@ public class PauseMenu : MonoBehaviour
         firstPersonController = FindObjectOfType<FirstPersonController>();
         beginningOfGame = true;
         if(mouseSensitivityUI.gameObject.activeSelf == false) mouseSensitivityUI.gameObject.SetActive(true);
+        //Debug.Log("Game Started");
         BeginGame();
     }
 

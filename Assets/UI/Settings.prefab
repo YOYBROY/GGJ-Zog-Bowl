@@ -1263,6 +1263,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5380801683050442557}
     m_Modifications:
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_MinValue
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2181858217280199133, guid: eb97f82acbeda8f4695f3557b1111a78,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1432,6 +1457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RaycastPadding.y
       value: 33.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005070940453173961, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0.020100502
       objectReference: {fileID: 0}
     - target: {fileID: 9005070940453173961, guid: eb97f82acbeda8f4695f3557b1111a78,
         type: 3}

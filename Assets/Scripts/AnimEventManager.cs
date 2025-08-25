@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
-
+using StarterAssets;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class AnimEventManager : MonoBehaviour
 {
     [SerializeField] private AudioSource ObjectAudioSource;
@@ -14,11 +16,13 @@ public class AnimEventManager : MonoBehaviour
     [SerializeField] private AudioClip ElevatorRumble;
 
     [SerializeField] private AudioMixer myAudioMixer;
+
     AudioSource aud;
 
     void Start()
     {
         aud = GetComponent<AudioSource>();
+        
     }
 
     void Update()
@@ -81,4 +85,6 @@ public class AnimEventManager : MonoBehaviour
     {
         myAudioMixer.SetFloat("MasterAudio", Mathf.Log10(value) * 20);
     }
+
+
 }

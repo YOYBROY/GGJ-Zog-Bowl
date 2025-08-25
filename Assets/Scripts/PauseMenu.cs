@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject winMenuUI;
     public GameObject loseMenuUI;
     public TMP_Text mouseSensitivityUI;
+    public Slider _sensitivitySlider;
 
     GunController gunController;
     FirstPersonController firstPersonController;
@@ -32,6 +34,7 @@ public class PauseMenu : MonoBehaviour
     public Sprite sodaReticle;
     public Sprite champagneReticle;
     public Sprite emptyReticle;
+    public SavedSettings savedSettings;
 
     [SerializeField] GameObject destroyAllHumansUI;
 
@@ -43,11 +46,17 @@ public class PauseMenu : MonoBehaviour
 
         totalEnemyCount = enemies.Length + zaceyEnemies.Length;
 
+        EventSystem.current.SetSelectedGameObject(gameObject);
+
+        savedSettings = FindObjectOfType<SavedSettings>();
+        
+
         gunController = FindObjectOfType<GunController>();
         firstPersonController = FindObjectOfType<FirstPersonController>();
         beginningOfGame = true;
-        if(mouseSensitivityUI.gameObject.activeSelf == false) mouseSensitivityUI.gameObject.SetActive(true);
+        if (mouseSensitivityUI.gameObject.activeSelf == false) mouseSensitivityUI.gameObject.SetActive(true);
         //Debug.Log("Game Started");
+        LoadSensitivity();
         BeginGame();
     }
 
@@ -56,11 +65,6 @@ public class PauseMenu : MonoBehaviour
     {
         if (totalEnemyCount == 0) GameWon();
         if (stopWatchOn) timerTime += Time.deltaTime; inGameTimerText.text = timerTime.ToString("#.00");
-        if (beginningOfGame)
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Escape))
-            {
-                BeginGame();
-            }
 
         if (Input.GetKeyDown(KeyCode.Minus))
         {
@@ -79,6 +83,7 @@ public class PauseMenu : MonoBehaviour
                 gunController.storedRotationSpeed = firstPersonController.RotationSpeed;
             }
         }
+
 
         //Pause Game on ESC
         if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
@@ -99,25 +104,45 @@ public class PauseMenu : MonoBehaviour
         {
             QuitGame();
         }
-        mouseSensitivityUI.text = "MOUSE SENSITIVITY: " + firstPersonController.RotationSpeed;
+        mouseSensitivityUI.text = "MOUSE SENSITIVITY: " + firstPersonController.RotationSpeed.ToString("#.00"); ;
     }
 
     public void UpdateReticleUI(string gunType)
     {
-        if(gunType == "Soda")
+        if (gunType == "Soda")
         {
             reticleUI.sprite = sodaReticle;
         }
-        else if(gunType == "Champ")
+        else if (gunType == "Champ")
         {
             reticleUI.sprite = champagneReticle;
         }
-        else if(gunType == "Null")
+        else if (gunType == "Null")
         {
             reticleUI.sprite = emptyReticle;
         }
     }
 
+    public void SensitivitySlider(float rotationSpeed)
+    {
+        _sensitivitySlider.maxValue = 20f;
+        _sensitivitySlider.minValue = 0.1f;
+
+        float roundedNum = Mathf.Round(rotationSpeed * 10) / 10;
+
+        _sensitivitySlider.value = roundedNum;
+    }
+
+    private void LoadSensitivity()
+    {
+        _sensitivitySlider.value = savedSettings.sensitivity;
+        firstPersonController.RotationSpeed = savedSettings.sensitivity;
+    }
+
+    public void SetRotationSpeed()
+    {
+        firstPersonController.RotationSpeed = _sensitivitySlider.value;
+    }
     //Resume game
     public void Resume()
     {
@@ -143,7 +168,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     //Quit Game
@@ -158,7 +183,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     //Game Won

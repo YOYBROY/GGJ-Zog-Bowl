@@ -72,9 +72,6 @@ public class Enemy : MonoBehaviour
         targetPoint = patrolPoints[0];
         timer = attackTimer;
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = AudioManager.GetAudioClip(SoundType.ROBOTMOVING);
-        audioSource.loop = true;
-        audioSource.Play();
         startHeight = transform.position.y;
     }
 

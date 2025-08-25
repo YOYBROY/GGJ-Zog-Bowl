@@ -172,7 +172,7 @@ public class GunController : MonoBehaviour
         {
             CinemachineShake.Instance.AddTrauma(CinemachineShake.Instance.bigShake);
 
-            //AudioManager.PlaySound(SoundType.SODACANPOP, 1);
+            AudioManager.PlaySound(SoundType.SODACANPOP, 1);
             //Particle Effect at launch point
             Instantiate(sodaShootParticle, activeGun.transform.GetChild(0).position, activeGun.transform.GetChild(0).rotation, activeGun.transform);
 

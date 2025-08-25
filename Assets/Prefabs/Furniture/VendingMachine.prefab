@@ -1171,6 +1171,7 @@ GameObject:
   - component: {fileID: 5832069308733482658}
   - component: {fileID: 7323037333268559168}
   - component: {fileID: 201274950041393876}
+  - component: {fileID: 7851917804314110247}
   m_Layer: 6
   m_Name: VendingMachine
   m_TagString: Untagged
@@ -1215,6 +1216,7 @@ MonoBehaviour:
   deletesSelf: 0
   scaleUpAmount: 1.2
   lerpSpeed: 10
+  isWalkoverPickup: 1
   outliners: []
 --- !u!65 &201274950041393876
 BoxCollider:
@@ -1236,6 +1238,27 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.4537169, y: 2.4362512, z: 1}
+  m_Center: {x: 0, y: 1.23, z: 0}
+--- !u!65 &7851917804314110247
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422602624505904118}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.89, y: 2.44, z: 1.38}
   m_Center: {x: 0, y: 1.23, z: 0}
 --- !u!1001 &274073925006872094
 PrefabInstance:

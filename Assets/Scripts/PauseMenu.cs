@@ -47,8 +47,6 @@ public class PauseMenu : MonoBehaviour
         totalEnemyCount = enemies.Length + zaceyEnemies.Length;
 
         EventSystem.current.SetSelectedGameObject(gameObject);
-
-        savedSettings = FindObjectOfType<SavedSettings>();
         
 
         gunController = FindObjectOfType<GunController>();
@@ -84,6 +82,11 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.Backspace))
+        {
+            savedSettings.ResetSensitivity();
+            LoadSensitivity();
+        }
 
         //Pause Game on ESC
         if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
@@ -123,16 +126,6 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void SensitivitySlider(float rotationSpeed)
-    {
-        _sensitivitySlider.maxValue = 20f;
-        _sensitivitySlider.minValue = 0.1f;
-
-        float roundedNum = Mathf.Round(rotationSpeed * 10) / 10;
-
-        _sensitivitySlider.value = roundedNum;
-    }
-
     private void LoadSensitivity()
     {
         _sensitivitySlider.value = savedSettings.sensitivity;
@@ -142,7 +135,9 @@ public class PauseMenu : MonoBehaviour
     public void SetRotationSpeed()
     {
         firstPersonController.RotationSpeed = _sensitivitySlider.value;
+        savedSettings.sensitivity = _sensitivitySlider.value;
     }
+
     //Resume game
     public void Resume()
     {
@@ -165,7 +160,6 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0;
     }
-
     public void GoToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);

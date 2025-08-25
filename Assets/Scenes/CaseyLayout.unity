@@ -17581,6 +17581,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 9150623644474020839, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}
+      propertyPath: savedSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: dca1dfb9e2d797342b867f6432bc0b9b,
+        type: 2}
+    - target: {fileID: 9150623644474020839, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
       propertyPath: settingsMenuUI
       value: 
       objectReference: {fileID: 1378981698}
@@ -51696,6 +51702,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7552151877992380184, guid: 3b080a0e2e82f6b4e9ad7ca8058c9c4c,
+        type: 3}
+      propertyPath: savedSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: dca1dfb9e2d797342b867f6432bc0b9b,
+        type: 2}
     - target: {fileID: 7552151877992380184, guid: 3b080a0e2e82f6b4e9ad7ca8058c9c4c,
         type: 3}
       propertyPath: _sensitivitySlider

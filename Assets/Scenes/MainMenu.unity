@@ -1192,51 +1192,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 3357491335590450399}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2085191402
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2085191404}
-  - component: {fileID: 2085191403}
-  m_Layer: 0
-  m_Name: SensitivitySettings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2085191403
+--- !u!114 &2116840045 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4904304617295678195, guid: 413e8b33e4c482f4fb9eef341540dea4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3357491335590450399}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085191402}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76bc3b37bb6949e4a9cf507806af08ac, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 0
---- !u!4 &2085191404
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085191402}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 157.33168, y: -108.64102, z: -36.299606}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3357491335590450399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,6 +1522,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7870343641496753506, guid: 413e8b33e4c482f4fb9eef341540dea4,
+        type: 3}
+      propertyPath: m_Name
+      value: Settings Text
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1792,12 +1764,18 @@ PrefabInstance:
         type: 3}
       propertyPath: savedSettings
       value: 
-      objectReference: {fileID: 2085191403}
+      objectReference: {fileID: 11400000, guid: dca1dfb9e2d797342b867f6432bc0b9b,
+        type: 2}
     - target: {fileID: 9057913458870708704, guid: 40de673eecda7404ab9e09b4a7ca3b7f,
         type: 3}
       propertyPath: _sensitivitySlider
       value: 
       objectReference: {fileID: 384096510}
+    - target: {fileID: 9057913458870708704, guid: 40de673eecda7404ab9e09b4a7ca3b7f,
+        type: 3}
+      propertyPath: mouseSensitivityUI
+      value: 
+      objectReference: {fileID: 2116840045}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1825,4 +1803,3 @@ SceneRoots:
   - {fileID: 1433997090}
   - {fileID: 475787758}
   - {fileID: 1214974677}
-  - {fileID: 2085191404}

@@ -1,9 +1,6 @@
-using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using System;
-using UnityEditor.ShaderGraph.Internal;
-using System.Collections.Generic;
 
 public enum SoundType
 {

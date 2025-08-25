@@ -1,7 +1,6 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;

@@ -1084,7 +1084,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: _WheelDustParticle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6452141214688987810, guid: c21021c449071a043824d294fd4a4f57, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

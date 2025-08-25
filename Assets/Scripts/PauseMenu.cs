@@ -22,6 +22,8 @@ public class PauseMenu : MonoBehaviour
     public TMP_Text inGameTimerText;
     float timerTime;
 
+    float storedTimeScale;
+
     public bool gameOver = false;
     public bool beginningOfGame;
     bool stopWatchOn;
@@ -43,17 +45,16 @@ public class PauseMenu : MonoBehaviour
 
         gunController = FindObjectOfType<GunController>();
         firstPersonController = FindObjectOfType<FirstPersonController>();
-        firstPersonController.enabled = false;
         beginningOfGame = true;
         if(mouseSensitivityUI.gameObject.activeSelf == false) mouseSensitivityUI.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        BeginGame();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (totalEnemyCount == 0) GameWon();
-        if (stopWatchOn) timerTime += Time.deltaTime; inGameTimerText.text = "Time: " + timerTime.ToString("#.000"); ;
+        if (stopWatchOn) timerTime += Time.deltaTime; inGameTimerText.text = timerTime.ToString("#.00");
         if (beginningOfGame)
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Escape))
             {
@@ -167,7 +168,7 @@ public class PauseMenu : MonoBehaviour
         stopWatchOn = false;
         finalTimeText.gameObject.SetActive(true);
         inGameTimerText.gameObject.SetActive(false);
-        finalTimeText.text = "Total Time: " + timerTime.ToString("#.000"); ;
+        finalTimeText.text = "Total Time: " + timerTime.ToString("#.00"); ;
         winMenuUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -182,7 +183,7 @@ public class PauseMenu : MonoBehaviour
         stopWatchOn = false;
         finalTimeText.gameObject.SetActive(true);
         inGameTimerText.gameObject.SetActive(false);
-        finalTimeText.text = "Total Time: " + timerTime.ToString("#.000"); ;
+        finalTimeText.text = "Total Time: " + timerTime.ToString("#.00"); ;
         loseMenuUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 4808766126636859355}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.937, z: 0.429}
+  m_LocalPosition: {x: -0, y: 0.819, z: 0.489}
   m_LocalScale: {x: 1, y: 1, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -153,7 +153,6 @@ MonoBehaviour:
   patrolLerpSpeed: 2.5
   attackLerpSpeed: 2
   moveSpeed: 4
-  stunThreshold: 100
   attackRange: 15
   attackTimer: 1
   dazedTimer: 2

@@ -12,7 +12,7 @@ public class ThrowProjectile : MonoBehaviour
 
     void OnEnable()
     {
-        GetComponent<Rigidbody>().AddForce(transform.up * force);
+        GetComponent<Rigidbody>().AddForce(transform.up * force, ForceMode.Impulse);
         GetComponent<Rigidbody>().angularVelocity += transform.right * angularForce;
     }
 

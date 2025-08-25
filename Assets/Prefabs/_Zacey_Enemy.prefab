@@ -382,11 +382,11 @@ MonoBehaviour:
   attentionSpan: 3
   dazedTimer: 5
   ignoreRayAgro: 0
+  aimOffset: {x: 0, y: -0.65, z: 0}
   attackSpawnPoint: {fileID: 2953163212903827288}
   enemyProjectile: {fileID: 8035736283932347423, guid: 850b60ad78425de42967ff81bbe578ae,
     type: 3}
   topHalf: {fileID: 8774211811916662344}
-  topHalfLocator: {fileID: 1203763704250887019}
   deathParticles: {fileID: 7311073286854942035, guid: 58647b01430cd0544a463bd33abb7444,
     type: 3}
 --- !u!82 &620917220420879080

@@ -36,11 +36,15 @@ public class ZaceyEnemy : MonoBehaviour
     [Tooltip("True = enemy will always be agro within the attackRange, False = enemy will also need to see player to agro")]
     [SerializeField] bool ignoreRayAgro;
 
+    [SerializeField] Vector3 aimOffset = new Vector3(0.0f, -0.65f, 0.0f);
+
     [Header("Public References")]
 
     private Rig rig;
     [SerializeField] Transform attackSpawnPoint;
     [SerializeField] GameObject enemyProjectile;
+
+    [SerializeField] GameObject topHalf;
 
     [SerializeField] ParticleSystem deathParticles;
 
@@ -119,7 +123,6 @@ public class ZaceyEnemy : MonoBehaviour
         }
         else enemyState = EnemyState.PATROLLING;
 
-
         //move towards a patrol point.
         direction = targetPoint.position - transform.position;
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -136,13 +139,15 @@ public class ZaceyEnemy : MonoBehaviour
             case EnemyState.PATROLLING:
                 rig.weight = 0;
                 animator.SetBool("IsAggro", false);
+                topHalf.transform.rotation = transform.rotation;
                 break;
             case EnemyState.ATTACKING:
                 rig.weight = 1;
                 animator.SetBool("IsAggro", true);
                 //face towards player
-                direction = player.transform.position - transform.position;
+                direction = (player.transform.position + aimOffset) - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+                topHalf.transform.rotation = targetRotation;
 
                 //shoot projectile on a timer
                 timer -= Time.deltaTime;
@@ -158,8 +163,9 @@ public class ZaceyEnemy : MonoBehaviour
             case EnemyState.ALERT:
                 animator.SetBool("IsAggro", true);
                 //face towards player
-                direction = player.transform.position - transform.position;
+                direction = (player.transform.position + aimOffset) - transform.position;
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+                topHalf.transform.rotation = targetRotation;
                 break;
             default:
                 break;

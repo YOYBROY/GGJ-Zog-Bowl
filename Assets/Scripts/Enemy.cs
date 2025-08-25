@@ -166,7 +166,7 @@ public class Enemy : MonoBehaviour
                     if (hit.collider.CompareTag("Player"))
                     {
                         //Mose Towards Player
-                        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                        //transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
                     }
                     else alertTimer += Time.deltaTime;
                     if (alertTimer > 4f) { alert = false; enemyState = EnemyState.PATROLLING; alertTimer = 0; }

@@ -1216,6 +1216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: patrolLerpSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -1223,7 +1228,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11578,6 +11583,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: attentionSpan
       value: 5
       objectReference: {fileID: 0}
@@ -11610,7 +11620,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17505,37 +17515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbc153f00fd90849a9f581e2b7792a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &720996713
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 720996714}
-  m_Layer: 0
-  m_Name: EnemyAimTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &720996714
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720996713}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.68, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1477961142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &721717185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5514718099227856930, guid: 0587297a88f85fc4c81efd0f5c294c4b,
@@ -18552,6 +18531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: ignoreRayAgro
       value: 1
       objectReference: {fileID: 0}
@@ -18619,7 +18603,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25907,11 +25891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5814546909788036738, guid: 86053e85232e6274b9ce7bbae8ed8242,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 720996714}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2050681422456387116, guid: 86053e85232e6274b9ce7bbae8ed8242,
         type: 3}
@@ -32016,6 +31996,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: ignoreRayAgro
       value: 1
       objectReference: {fileID: 0}
@@ -32078,7 +32063,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34203,12 +34188,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 564849050297862286, guid: de184174f34d6bd46bb603f1fa020f60,
     type: 3}
   m_PrefabInstance: {fileID: 935537909426774100}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1477961142 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5814546909788036738, guid: 86053e85232e6274b9ce7bbae8ed8242,
-    type: 3}
-  m_PrefabInstance: {fileID: 1117435730}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1479446930 stripped
 Transform:
@@ -39679,6 +39658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: patrolLerpSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -39686,7 +39670,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40860,6 +40844,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: patrolLerpSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -40892,7 +40881,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47648,6 +47637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441089174571839533, guid: adbfef451e1606a4199bcc78573b25ea,
+        type: 3}
       propertyPath: ignoreRayAgro
       value: 1
       objectReference: {fileID: 0}
@@ -47690,7 +47684,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
-      objectReference: {fileID: 720996714}
+      objectReference: {fileID: 0}
     - target: {fileID: 8717160619163204823, guid: adbfef451e1606a4199bcc78573b25ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -51600,11 +51594,11 @@ SceneRoots:
   - {fileID: 1704903404}
   - {fileID: 1689583384}
   - {fileID: 248317137}
-  - {fileID: 714596745}
-  - {fileID: 1093502463}
   - {fileID: 393237612}
   - {fileID: 908535687}
   - {fileID: 2025617702}
+  - {fileID: 714596745}
+  - {fileID: 1093502463}
   - {fileID: 68138200}
   - {fileID: 1882303411}
   - {fileID: 475428860}

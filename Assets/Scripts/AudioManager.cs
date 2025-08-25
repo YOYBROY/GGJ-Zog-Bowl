@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using System;
+using UnityEditor.ShaderGraph.Internal;
+using System.Collections.Generic;
 
 public enum SoundType
 {
@@ -23,6 +25,8 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
     private AudioSource audioSource;
 
+    private AudioSource[] audioSources;
+
 
     private void Awake()
     {
@@ -32,6 +36,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
     }
 
     public static void PlaySound(SoundType sound, float volume = 1)
@@ -39,6 +44,17 @@ public class AudioManager : MonoBehaviour
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
         instance.audioSource.PlayOneShot(randomClip, volume);
+    }
+
+    public static void AdjustPitch(float pitch)
+    {
+        foreach (AudioSource audioSource in instance.audioSources)
+        {
+            if (audioSource != null)
+            {
+                audioSource.pitch = pitch;
+            }
+        }
     }
 
     public static AudioClip GetAudioClip(SoundType sound)
@@ -53,7 +69,7 @@ public class AudioManager : MonoBehaviour
     {
         string[] names = Enum.GetNames(typeof(SoundType));
         Array.Resize(ref soundList, names.Length);
-        for(int i = 0; i < soundList.Length; i++)
+        for (int i = 0; i < soundList.Length; i++)
         {
             soundList[i].name = names[i];
         }

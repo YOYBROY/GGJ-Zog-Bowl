@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.39000002
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.39000002
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.39000002
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
@@ -83,6 +83,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8d3b5b71c76160f4792094004e7aa623, type: 2}
+    - target: {fileID: -5754084199372789682, guid: a962f40b651830249bf2a9c6d7993995,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2543481742412672330, guid: b85f727cd75baa04ba29ec08672c7804,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_Name
@@ -91,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
@@ -105,11 +111,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5983823672737053247}
+      addedObject: {fileID: 3552092157858709962}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3552092157858709962}
+      addedObject: {fileID: 6629693536771648597}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a962f40b651830249bf2a9c6d7993995,
         type: 3}
       insertIndex: -1
@@ -121,28 +127,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4555231139257464939}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &5983823672737053247
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3744188144970368314}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4871546634432744703, guid: a962f40b651830249bf2a9c6d7993995, type: 3}
 --- !u!54 &3552092157858709962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,6 +154,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!64 &6629693536771648597
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744188144970368314}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2543481742412672330, guid: b85f727cd75baa04ba29ec08672c7804, type: 3}
 --- !u!114 &7741228521448980547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +193,4 @@ MonoBehaviour:
   isChampaign: 0
   impactParticle: {fileID: 1044148570233665142, guid: 56a0b90d0bd13844e8597ca9d7b003f8,
     type: 3}
+  killSpeed: 100

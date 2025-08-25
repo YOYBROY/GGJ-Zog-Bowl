@@ -50,6 +50,7 @@ namespace StarterAssets
         [Tooltip("Amount to alter from starting fov, +wider, -more zoomed")]
         public float fovSlideAmount = 20f;
         public AnimationCurve fovLerpCurve;
+        public AnimationCurve timeLerpCurve;
         private float targetFOV;
 
         [Space(10)]
@@ -194,11 +195,16 @@ namespace StarterAssets
         private IEnumerator animateFOV(float amountToAdjust)
         {
             targetFOV = storedFOV + amountToAdjust;
-            float timer = 0;
+            float timer = 0.01f;
             while(timer < slowDownLength)
             {
                 float lerpPos = fovLerpCurve.Evaluate(timer / slowDownLength);
                 cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(targetFOV, storedFOV, lerpPos);
+
+                float timeLerpPos = timeLerpCurve.Evaluate(timer / slowDownLength);
+                Time.timeScale = timeLerpPos;
+                AudioManager.AdjustPitch(timeLerpPos);
+
                 timer += Time.unscaledDeltaTime;
                 yield return null;
             }
@@ -284,7 +290,7 @@ namespace StarterAssets
                 {
                     if(!crouchKeyPressed)
                     {
-                        SlowTimeDown(slowDownFactor);
+                        //SlowTimeDown(slowDownFactor);
                         StartCoroutine(animateFOV(fovSlideAmount));
                     }
                     Vector3 newSpeed = Vector3.Lerp(inputDirection.normalized * (slideSpeed * Time.deltaTime) + currentHorizontalVelocity, Vector3.zero, Time.deltaTime * slideFriction);

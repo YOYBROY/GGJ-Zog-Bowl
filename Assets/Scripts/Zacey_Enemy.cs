@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -37,6 +35,8 @@ public class ZaceyEnemy : MonoBehaviour
     [SerializeField] bool ignoreRayAgro;
 
     [SerializeField] Vector3 aimOffset = new Vector3(0.0f, -0.65f, 0.0f);
+
+    [SerializeField] AudioSource shootAudioSource;
 
     [Header("Public References")]
 
@@ -150,10 +150,7 @@ public class ZaceyEnemy : MonoBehaviour
                 timer -= Time.deltaTime;
                 if (timer < 0)
                 {
-                    //Attack
-                    Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
-                    AudioManager.PlaySound(SoundType.ZACEYSHOOT, 1);
-                    //attack Animation
+                    Shoot();
                     timer = attackTimer;
                 }
                 //play sound effect
@@ -198,5 +195,16 @@ public class ZaceyEnemy : MonoBehaviour
     public void StunEnemy()
     {
         dazedCount = dazedTimer;
+    }
+
+    private void Shoot()
+    {
+        Instantiate(enemyProjectile, attackSpawnPoint.position, attackSpawnPoint.rotation);
+        PlayShootSound(AudioManager.GetAudioClip(SoundType.ZACEYSHOOT));
+    }
+
+    private void PlayShootSound(AudioClip audioClip)
+    {
+        shootAudioSource.PlayOneShot(audioClip);
     }
 }

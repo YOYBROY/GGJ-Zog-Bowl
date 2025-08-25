@@ -57,7 +57,6 @@ public class DestructibleObject : MonoBehaviour
                 Vector3 force = (piece.transform.position - transform.position).normalized * forceMultiplier;
                 rb.AddForceAtPosition(force, transform.position);
             }
-            Debug.Log("spawned destrucion piece");
             Destroy(gameObject);
         }
     }

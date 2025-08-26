@@ -162,7 +162,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void GoToScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName);
     }
 
     //Quit Game
@@ -177,7 +177,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadScene(1);
     }
 
     //Game Won

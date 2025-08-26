@@ -209,6 +209,8 @@ namespace StarterAssets
                 float lerpPos = fovLerpCurve.Evaluate(timer / slowDownLength);
                 cinemachineVirtualCamera.m_Lens.FieldOfView = Mathf.Lerp(targetFOV, storedFOV, lerpPos);
 
+                Mathf.Lerp(targetFOV, storedFOV, timer);
+
                 float timeLerpPos = timeLerpCurve.Evaluate(timer / slowDownLength);
                 Time.timeScale = timeLerpPos;
                 AudioManager.AdjustPitch(timeLerpPos);

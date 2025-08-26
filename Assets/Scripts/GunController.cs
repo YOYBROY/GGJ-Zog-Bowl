@@ -49,6 +49,8 @@ public class GunController : MonoBehaviour
     [SerializeField] ParticleSystem champainShootParticle;
     [SerializeField] ParticleSystem champaignImpactParticle;
 
+    [SerializeField] private SavedSettings savedSettings;
+    
     //Private Variables
     private Vector3 storedGunSocketPos;
     private Quaternion storedGunSocketRot;
@@ -118,7 +120,7 @@ public class GunController : MonoBehaviour
         if (Input.GetMouseButtonUp(1)) //rmb
         {
             StopShakingGun();
-            _controller.RotationSpeed = storedRotationSpeed;
+            _controller.RotationSpeed = savedSettings.sensitivity;
         }
 
         if (Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))

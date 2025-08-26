@@ -13,6 +13,7 @@ public enum SoundType
     GLASSSMASH,
     SODALANDING,
     ZACEYSHOOT,
+    DEATHSOUND,
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]

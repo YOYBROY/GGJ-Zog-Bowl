@@ -63,6 +63,8 @@ public class ZaceyEnemy : MonoBehaviour
 
     private int killCounter = 0;
 
+    [SerializeField] private LayerMask layerMask;
+
     enum EnemyState { PATROLLING, ATTACKING, ALERT };
     EnemyState enemyState;
 
@@ -96,7 +98,7 @@ public class ZaceyEnemy : MonoBehaviour
             else
             {
                 RaycastHit hit;
-                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f, layerMask))
                 {
                     if (hit.collider.CompareTag("Player"))
                     {
@@ -175,6 +177,7 @@ public class ZaceyEnemy : MonoBehaviour
             PauseMenu.totalEnemyCount--;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
             Instantiate(deathParticles, attackSpawnPoint.transform.position, Quaternion.identity);
+            AudioManager.PlaySound(SoundType.DEATHSOUND, 1);
             gameObject.GetComponent<DestructibleObject>().SwapEnemyModel();
             Destroy(gameObject.transform.parent.gameObject);
         }

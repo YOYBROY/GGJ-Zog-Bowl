@@ -169,6 +169,9 @@ MonoBehaviour:
     type: 3}
   confusedParticles: {fileID: 2879032215474260523, guid: 2b21a9953592fa84db291d51bbbc7aed,
     type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 499
 --- !u!65 &6619815831750983801
 BoxCollider:
   m_ObjectHideFlags: 0

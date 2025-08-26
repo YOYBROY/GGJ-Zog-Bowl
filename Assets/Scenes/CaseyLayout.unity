@@ -17056,12 +17056,17 @@ PrefabInstance:
     - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}
       propertyPath: soundList.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}
       propertyPath: soundList.Array.data[8].name
       value: ZACEYSHOOT
+      objectReference: {fileID: 0}
+    - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: soundList.Array.data[9].name
+      value: DEATHSOUND
       objectReference: {fileID: 0}
     - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}
@@ -17077,6 +17082,11 @@ PrefabInstance:
         type: 3}
       propertyPath: soundList.Array.data[8].sounds.Array.size
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: soundList.Array.data[9].sounds.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}
@@ -17148,6 +17158,26 @@ PrefabInstance:
       propertyPath: soundList.Array.data[8].sounds.Array.data[5]
       value: 
       objectReference: {fileID: 8300000, guid: cd3cba018f790394da712993b145dd9f, type: 3}
+    - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: soundList.Array.data[9].sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c68f501cc16ecaf4a8755bc29117f53c, type: 3}
+    - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: soundList.Array.data[9].sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cb8edaeac4ce1114bbf7ad4e7a54f219, type: 3}
+    - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: soundList.Array.data[9].sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 166fce0f71ce45941b4d3b312734617f, type: 3}
+    - target: {fileID: 4811316861594807193, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
+        type: 3}
+      propertyPath: soundList.Array.data[9].sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 505cffac386044e48b3c263a68600a4e, type: 3}
     - target: {fileID: 5226614750305159023, guid: 9a5ab8bf0caa8d74f8df3f56e97c1f94,
         type: 3}
       propertyPath: m_IsActive
@@ -51333,6 +51363,17 @@ PrefabInstance:
       propertyPath: shakenSlider
       value: 
       objectReference: {fileID: 1646913597}
+    - target: {fileID: 661732378491570826, guid: 3221c054740acea4d892d713d49ae0e6,
+        type: 3}
+      propertyPath: savedSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: dca1dfb9e2d797342b867f6432bc0b9b,
+        type: 2}
+    - target: {fileID: 820108025867601346, guid: 3221c054740acea4d892d713d49ae0e6,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 243
+      objectReference: {fileID: 0}
     - target: {fileID: 3964153805864772532, guid: 3221c054740acea4d892d713d49ae0e6,
         type: 3}
       propertyPath: deathTimer

@@ -39,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1901, y: 14.378}
+  m_AnchoredPosition: {x: -1901, y: 14.37793}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3413805855788363214
@@ -384,7 +384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6439908308737188881
@@ -534,7 +534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: 359.99994}
+  m_AnchoredPosition: {x: 0, y: 360}
   m_SizeDelta: {x: -1135, y: -614.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2356714776524005056
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 8921509573828053934}
   - component: {fileID: 2585712613345004731}
   m_Layer: 5
-  m_Name: Sensitivity Text (1)
+  m_Name: Settings Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -330}
+  m_AnchoredPosition: {x: 0, y: -329.9995}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5534390017016861071
@@ -961,18 +961,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7505527776558911020}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7312517302518828039}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
@@ -983,6 +971,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Clicked
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7505527776558911020}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1001 &1629129055904601421
@@ -1265,6 +1265,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
         type: 3}
+      propertyPath: m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
       propertyPath: m_MaxValue
       value: 20
       objectReference: {fileID: 0}
@@ -1287,6 +1292,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetRotationSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502809787291907968, guid: eb97f82acbeda8f4695f3557b1111a78,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2181858217280199133, guid: eb97f82acbeda8f4695f3557b1111a78,
         type: 3}
@@ -1461,7 +1481,7 @@ PrefabInstance:
     - target: {fileID: 9005070940453173961, guid: eb97f82acbeda8f4695f3557b1111a78,
         type: 3}
       propertyPath: m_FillAmount
-      value: 0.020100502
+      value: 0.24623115
       objectReference: {fileID: 0}
     - target: {fileID: 9005070940453173961, guid: eb97f82acbeda8f4695f3557b1111a78,
         type: 3}

@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem surpriseParticle;
     [SerializeField] private ParticleSystem confusedParticles;
 
+    [SerializeField] private LayerMask layerMask;
+
     //private variables
     Transform targetPoint;
     int patrolNumber = 0;
@@ -94,7 +96,7 @@ public class Enemy : MonoBehaviour
 
 
         RaycastHit hit;
-        if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, attackRange))
+        if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, attackRange, layerMask))
         {
             if (hit.collider.CompareTag("Player"))
             {
@@ -158,7 +160,7 @@ public class Enemy : MonoBehaviour
                 targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, attackLerpSpeed * Time.deltaTime);
 
-                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f))
+                if (Physics.Raycast(attackSpawnPoint.position, direction.normalized, out hit, 100f, layerMask))
                 {
                     if (hit.collider.CompareTag("Player"))
                     {
@@ -182,6 +184,7 @@ public class Enemy : MonoBehaviour
         {
             PauseMenu.totalEnemyCount--;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            AudioManager.PlaySound(SoundType.DEATHSOUND, 1);
             GetComponent<DestructibleObject>().SwapEnemyModel();
             Destroy(gameObject);
         }
